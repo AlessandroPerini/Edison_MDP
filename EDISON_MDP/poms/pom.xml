@@ -12,6 +12,7 @@
     <module>code/routines</module>
     <module>jobs/process/kubernetes_flow_0.1</module>
     <module>jobs/process/job_di_prova_0.1</module>
+    <module>jobs/process/sleep_0.1</module>
   </modules>
   <properties>
     <signer.version>7.3.1</signer.version>
