@@ -2,9 +2,9 @@
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="loop" prompt="loop?" promptNeeded="false" type="id_Integer" value="1"/>
     <contextParameter comment="" name="flow_id" prompt="flow_id?" promptNeeded="false" type="id_String" value="&quot;id000&quot;"/>
-    <contextParameter comment="" name="flow_date" prompt="flow_date?" promptNeeded="false" type="id_String" value="&quot;&quot;"/>
+    <contextParameter comment="" name="flow_date" prompt="flow_date?" promptNeeded="false" type="id_String" value="&quot;-7&quot;"/>
     <contextParameter comment="" name="flow_exec" prompt="flow_exec?" promptNeeded="false" type="id_String" value="&quot;&quot;"/>
-    <contextParameter comment="" name="flow_date_ref" prompt="flow_date_ref?" promptNeeded="false" type="id_String" value="&quot;20200710&quot;"/>
+    <contextParameter comment="" name="flow_date_ref" prompt="flow_date_ref?" promptNeeded="false" type="id_String" value="&quot;+1&quot;"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" show="false" value="0"/>
@@ -48,7 +48,7 @@
     <elementParameter field="TEXT" name="PROPERTIES_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="SCHEMA_DB_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:ZiNM1WcvZtf7hG7I0B/ZHDCnfijHKexbwO/ZWbij"/>
+    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:p8Zoi2x8OerZfyWKNu8R/q3Vae+LsxGt4Xz2E0So"/>
     <elementParameter field="FILE" name="DBFILE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="DBTABLE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="QUERY_CONDITION_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
@@ -83,7 +83,7 @@
     <elementParameter field="TEXT" name="PROPERTIES" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="SCHEMA_DB" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER" show="false" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:RZ3cQkQcdVoCsKjRt7maNEPofFLHREDQE9Ms7AKj"/>
+    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:8miiP8Uprh6cY40rZh6ryoHlnju3Uputw8YrzIy8"/>
     <elementParameter field="FILE" name="DBFILE" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE_STATS" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE_LOGS" show="false" value="&quot;&quot;"/>
@@ -159,23 +159,8 @@
       <column comment="" key="false" length="-1" name="newColumn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="96" posY="192">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_1"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="if(context.flow_date.equals(&quot;-7&quot;)) {&#10;&#9;context.loop = 7;&#10;&#9;// verificare che -7 sia l'unico offset ammesso&#10;} else {&#10;&#9;context.loop = 1;&#10;}&#10;&#10;context.flow_exec = Long.toString(System.currentTimeMillis());&#10;&#10;DateTimeFormatter dtf = DateTimeFormatter.ofPattern(&quot;yyyyMMdd&quot;);&#10;LocalDate localDate = LocalDate.now();&#10;&#10;String date_type = context.flow_date_ref.substring(0,1);&#10;int offset = 0;&#10;&#10;switch(date_type) {&#10;    case &quot;0&quot;:&#10;      context.flow_date = dtf.format(localDate);&#10;      break;&#10;    case &quot;+&quot;:&#10;      offset = parseInt(context.flow_date_ref.replaceAll(&quot;\\s+&quot;,&quot;&quot;).substring(1));&#10;      context.flow_date = dtf.format(localDate.plusDays(offset));&#10;      break;&#10;    case &quot;-&quot;:&#10;      offset = parseInt(context.flow_date_ref.replaceAll(&quot;\\s+&quot;,&quot;&quot;).substring(1));&#10;      context.flow_date = dtf.format(localDate.plusDays(-1 * offset));&#10;      break;&#10;    default:&#10;      context.flow_date =  context.flow_date_ref; //Gestire valori non ammessi&#10;}&#10;&#10;System.out.println(&quot;\nData di riferimento: &quot; + context.flow_date + &quot;\n&quot;);"/>
-    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import java.time.LocalDate;&#10;import java.time.format.DateTimeFormatter;&#10;import static java.lang.Integer.parseInt;"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="tJava_1"/>
-  </node>
-  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="416" posY="384">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_4"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="System.out.println(&quot;\nUltimo componente tJava_4&quot;);"/>
-    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="tJava_4"/>
-  </node>
   <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1088" posY="192">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tRunJob_1"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
     <elementParameter field="TEXT" name="CONTEXT_JOB" show="false" value=""/>
     <elementParameter field="PROCESS_TYPE" name="PROCESS" value="Kubernetes_Flow"/>
@@ -206,6 +191,20 @@
       <column comment="" key="false" length="-1" name="newColumn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
+  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="96" posY="192">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_1"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="if(context.flow_date.equals(&quot;-7&quot;)) {&#10;&#9;context.loop = 7;&#10;&#9;// verificare che -7 sia l'unico offset ammesso&#10;} else {&#10;&#9;context.loop = 1;&#10;}&#10;&#10;context.flow_exec = Long.toString(System.currentTimeMillis());&#10;&#10;DateTimeFormatter dtf = DateTimeFormatter.ofPattern(&quot;yyyyMMdd&quot;);&#10;LocalDate localDate = LocalDate.now();&#10;&#10;String date_type = context.flow_date_ref.substring(0,1);&#10;int offset = 0;&#10;&#10;switch(date_type) {&#10;    case &quot;0&quot;:&#10;      context.flow_date = dtf.format(localDate);&#10;      break;&#10;    case &quot;+&quot;:&#10;      offset = parseInt(context.flow_date_ref.replaceAll(&quot;\\s+&quot;,&quot;&quot;).substring(1));&#10;      context.flow_date = dtf.format(localDate.plusDays(offset));&#10;      break;&#10;    case &quot;-&quot;:&#10;      offset = parseInt(context.flow_date_ref.replaceAll(&quot;\\s+&quot;,&quot;&quot;).substring(1));&#10;      context.flow_date = dtf.format(localDate.plusDays(-1 * offset));&#10;      break;&#10;    default:&#10;      context.flow_date =  context.flow_date_ref; //Gestire valori non ammessi&#10;}&#10;&#10;System.out.println(&quot;\nData di riferimento: &quot; + context.flow_date + &quot;\n&quot;);"/>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import java.time.LocalDate;&#10;import java.time.format.DateTimeFormatter;&#10;import static java.lang.Integer.parseInt;"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tJava_1"/>
+  </node>
+  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="416" posY="384">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_4"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="System.out.println(&quot;\nUltimo componente tJava_4&quot;);"/>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tJava_4"/>
+  </node>
   <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1280" posY="192">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_3"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
@@ -232,16 +231,15 @@
   <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="tJava_2" offsetLabelX="0" offsetLabelY="0" source="tJava_2" target="tRunJob_1">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" show="false" value="2"/>
-    <elementParameter field="CHECK" name="ACTIVATE" show="false" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="iterate3"/>
-  </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tJava_1" offsetLabelX="0" offsetLabelY="0" source="tJava_1" target="tLoop_1">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk1"/>
   </connection>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tRunJob_1" offsetLabelX="11" offsetLabelY="0" source="tRunJob_1" target="tJava_3">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="CHECK" name="ACTIVATE" show="false" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row1"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tJava_1" offsetLabelX="0" offsetLabelY="0" source="tJava_1" target="tLoop_1">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk1"/>
   </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tLoop_1"/>
@@ -259,17 +257,17 @@
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
   <subjob>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tRunJob_1"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_3"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_016c663a-cecc-4f0f-bc8e-9b36730036d9"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>ihGNWm6FvBm2AcMpnvnZ3lK4G8n1NYBdNF9MAIhRuI0nM8h2FAOGJecgav+Vyyip0xl6eokqKA3i
-9bhPmbrsvw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_d6421881-f041-48b3-96f3-5cd67f8c1fba"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>NLXeIUV0dZlLmF+pH4yZcye1axSkS9j8DPK5g+MOweP+8hxHN6zD7GKryQkP2j03oDehFS/iVE01
-yD1zq7yMqA==</DigestValue></Reference></SignedInfo><SignatureValue>gnrdJa+fpbTDBQ+E8QFXotNYyTVfvzJZ2gUbGWK91Xns4qDR01RWl52qsNJLQbLALn4ZQnD1dDSW
-GMfg4Z/L59Xqs1qC3HSH5dTTmsArFzhJq5DZHvycHmqY/ZdUA12AHA54w64hBDyHoBbWjy18lNds
-XESocYpQaM9kdpMYWro1mQlb7Lepmydf7TmpuqTEI0TYfRrhX+XXb/b2crQX0S5qOsOKjgDozg+a
-YmZ6tev5Tq7DQo1kq3/GmQTN/5OOeB/on2aOb+KfDLPw99itfwHZSFemG+elwI5ZJUEyH/aR6eIa
-mHtAk5mp6x5MsvTsqqW/ATuicYuCWuuV2Uls6w==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_1c1ebafa-28b7-42e6-9d7f-ff6621ca0cb3"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>tSPyHOm8Yd2C9o1YkYyOItz666Gv3Xjv4qGiB27GNS2+YLsI9JieY3Orj0sQ59PqbaZzWPrjt8cj
+Bk90zr8F0w==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_8775a789-f606-4242-bdcb-46476538b462"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>cUsd1ASt0WY+3ciCnx5dqOU6JrsB3qfQvbj4+GcnLiQd5TO0D9wAZ0vqfFSP3CBQ2dBPsCjpVvGR
+DcifDZOAbg==</DigestValue></Reference></SignedInfo><SignatureValue>ITOkkOW8H9RvYdxLqx4i/Jwrmjjmb+sobk6PgtnFe29j9+SYBdvuToYY7ZHPi3kMScWE96J4C2jB
+rOIEmgcGA2OD3TW6ZMnJ6DGbLXaVWPuJRpaBHtfjGvf4tTDWyquD4xf6yEUOIbHF5d7ZpDQI5n6l
+k6R+/D8llNkIUYUabcYxtVQVClCQM9L6M3K7NuFpDXX/oe0uSap58w6uAAsoAGt90JtIkHQw/2L6
+V4nP34UhMEQ3DxhuMScm3C8R279jyMdCIBSWNF0wvJKO341DulkHW6VbIzY/f6uRjBQQdamO8VNM
+hQzz7ibrEnqdSmjuCPrFnBbMTE9iL5n1vx1Fng==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U
@@ -291,4 +289,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_d6421881-f041-48b3-96f3-5cd67f8c1fba" Target="#_016c663a-cecc-4f0f-bc8e-9b36730036d9"><Timestamp>2020-07-06 13:40:06</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_8775a789-f606-4242-bdcb-46476538b462" Target="#_1c1ebafa-28b7-42e6-9d7f-ff6621ca0cb3"><Timestamp>2020-07-06 13:41:36</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
