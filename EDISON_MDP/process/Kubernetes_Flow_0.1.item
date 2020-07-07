@@ -6,6 +6,7 @@
     <contextParameter comment="" name="flow_data" prompt="flow_data?" promptNeeded="false" type="id_String" value="&quot;1&quot;"/>
     <contextParameter comment="" name="flow_exec" prompt="flow_exec?" promptNeeded="false" type="id_String" value="&quot;1&quot;"/>
     <contextParameter comment="" name="watcherTimeoutInMinutes" prompt="watcherTimeoutInMinutes?" promptNeeded="false" type="id_Integer" value="30"/>
+    <contextParameter comment="" name="resultStatus" prompt="resultStatus?" promptNeeded="false" type="id_Integer" value="0"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" show="false" value="0"/>
@@ -49,7 +50,7 @@
     <elementParameter field="TEXT" name="PROPERTIES_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="SCHEMA_DB_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:YshkFW2YJJlrEHV79lJwT0c5EFTzMPLLnema/xMy"/>
+    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:5tmw2QMR43bGCb6yrgTe65KrSXvIesN2R/kA4YZi"/>
     <elementParameter field="FILE" name="DBFILE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="DBTABLE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="QUERY_CONDITION_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
@@ -84,7 +85,7 @@
     <elementParameter field="TEXT" name="PROPERTIES" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="SCHEMA_DB" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER" show="false" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:kMww9kDnbJCJ++HdA0IvQLlQFIBXYMeJBDhGQKMd"/>
+    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:OikDcnT3i7qnZMJdEO9G3i2OYSvdHKjJcX0KvR+p"/>
     <elementParameter field="FILE" name="DBFILE" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE_STATS" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE_LOGS" show="false" value="&quot;&quot;"/>
@@ -172,8 +173,7 @@
   </node>
   <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="704" posY="512">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_3"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="KubernetesClient client = new DefaultKubernetesClient();&#10;&#10;System.out.println(&quot;\n\nLog del pod 'hello':\n&quot; + client.pods().inNamespace(context.namespace).withName(context.podName).getLog());"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="KubernetesClient client = new DefaultKubernetesClient();&#10;&#10;String log = client.pods().inNamespace(context.namespace).withName(context.podName).getLog();&#10;&#10;System.out.println(&quot;\n\nLog del pod 'hello':\n&quot; + log);&#10;&#10;if(log.equals(&quot;1&quot;)) {&#10;&#9;context.resultStatus = 1;&#10;} else {&#10;&#9;context.resultStatus = -5;&#10;}"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import io.fabric8.kubernetes.client.DefaultKubernetesClient;&#10;import io.fabric8.kubernetes.client.KubernetesClient;"/>
     <elementParameter field="TEXT" name="LABEL" value="Read_Log"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -181,8 +181,7 @@
   </node>
   <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="416" posY="512">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_1"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="int timeout = context.watcherTimeoutInMinutes;&#10;&#10;final CountDownLatch closeLatch = new CountDownLatch(1);&#10;Config config = new ConfigBuilder().build();&#10;       &#10;       try (final KubernetesClient client = new DefaultKubernetesClient(config)) {&#10;         try (Watch watch = client.pods().inNamespace(context.namespace).withName(context.podName).watch(new Watcher&lt;Pod&gt;() {&#10;&#10;           @Override&#10;           public void eventReceived(Watcher.Action action, Pod resource) {&#10;               String name = resource.getMetadata().getName();&#10;               String status = resource.getStatus().getPhase();&#10;               //String kind = resource.getKind();&#10;               //String details = podStatus.toString();&#10;&#10;               System.out.printf(&quot;\nPOD NAME: %s | STATUS: %s &quot;, name, status);&#10;&#10;               if(status.equals(&quot;Succeeded&quot;)) onClose(null);&#10;               if(status.equals(&quot;Failed&quot;)) onClose(new KubernetesClientException(&quot;Failed&quot;));&#10;               &#10;           }&#10;&#10;           @Override&#10;           public void onClose(KubernetesClientException e) {&#10;               //System.out.println(&quot;Watcher onClose&quot;);&#10;             if (e != null) {&#10;               //logger.error(e.getMessage(), e);&#10;               System.out.println(e.getMessage() + e);&#10;             }&#10;             closeLatch.countDown();&#10;           }&#10;         })) {&#10;           System.out.println(&quot;\n\nWatcher del pod '&quot; + context.podName + &quot;' in ascolto&quot;);&#10;           closeLatch.await(timeout, TimeUnit.MINUTES);&#10;         } catch (KubernetesClientException | InterruptedException e) {&#10;           System.out.println(&quot;Watcher catch1&quot;);&#10;         }&#10;       } catch (Exception e) {&#10;         e.printStackTrace();&#10;         System.out.println(&quot;Watcher catch 2&quot;);&#10;&#10;         Throwable[] suppressed = e.getSuppressed();&#10;         if (suppressed != null) {&#10;           for (Throwable t : suppressed) {&#10;             System.out.println(&quot;Watcher catch 3&quot;);&#10;           }&#10;         }&#10;       }&#10;         &#10;       //System.out.println(&quot;prima di sleep&quot;);&#10;       //Thread.sleep(60000l);"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="int timeout = context.watcherTimeoutInMinutes;&#10;&#10;final CountDownLatch closeLatch = new CountDownLatch(1);&#10;Config config = new ConfigBuilder().build();&#10;       &#10;       try (final KubernetesClient client = new DefaultKubernetesClient(config)) {&#10;         try (Watch watch = client.pods().inNamespace(context.namespace).withName(context.podName).watch(new Watcher&lt;Pod&gt;() {&#10;&#10;           @Override&#10;           public void eventReceived(Watcher.Action action, Pod resource) {&#10;               String name = resource.getMetadata().getName();&#10;               String status = resource.getStatus().getPhase();&#10;               //String kind = resource.getKind();&#10;               //String details = podStatus.toString();&#10;&#10;               System.out.printf(&quot;\nPOD NAME: %s | STATUS: %s &quot;, name, status);&#10;&#10;               if(status.equals(&quot;Succeeded&quot;)) onClose(null);&#10;               if(status.equals(&quot;Failed&quot;)) onClose(new KubernetesClientException(&quot;Failed&quot;));&#10;               &#10;           }&#10;&#10;           @Override&#10;           public void onClose(KubernetesClientException e) {&#10;               //System.out.println(&quot;Watcher onClose&quot;);&#10;             if (e != null) {&#10;               //Stato = 'Failed'&#10;               context.resultStatus = -3;&#10;               System.out.println(e.getMessage() + e);&#10;             }&#10;             closeLatch.countDown();&#10;           }&#10;         })) {&#10;           System.out.println(&quot;\n\nWatcher del pod '&quot; + context.podName + &quot;' in ascolto&quot;);&#10;           closeLatch.await(timeout, TimeUnit.MINUTES);&#10;         } catch (KubernetesClientException | InterruptedException e) {&#10;           System.out.println(&quot;Watcher catch1&quot;);&#10;         }&#10;       } catch (Exception e) {&#10;         e.printStackTrace();&#10;         System.out.println(&quot;Watcher catch 2&quot;);&#10;&#10;         Throwable[] suppressed = e.getSuppressed();&#10;         if (suppressed != null) {&#10;           for (Throwable t : suppressed) {&#10;             System.out.println(&quot;Watcher catch 3&quot;);&#10;           }&#10;         }&#10;       }&#10;         &#10;       //System.out.println(&quot;prima di sleep&quot;);&#10;       //Thread.sleep(60000l);"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import io.fabric8.kubernetes.api.model.Pod;&#10;import io.fabric8.kubernetes.client.Config;&#10;import io.fabric8.kubernetes.client.ConfigBuilder;&#10;import io.fabric8.kubernetes.client.DefaultKubernetesClient;&#10;import io.fabric8.kubernetes.client.KubernetesClient;&#10;import io.fabric8.kubernetes.client.KubernetesClientException;&#10;import io.fabric8.kubernetes.client.Watch;&#10;import io.fabric8.kubernetes.client.Watcher;&#10;import java.util.concurrent.CountDownLatch;&#10;import java.util.concurrent.TimeUnit;&#10;"/>
     <elementParameter field="TEXT" name="LABEL" value="Watcher_Start"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -194,8 +193,7 @@
   </node>
   <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="128" posY="512">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_2"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="KubernetesClient client = new DefaultKubernetesClient();&#10;&#10;Pod aPod = &#10;                    new PodBuilder().&#10;                            withNewMetadata().&#10;                            withName(context.podName).&#10;                            endMetadata()&#10;                            .withNewSpec()&#10;                            .addNewContainer()&#10;                            .addToCommand(&quot;python&quot;, &quot;app.py&quot;, context.flow_id, context.flow_data, context.flow_exec)&#10;                            .withName(context.podName)&#10;                            .withImage(&quot;al3p3r/helloworld-python&quot;)&#10;                            .endContainer()&#10;                            .withRestartPolicy(&quot;Never&quot;)&#10;                            .endSpec()&#10;                            .build();&#10;&#10;Pod createdPod = client.pods().inNamespace(context.namespace).create(aPod);&#10;&#10;System.out.println(&quot;\nCreazione del POD...&quot;);// + createdPod.toString());"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="KubernetesClient client = new DefaultKubernetesClient();&#10;&#10;Pod aPod = &#10;                    new PodBuilder().&#10;                            withNewMetadata().&#10;                            withName(context.podName).&#10;                            endMetadata()&#10;                            .withNewSpec()&#10;                            .addNewContainer()&#10;                            .addToCommand(&quot;python&quot;, &quot;app.py&quot;, context.flow_id, context.flow_data, context.flow_exec)&#10;                            .withName(context.podName)&#10;                            .withImage(&quot;al3p3r/helloworld-python&quot;)&#10;                            .endContainer()&#10;                            .withRestartPolicy(&quot;Never&quot;)&#10;                            .endSpec()&#10;                            .build();&#10;&#10;&#10;try {&#10;&#9;System.out.println(&quot;\nCreazione del POD...&quot;); // + createdPod.toString());&#10;&#9;Pod createdPod = client.pods().inNamespace(context.namespace).create(aPod);&#10;} catch {&#10;&#9;System.out.println(&quot;\nErrore durante la creazione del POD&quot;);&#10;&#9;context.resultStatus = -2;&#10;}&#10;"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import io.fabric8.kubernetes.api.model.Pod;&#10;import io.fabric8.kubernetes.api.model.PodBuilder;&#10;import io.fabric8.kubernetes.client.DefaultKubernetesClient;&#10;import io.fabric8.kubernetes.client.KubernetesClient;&#10;&#10;import java.time.LocalDate;&#10;import java.time.format.DateTimeFormatter;"/>
     <elementParameter field="TEXT" name="LABEL" value="Create_POD"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -205,8 +203,7 @@
   </node>
   <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="960" posY="512">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_4"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="KubernetesClient client = new DefaultKubernetesClient();&#10;        &#10;Boolean isDeleted = client.pods().inNamespace(context.namespace).withName(context.podName).delete();&#10;        &#10;System.out.println(&quot;\nPod '&quot; + context.podName + &quot;' has been deleted: &quot; + isDeleted + &quot;\n\n&quot;);&#10;&#10;&#10;row1.resultStatus = 1;"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="KubernetesClient client = new DefaultKubernetesClient();&#10;        &#10;Boolean isDeleted = client.pods().inNamespace(context.namespace).withName(context.podName).delete();&#10;        &#10;System.out.println(&quot;\nPod '&quot; + context.podName + &quot;' has been deleted: &quot; + isDeleted + &quot;\n\n&quot;);&#10;&#10;if(!isDeleted &amp;&amp; context.resultStatus == -5) {&#10;&#9;row1.resultStatus = -6;&#10;} else {&#10;&#9;row1.resultStatus = -1;&#10;}&#10;&#10;"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import io.fabric8.kubernetes.client.DefaultKubernetesClient;&#10;import io.fabric8.kubernetes.client.KubernetesClient;"/>
     <elementParameter field="TEXT" name="LABEL" value="Delete_POD"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -216,7 +213,6 @@
   </node>
   <node componentName="tBufferOutput" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1216" posY="512">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tBufferOutput_1"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tBufferOutput_1">
       <column comment="" key="false" length="-1" name="resultStatus" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
@@ -224,7 +220,7 @@
   </node>
   <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="128" posY="288">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_5"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="/*DateTimeFormatter dtf = DateTimeFormatter.ofPattern(&quot;yyyyMMdd&quot;);&#10;LocalDate localDate = LocalDate.now();&#10;&#10;context.flow_id = &quot;id12345&quot;;&#10;context.flow_data = dtf.format(localDate);&#10;context.flow_exec = Long.toString(System.currentTimeMillis());&#10;*/&#10;&#10;context.podName = context.flow_id + &quot;-&quot; + context.flow_exec;&#10;context.namespace = &quot;default&quot;;&#10;&#10;&#10;System.out.println(&quot;\n_______________ Job Variables _______________\n&quot;);&#10;System.out.println(&quot;\tflowID: &quot; + context.flow_id);&#10;System.out.println(&quot;\tflowData: &quot; + context.flow_data);&#10;System.out.println(&quot;\tflowExec: &quot; + context.flow_exec);&#10;System.out.println(&quot;\tpodName: &quot; + context.podName );&#10;System.out.println(&quot;\tnamespace: &quot; + context.namespace);&#10;System.out.println(&quot;\twatcherTimeoutInMinutes: &quot; + context.watcherTimeoutInMinutes);&#10;System.out.println(&quot;_____________________________________________\n\n&quot;);&#10;&#10;&#10;&#10;// Per far terminare con errore&#10;if(context.flow_data.equals(&quot;20200604&quot;)){&#10;&#9;row2.resultStatus = -1;&#10;} else {row2.resultStatus = 1;}"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="&#10;context.podName = context.flow_id + &quot;-&quot; + context.flow_exec;&#10;context.namespace = &quot;default&quot;;&#10;&#10;&#10;System.out.println(&quot;\n_______________ Job Variables _______________\n&quot;);&#10;System.out.println(&quot;\tflowID: &quot; + context.flow_id);&#10;System.out.println(&quot;\tflowData: &quot; + context.flow_data);&#10;System.out.println(&quot;\tflowExec: &quot; + context.flow_exec);&#10;System.out.println(&quot;\tpodName: &quot; + context.podName );&#10;System.out.println(&quot;\tnamespace: &quot; + context.namespace);&#10;System.out.println(&quot;\twatcherTimeoutInMinutes: &quot; + context.watcherTimeoutInMinutes);&#10;System.out.println(&quot;_____________________________________________\n\n&quot;);&#10;&#10;&#10;&#10;// Per far terminare con errore&#10;if(context.flow_data.equals(&quot;20200604&quot;)){&#10;&#9;row2.resultStatus = -10;&#10;} else {row2.resultStatus = 1;}"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
     <elementParameter field="TEXT" name="LABEL" value="Variables_Setting"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -239,20 +235,59 @@
       <column comment="" key="false" length="-1" name="resultStatus" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
     </metadata>
   </node>
+  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="128" posY="704">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_6"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="row3.resultStatus = context.resultStatus;"/>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tJava_6">
+      <column comment="" key="false" length="-1" name="resultStatus" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tBufferOutput" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="224" posY="832">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tBufferOutput_3"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tBufferOutput_3">
+      <column comment="" key="false" length="-1" name="resultStatus" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="416" posY="704">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_7"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="row3.resultStatus = context.resultStatus;"/>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tJava_7">
+      <column comment="" key="false" length="-1" name="resultStatus" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tBufferOutput" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="512" posY="832">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tBufferOutput_4"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tBufferOutput_4">
+      <column comment="" key="false" length="-1" name="resultStatus" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+    </metadata>
+  </node>
   <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tLibraryLoad_1" offsetLabelX="0" offsetLabelY="0" source="tLibraryLoad_1" target="tJava_5">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk1"/>
   </connection>
   <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tJava_3" offsetLabelX="0" offsetLabelY="0" source="tJava_3" target="tJava_4">
-    <elementParameter field="CHECK" name="ACTIVATE" show="false" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk5"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tJava_1" offsetLabelX="0" offsetLabelY="0" source="tJava_1" target="tJava_3">
-    <elementParameter field="CHECK" name="ACTIVATE" show="false" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk3"/>
+  <connection connectorName="RUN_IF" label="If" lineStyle="6" metaname="tJava_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tJava_1" target="tJava_3">
+    <elementParameter field="MEMO_JAVA" name="CONDITION" value="context.resultStatus &gt;= 0"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="If4"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tJava_2" offsetLabelX="0" offsetLabelY="0" source="tJava_2" target="tJava_1">
-    <elementParameter field="CHECK" name="ACTIVATE" show="false" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk2"/>
+  <connection connectorName="RUN_IF" label="If" lineStyle="6" metaname="tJava_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tJava_1" target="tJava_7">
+    <elementParameter field="MEMO_JAVA" name="CONDITION" value="context.resultStatus &lt; 0"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="If3"/>
+  </connection>
+  <connection connectorName="RUN_IF" label="If" lineStyle="6" metaname="tJava_2" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tJava_2" target="tJava_1">
+    <elementParameter field="MEMO_JAVA" name="CONDITION" value="context.resultStatus &gt;= 0"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="If1"/>
+  </connection>
+  <connection connectorName="RUN_IF" label="If" lineStyle="6" metaname="tJava_2" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tJava_2" target="tJava_6">
+    <elementParameter field="MEMO_JAVA" name="CONDITION" value="context.resultStatus &lt; 0"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="If2"/>
   </connection>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tJava_4" offsetLabelX="0" offsetLabelY="0" source="tJava_4" target="tBufferOutput_1">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
@@ -261,7 +296,6 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="CHECK" name="ACTIVATE" show="false" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row1"/>
   </connection>
   <connection connectorName="FLOW" label="row2" lineStyle="0" metaname="tJava_5" offsetLabelX="0" offsetLabelY="0" source="tJava_5" target="tBufferOutput_2">
@@ -269,9 +303,21 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row2"/>
   </connection>
   <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tJava_5" offsetLabelX="0" offsetLabelY="0" source="tJava_5" target="tJava_2">
-    <elementParameter field="CHECK" name="ACTIVATE" show="false" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk6"/>
   </connection>
+  <connection connectorName="FLOW" label="row3" lineStyle="0" metaname="tJava_6" offsetLabelX="0" offsetLabelY="0" source="tJava_6" target="tBufferOutput_3">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row3"/>
+  </connection>
+  <connection connectorName="FLOW" label="row4" lineStyle="0" metaname="tJava_7" offsetLabelX="0" offsetLabelY="0" source="tJava_7" target="tBufferOutput_4">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row4"/>
+  </connection>
+  <note opaque="true" posX="832" posY="96" sizeHeight="225" sizeWidth="385" text="Valore di ritorno: context.resultStatus&#13;&#10;&#13;&#10;1:&#9;nessun errore&#13;&#10;-1:&#9;POD succeeded ma non eliminato&#13;&#10;-2:&#9;errore di creazione POD&#13;&#10;-3:&#9;POD Failed&#13;&#10;-4:&#9;timeout watcher raggiunto&#13;&#10;-5:&#9;errore codice Python&#13;&#10;-6:&#9;errore codice Python e POD non eliminato">
+    <elementParameter field="RADIO" name="NOTETXT_LEFT" value="true"/>
+    <elementParameter field="RADIO" name="NOTETXT_CENTER" value="false"/>
+    <elementParameter field="TEXT" name="FONT_SIZE" value="9"/>
+  </note>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tLibraryLoad_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
@@ -302,13 +348,23 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_ff78e2e0-65a4-4724-b703-e42ccd851ca7"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>ZM5B+KGUkAeb4QsFJTdEv0KMmXWrL2Q9qc4GLNT0db7ESWt5Q71zYo0KjmnmhuqcbCiMaLdoYb+3
-As6ztpHHMw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_4ad1e812-a3ff-4a17-928f-86f2580d30eb"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>fbTRjuA/uq3s7N/dVQWWWQRftcrS5oJX8VUY2aa7zY4pFhJXo1NLq5XIwMBDIAMeMM8A1wJnm1ak
-5jbQXaBlyw==</DigestValue></Reference></SignedInfo><SignatureValue>j4vxFPTP/t2r12IwG/TC7Zefe9L/WR3aHrVmCR60qUoT8xXkvL/0BntwcgiYr9ndkzKRqUv/C2sA
-IXk7Wob0ia+4S9Y9ykCA5izxLoEsGCVneIplEUDJ90z25Dxzn8V0QzKON8qkQjbIi/+RA+es2an1
-O5GbJUbj3kK2UZQzxW/SBEwTVMfsNVpd3P2i9NUu28GpapxTNOPok5XvTojVv9PI/lgTk3l6BB5q
-d+FgCmfdbJJc5bRthv1TUztgfIwXrhstA7KHTRQXHx/EkYNpo623fD4PtVoJRdTOYJ4NvD33t2OF
-yyiZHoHgjbHCTUIqRr0awMTgXKUhXE78X8SI2A==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_6"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_7"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_58b1c44d-2ac0-4fe3-a5a9-0e01da2e1133"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>fapXmRMssq7yds3KlsLcxcpYabOo6vQQiGge5f3Y9tO9bu1UibqEdLvf55XtdBF/VxiPDromGFCN
+acWs6DmjLg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_88b0532a-bd43-40ab-b665-aafbfdaa6795"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>2wK9nDMCKCUPmGqe0OiB84wK0M94KiXHZ+k9CASjFWWiio7C+rrK85VWyJ/Lg0nqDZd7h0FfJcy3
+pnM5tVmnZw==</DigestValue></Reference></SignedInfo><SignatureValue>hFYIgUiRkD3jemlIHtqoQLS4AVuPY0zQUbPerWrnN0mrjAxddC6MUaojyhjJLwInAxJoImN/9WN0
+X1PLSoESyCJDRkugkNDiXiFExF0BVSDCjIZv5ZGlDIgdh0qvTy0KvSWYU3jioNWPFqqbc20+IofT
+E6jNu2b3iyiPaPAH66tUtZgtw172Us0MmF9z7rPb1mWwDmJ5onGsteTPCUaFIGqpgMCEc8VUqEkX
+6OebW+Hv8SAIkJqDv5PoUpX3giYGPpozazM98vP05eiNVRc+Cg3HIT457v3N13KfA07Aamho5MZI
+DwqSd4YEGClSnheJoDijgUQR5MLiJyc8gVrqkw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U
@@ -330,4 +386,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_4ad1e812-a3ff-4a17-928f-86f2580d30eb" Target="#_ff78e2e0-65a4-4724-b703-e42ccd851ca7"><Timestamp>2020-07-07 07:31:08</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_88b0532a-bd43-40ab-b665-aafbfdaa6795" Target="#_58b1c44d-2ac0-4fe3-a5a9-0e01da2e1133"><Timestamp>2020-07-07 08:50:44</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
