@@ -50,7 +50,7 @@
     <elementParameter field="TEXT" name="PROPERTIES_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="SCHEMA_DB_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:PG8E0D5JbCv/yQqfoEWpdM3eWjqOjTB3asRL9cwO"/>
+    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:buYAZ7z8SiA0hnqHdJ3Akrj54XXgdHzINqp9+q+E"/>
     <elementParameter field="FILE" name="DBFILE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="DBTABLE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="QUERY_CONDITION_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
@@ -85,7 +85,7 @@
     <elementParameter field="TEXT" name="PROPERTIES" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="SCHEMA_DB" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER" show="false" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:J6A0tVdLbdqfhOrRNtehF9w39COPdz1s9+k1oyjt"/>
+    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:2YZO2V3tq/XNy5X7TPnDw7zAYlDni9dJKLgPs+jn"/>
     <elementParameter field="FILE" name="DBFILE" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE_STATS" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE_LOGS" show="false" value="&quot;&quot;"/>
@@ -193,7 +193,7 @@
   </node>
   <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="128" posY="512">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_2"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="KubernetesClient client = new DefaultKubernetesClient();&#10;&#10;Pod aPod = &#10;                    new PodBuilder().&#10;                            withNewMetadata().&#10;                            withName(context.podName).&#10;                            endMetadata()&#10;                            .withNewSpec()&#10;                            .addNewContainer()&#10;                            .addToCommand(&quot;python&quot;, &quot;app.py&quot;, context.flow_id, context.flow_data, context.flow_exec)&#10;                            .withName(context.podName)&#10;                            .withImage(&quot;al3p3r/helloworld-python&quot;)&#10;                            .endContainer()&#10;                            .withRestartPolicy(&quot;Never&quot;)&#10;                            .endSpec()&#10;                            .build();&#10;&#10;&#10;try {&#10;&#9;System.out.println(&quot;\nCreazione del POD...&quot;); // + createdPod.toString());&#10;&#9;Pod createdPod = client.pods().inNamespace(context.namespace).create(aPod);&#10;} catch {&#10;&#9;System.out.println(&quot;\nErrore durante la creazione del POD&quot;);&#10;&#9;context.resultStatus = -2;&#10;}&#10;"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="KubernetesClient client = new DefaultKubernetesClient();&#10;&#10;Pod aPod = &#10;                    new PodBuilder().&#10;                            withNewMetadata().&#10;                            withName(context.podName).&#10;                            endMetadata()&#10;                            .withNewSpec()&#10;                            .addNewContainer()&#10;                            .addToCommand(&quot;python&quot;, &quot;app.py&quot;, context.flow_id, context.flow_data, context.flow_exec)&#10;                            .withName(context.podName)&#10;                            .withImage(&quot;al3p3r/helloworld-python&quot;)&#10;                            .endContainer()&#10;                            .withRestartPolicy(&quot;Never&quot;)&#10;                            .endSpec()&#10;                            .build();&#10;&#10;&#10;try {&#10;&#9;System.out.println(&quot;\nCreazione del POD...&quot;); // + createdPod.toString());&#10;&#9;Pod createdPod = client.pods().inNamespace(context.namespace).create(aPod);&#10;} catch {&#10;&#9;System.out.println(&quot;\nErrore durante la creazione del POD&quot;);&#10;&#9;context.resultStatus = -2;&#10;} finally {&#10;}&#10;"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import io.fabric8.kubernetes.api.model.Pod;&#10;import io.fabric8.kubernetes.api.model.PodBuilder;&#10;import io.fabric8.kubernetes.client.DefaultKubernetesClient;&#10;import io.fabric8.kubernetes.client.KubernetesClient;&#10;&#10;import java.time.LocalDate;&#10;import java.time.format.DateTimeFormatter;"/>
     <elementParameter field="TEXT" name="LABEL" value="Create_POD"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -358,13 +358,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_cda20234-ded0-49f1-86d9-264f32dc314e"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>3HbhIwPD3rrJPv8rR/Up9zoNc2Zfq/51A3fH6ZZWk3nLGULdazvr4nIjAo6UCQNqDoAPaAoXMnun
-tTDxTOOKpw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_9750ea54-2ce6-43aa-9874-9162e8ee3f6b"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>JX0Sz7NI4Ji9JichUCxF7WgQlXrmHcTekWb+lZunHecIDzfEuQqFbg8hT6T1Mqhf+oYD29SA2Ipf
-mvB89aXScA==</DigestValue></Reference></SignedInfo><SignatureValue>Rp9jH96oRWKi1S3M10+/6MfRxirSE4bdqewBSFB13T48EqrZwcrrdLXDBoWkilQ+gL8OThTvVjuj
-aJgfbIPucthIy1DXVX1YIJcx90QGg8GfykmqIbg4d8QyYaLy7Eih034I1l8Y2iDEUM3FS5B/6lsM
-eFnzQKXpn10EanZD8iYKwTLjJohcK1mRYIXPNPdWYMXPweVaWbyIeXfRRrMkNPuYMg+1P/QCYgoC
-KnDhJhGKd9850IdxgQSyD79M+DulvWg2o1Ny8Xo2E4Vuj8nzAtrTmB4r0JSC7wIFnUrEXMzQAE46
-5KAV3q+Cgvr1Vxz0C7CjWXlyJh1Ojg7f0ecWWA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_0c3a6d8a-a778-467f-8f87-75fabb4f968c"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Wy0eXcCM6FWDMrRIu/ys6usWNzouZW1ee3oMFfqCkChzDAtOUnqzhf4/HzoTo8w7JcSge88V71xg
+dYIxjco5wA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_81777d31-c09b-4645-ab95-6d6e07a1eb41"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>zv3OamE3q0C/8K7F1HFa52w3aYSEBd7rSQSA1aQGtr4yoZE2OlhvaNRek4LxPAaWwZ08in5w7rfo
+TE0q6e6khA==</DigestValue></Reference></SignedInfo><SignatureValue>LAftYh1/zDaiAbOzrMDfmExPoO/+O0BMEVWVNZ7Ln1pwIr9Qb54FBVhWaPixEkj5PIyfswCqFQuF
+y8J4siEHrWMPfv70WimN7sINRT2VVnC6zueDOR79vyPmp+1yuUaeTNG5VTNDhEY3SDVrKkQYc9aZ
+3HcTXrMxaaQmq+DFMfSI5XagdUErSeQMuzt5IClrnBIrz4TVentYsk3w9HC7nonOR9Yj0O99i9RQ
+9Jd2QnNPTmPxKrNEA3FxntkglJ1WedS4Jp9HFpIs6xaLw0IGitL12rsMjMZ4fGpubCeAbQRegxJk
+WMXwlW9DCvYbnf7YAQdU6KfhxgVF/HXF8YMg/w==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U
@@ -386,4 +386,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_9750ea54-2ce6-43aa-9874-9162e8ee3f6b" Target="#_cda20234-ded0-49f1-86d9-264f32dc314e"><Timestamp>2020-07-07 08:54:44</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_81777d31-c09b-4645-ab95-6d6e07a1eb41" Target="#_0c3a6d8a-a778-467f-8f87-75fabb4f968c"><Timestamp>2020-07-07 09:01:39</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
