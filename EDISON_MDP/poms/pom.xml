@@ -15,6 +15,7 @@
     <module>jobs/process/sleep_0.1</module>
     <module>jobs/process/kubernetes_main_0.1</module>
     <module>jobs/process/kubernetes_flow_copy_0.1</module>
+    <module>jobs/process/kubernetes_main_copy_0.1</module>
   </modules>
   <properties>
     <signer.version>7.3.1</signer.version>
