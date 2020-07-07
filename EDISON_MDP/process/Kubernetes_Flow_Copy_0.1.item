@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><talendfile:ProcessType xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmlns:xmi="http://www.omg.org/XMI" defaultContext="Default" jobType="Standard" xmi:version="2.0">
+  <context confirmationNeeded="false" name="Default">
+    <contextParameter comment="" name="podName" prompt="podName?" promptNeeded="false" type="id_String" value="&quot;&quot;"/>
+    <contextParameter comment="" name="namespace" prompt="namespace?" promptNeeded="false" type="id_String" value="&quot;&quot;"/>
+    <contextParameter comment="" name="flow_id" prompt="flow_id?" promptNeeded="false" type="id_String" value="&quot;1&quot;"/>
+    <contextParameter comment="" name="flow_data" prompt="flow_data?" promptNeeded="false" type="id_String" value="&quot;1&quot;"/>
+    <contextParameter comment="" name="flow_exec" prompt="flow_exec?" promptNeeded="false" type="id_String" value="&quot;1&quot;"/>
+    <contextParameter comment="" name="watcherTimeoutInMinutes" prompt="watcherTimeoutInMinutes?" promptNeeded="false" type="id_Integer" value="30"/>
+  </context>
+  <parameters>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" show="false" value="0"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" show="false" value="0"/>
+    <elementParameter field="TEXT" name="REPOSITORY_CONNECTION_ID" show="false" value=""/>
+    <elementParameter field="TEXT" name="OOZIE_PROPERTY_TYPENAME" show="false" value=""/>
+    <elementParameter field="TEXT" name="OOZIE_HADOOP_DISTRIBUTION" show="false" value=""/>
+    <elementParameter field="TEXT" name="OOZIE_HADOOP_VERSION" show="false" value=""/>
+    <elementParameter field="TEXT" name="OOZIE_ENABLE_KERBEROS" show="false" value=""/>
+    <elementParameter field="TEXT" name="OOZIE_NAME_NODE_PRINCIPAL" show="false" value=""/>
+    <elementParameter field="TEXT" name="OOZIE_USERNAME" show="false" value=""/>
+    <elementParameter field="TEXT" name="OOZIE_GROUP" show="false" value=""/>
+    <elementParameter field="TEXT" name="OOZIE_USE_KEYTAB" show="false" value=""/>
+    <elementParameter field="TEXT" name="OOZIE_KT_PRINCIPAL" show="false" value=""/>
+    <elementParameter field="TEXT" name="OOZIE_KEY_TAB" show="false" value=""/>
+    <elementParameter field="TEXT" name="OOZIE_ENABLE_OO_KERBEROS" show="false" value=""/>
+    <elementParameter field="TEXT" name="OOZIE_NAME_NODE_END_POINT" show="false" value=""/>
+    <elementParameter field="TEXT" name="OOZIE_JOB_TRACKER_ENDPOINT" show="false" value=""/>
+    <elementParameter field="TEXT" name="OOZIE_END_POINT" show="false" value=""/>
+    <elementParameter field="CHECK" name="IMPLICITCONTEXT_USE_PROJECT_SETTINGS" show="false" value="true"/>
+    <elementParameter field="CHECK" name="STATANDLOG_USE_PROJECT_SETTINGS" show="false" value="true"/>
+    <elementParameter field="CHECK" name="MULTI_THREAD_EXECATION" value="false"/>
+    <elementParameter field="TEXT" name="PARALLELIZE_UNIT_SIZE" value="25000"/>
+    <elementParameter field="CHECK" name="IMPLICIT_TCONTEXTLOAD" value="false"/>
+    <elementParameter field="RADIO" name="FROM_FILE_FLAG_IMPLICIT_CONTEXT" show="false" value="false"/>
+    <elementParameter field="RADIO" name="FROM_DATABASE_FLAG_IMPLICIT_CONTEXT" show="false" value="false"/>
+    <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" show="false" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" show="false" value="&quot;&quot;"/>
+    <elementParameter field="CHECK" name="OVERRIDE_ENCODING_FLAG" show="false" value="false"/>
+    <elementParameter field="ENCODING_TYPE" name="OVERRIDE_ENCODING_IN_EXTRA" show="false" value="ISO-8859-15"/>
+    <elementParameter field="TECHNICAL" name="OVERRIDE_ENCODING_IN_EXTRA:ENCODING_TYPE" show="false" value="ISO-8859-15"/>
+    <elementParameter field="CLOSED_LIST" name="DB_TYPE_IMPLICIT_CONTEXT" show="false" value=""/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION_IMPLICIT_CONTEXT" show="false" value=""/>
+    <elementParameter field="TEXT" name="URL_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
+    <elementParameter field="TABLE" name="DRIVER_JAR_IMPLICIT_CONTEXT" show="false"/>
+    <elementParameter field="TEXT" name="DRIVER_CLASS_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="HOST_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PORT_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="LOCAL_SERVICE_NAME_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PROPERTIES_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="USER_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
+    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:502Q4nGjZoMu+0HjGqQwmmSUPEezS1rYj6JLPdYf"/>
+    <elementParameter field="FILE" name="DBFILE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
+    <elementParameter field="DBTABLE" name="DBTABLE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="QUERY_CONDITION_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="LOAD_NEW_VARIABLE" show="false" value="Warning"/>
+    <elementParameter field="CLOSED_LIST" name="NOT_LOAD_OLD_VARIABLE" show="false" value="Warning"/>
+    <elementParameter field="CHECK" name="PRINT_OPERATIONS" show="false" value="false"/>
+    <elementParameter field="CHECK" name="DISABLE_ERROR" show="false" value="false"/>
+    <elementParameter field="CHECK" name="DISABLE_WARNINGS" show="false" value="false"/>
+    <elementParameter field="CHECK" name="DISABLE_INFO" show="false" value="false"/>
+    <elementParameter field="CHECK" name="ON_STATCATCHER_FLAG" value="false"/>
+    <elementParameter field="CHECK" name="ON_LOGCATCHER_FLAG" value="false"/>
+    <elementParameter field="CHECK" name="ON_METERCATCHER_FLAG" value="false"/>
+    <elementParameter field="CHECK" name="ON_CONSOLE_FLAG" show="false" value="false"/>
+    <elementParameter field="CHECK" name="ON_FILES_FLAG" show="false" value="false"/>
+    <elementParameter field="DIRECTORY" name="FILE_PATH" show="false" value="&quot;C:/Users/a.perini/TalendWorkspace/.metadata&quot;"/>
+    <elementParameter field="TEXT" name="FILENAME_STATS" show="false" value="&quot;stats_file.txt&quot;"/>
+    <elementParameter field="TEXT" name="FILENAME_LOGS" show="false" value="&quot;logs_file.txt&quot;"/>
+    <elementParameter field="TEXT" name="FILENAME_METTER" show="false" value="&quot;meter_file.txt&quot;"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" show="false" value="ISO-8859-15"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" show="false" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="ON_DATABASE_FLAG" show="false" value="false"/>
+    <elementParameter field="CLOSED_LIST" name="DB_TYPE" show="false" value="tJDBCOutput"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION" show="false" value="ORACLE_12"/>
+    <elementParameter field="TEXT" name="URL" show="false" value="&quot;&quot;"/>
+    <elementParameter field="TABLE" name="DRIVER_JAR" show="false"/>
+    <elementParameter field="TEXT" name="DRIVER_CLASS" show="false" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="HOST" show="false" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PORT" show="false" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="DATASOURCE" show="false" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" show="false" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="LOCAL_SERVICE_NAME" show="false" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PROPERTIES" show="false" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" show="false" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="USER" show="false" value="&quot;&quot;"/>
+    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:oB2GVOUhokBbkZIPE1GD8Z+A/NLppy6WeKtmtblX"/>
+    <elementParameter field="FILE" name="DBFILE" show="false" value="&quot;&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE_STATS" show="false" value="&quot;&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE_LOGS" show="false" value="&quot;&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE_METER" show="false" value="&quot;&quot;"/>
+    <elementParameter field="CHECK" name="CATCH_RUNTIME_ERRORS" show="false" value="true"/>
+    <elementParameter field="CHECK" name="CATCH_USER_ERRORS" show="false" value="true"/>
+    <elementParameter field="CHECK" name="CATCH_USER_WARNING" show="false" value="true"/>
+    <elementParameter field="CHECK" name="CATCH_REALTIME_STATS" show="false" value="false"/>
+    <elementParameter field="TEXT" name="HEADERFOOTER_HEADERID" show="false" value=""/>
+    <elementParameter field="CHECK" name="HEADER_ENABLED" show="false" value="false"/>
+    <elementParameter field="TEXT" name="HEADER_LIBRARY" show="false" value=""/>
+    <elementParameter field="TEXT" name="HEADER_CODE" show="false" value=""/>
+    <elementParameter field="TEXT" name="HEADER_IMPORT" show="false" value=""/>
+    <elementParameter field="TEXT" name="HEADERFOOTER_FOOTERID" show="false" value=""/>
+    <elementParameter field="CHECK" name="FOOTER_ENABLED" show="false" value="false"/>
+    <elementParameter field="TEXT" name="FOOTER_LIBRARY" show="false" value=""/>
+    <elementParameter field="TEXT" name="FOOTER_CODE" show="false" value=""/>
+    <elementParameter field="TEXT" name="FOOTER_IMPORT" show="false" value=""/>
+    <routinesParameter id="_dEMV4LubEeqH7fjMe9YE2w" name="DataOperation"/>
+    <routinesParameter id="_dF8CULubEeqH7fjMe9YE2w" name="Mathematical"/>
+    <routinesParameter id="_dGSnoLubEeqH7fjMe9YE2w" name="Numeric"/>
+    <routinesParameter id="_dGmJoLubEeqH7fjMe9YE2w" name="Relational"/>
+    <routinesParameter id="_dHGf8LubEeqH7fjMe9YE2w" name="StringHandling"/>
+    <routinesParameter id="_dHgIkLubEeqH7fjMe9YE2w" name="TalendDataGenerator"/>
+    <routinesParameter id="_dH1fwLubEeqH7fjMe9YE2w" name="TalendDate"/>
+    <routinesParameter id="_dIPvcLubEeqH7fjMe9YE2w" name="TalendString"/>
+    <routinesParameter id="_dIltsLubEeqH7fjMe9YE2w" name="TalendStringUtil"/>
+    <routinesParameter id="_PgqxQL0hEeqk75r1RrMnug" name="SQLike"/>
+    <routinesParameter id="_Ph-_4L0hEeqk75r1RrMnug" name="DataQualityDependencies"/>
+    <routinesParameter id="_Pi0tYL0hEeqk75r1RrMnug" name="DQTechnical"/>
+    <routinesParameter id="_Phi7AL0hEeqk75r1RrMnug" name="DataQuality"/>
+    <routinesParameter id="_PiadsL0hEeqk75r1RrMnug" name="DqStringHandling"/>
+    <routinesParameter id="_PhFoAL0hEeqk75r1RrMnug" name="DataMasking"/>
+  </parameters>
+  <node componentName="tLibraryLoad" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="96">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tLibraryLoad_1"/>
+    <elementParameter field="MODULE_LIST" name="LIBRARY" value="&quot;automaton-1.11-8.jar&quot;"/>
+    <elementParameter field="TABLE" name="HOTLIBS">
+      <elementValue elementRef="LIBPATH" value="&quot;generex-1.0.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;jackson-annotations-2.10.3.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;jackson-core-2.10.3.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;jackson-databind-2.10.3.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;jackson-dataformat-yaml-2.10.3.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;jackson-datatype-jsr310-2.10.3.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;jackson-module-jaxb-annotations-2.10.3.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;jakarta.activation-api-1.2.1.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;jakarta.xml.bind-api-2.3.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;knative-client-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;kubernetes-client-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;kubernetes-model-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;kubernetes-model-admissionregistration-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;kubernetes-model-apiextensions-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;kubernetes-model-apps-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;kubernetes-model-autoscaling-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;kubernetes-model-batch-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;kubernetes-model-certificates-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;kubernetes-model-common-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;kubernetes-model-coordination-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;kubernetes-model-core-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;kubernetes-model-discovery-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;kubernetes-model-events-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;kubernetes-model-extensions-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;kubernetes-model-metrics-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;kubernetes-model-networking-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;kubernetes-model-policy-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;kubernetes-model-rbac-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;kubernetes-model-scheduling-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;kubernetes-model-settings-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;kubernetes-model-storageclass-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;logging-interceptor-3.12.12.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;okhttp-3.12.12.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;okio-1.15.0.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;openshift-client-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;openshift-model-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;slf4j-api-1.7.30.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;snakeyaml-1.24.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;tekton-client-4.10.2.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;zjsonpatch-0.3.0.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;slf4j-simple-1.6.1.jar&quot;"/>
+      <elementValue elementRef="LIBPATH" value="&quot;slf4j-api-1.6.1.jar&quot;"/>
+    </elementParameter>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
+    <elementParameter field="TEXT" name="LABEL" value="Libraries_import"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+  </node>
+  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="704" posY="512">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_3"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="KubernetesClient client = new DefaultKubernetesClient();&#10;&#10;System.out.println(&quot;\n\nLog del pod 'hello':\n&quot; + client.pods().inNamespace(context.namespace).withName(context.podName).getLog());"/>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import io.fabric8.kubernetes.client.DefaultKubernetesClient;&#10;import io.fabric8.kubernetes.client.KubernetesClient;"/>
+    <elementParameter field="TEXT" name="LABEL" value="Read_Log"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tJava_3"/>
+  </node>
+  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="416" posY="512">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_1"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="int timeout = context.watcherTimeoutInMinutes;&#10;&#10;final CountDownLatch closeLatch = new CountDownLatch(1);&#10;Config config = new ConfigBuilder().build();&#10;       &#10;       try (final KubernetesClient client = new DefaultKubernetesClient(config)) {&#10;         try (Watch watch = client.pods().inNamespace(context.namespace).withName(context.podName).watch(new Watcher&lt;Pod&gt;() {&#10;&#10;           @Override&#10;           public void eventReceived(Watcher.Action action, Pod resource) {&#10;               String name = resource.getMetadata().getName();&#10;               String status = resource.getStatus().getPhase();&#10;               //String kind = resource.getKind();&#10;               //String details = podStatus.toString();&#10;&#10;               System.out.printf(&quot;\nPOD NAME: %s | STATUS: %s &quot;, name, status);&#10;&#10;               if(status.equals(&quot;Succeeded&quot;)) onClose(null);&#10;               if(status.equals(&quot;Failed&quot;)) onClose(new KubernetesClientException(&quot;Failed&quot;));&#10;               &#10;           }&#10;&#10;           @Override&#10;           public void onClose(KubernetesClientException e) {&#10;               //System.out.println(&quot;Watcher onClose&quot;);&#10;             if (e != null) {&#10;               //logger.error(e.getMessage(), e);&#10;               System.out.println(e.getMessage() + e);&#10;             }&#10;             closeLatch.countDown();&#10;           }&#10;         })) {&#10;           System.out.println(&quot;\n\nWatcher del pod '&quot; + context.podName + &quot;' in ascolto&quot;);&#10;           closeLatch.await(timeout, TimeUnit.MINUTES);&#10;         } catch (KubernetesClientException | InterruptedException e) {&#10;           System.out.println(&quot;Watcher catch1&quot;);&#10;         }&#10;       } catch (Exception e) {&#10;         e.printStackTrace();&#10;         System.out.println(&quot;Watcher catch 2&quot;);&#10;&#10;         Throwable[] suppressed = e.getSuppressed();&#10;         if (suppressed != null) {&#10;           for (Throwable t : suppressed) {&#10;             System.out.println(&quot;Watcher catch 3&quot;);&#10;           }&#10;         }&#10;       }&#10;         &#10;       //System.out.println(&quot;prima di sleep&quot;);&#10;       //Thread.sleep(60000l);"/>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import io.fabric8.kubernetes.api.model.Pod;&#10;import io.fabric8.kubernetes.client.Config;&#10;import io.fabric8.kubernetes.client.ConfigBuilder;&#10;import io.fabric8.kubernetes.client.DefaultKubernetesClient;&#10;import io.fabric8.kubernetes.client.KubernetesClient;&#10;import io.fabric8.kubernetes.client.KubernetesClientException;&#10;import io.fabric8.kubernetes.client.Watch;&#10;import io.fabric8.kubernetes.client.Watcher;&#10;import java.util.concurrent.CountDownLatch;&#10;import java.util.concurrent.TimeUnit;&#10;"/>
+    <elementParameter field="TEXT" name="LABEL" value="Watcher_Start"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tJava_1">
+      <column comment="" key="false" length="-1" name="newColumn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true">
+        <additionalField key="FUNCTION_INFO" value="{&quot;NAME&quot;:&quot;getAsciiRandomString&quot;,&quot;PARAMETERS&quot;:[{&quot;PARAMETER_NAME&quot;:&quot;length&quot;,&quot;PARAMETER_VALUE&quot;:&quot;6&quot;}],&quot;PARAMETER_CLASS_NAME&quot;:&quot;TalendString&quot;}"/>
+      </column>
+    </metadata>
+  </node>
+  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="128" posY="512">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_2"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="KubernetesClient client = new DefaultKubernetesClient();&#10;&#10;Pod aPod = &#10;                    new PodBuilder().&#10;                            withNewMetadata().&#10;                            withName(context.podName).&#10;                            endMetadata()&#10;                            .withNewSpec()&#10;                            .addNewContainer()&#10;                            .addToCommand(&quot;python&quot;, &quot;app.py&quot;, context.flow_id, context.flow_data, context.flow_exec)&#10;                            .withName(context.podName)&#10;                            .withImage(&quot;al3p3r/helloworld-python&quot;)&#10;                            .endContainer()&#10;                            .withRestartPolicy(&quot;Never&quot;)&#10;                            .endSpec()&#10;                            .build();&#10;&#10;Pod createdPod = client.pods().inNamespace(context.namespace).create(aPod);&#10;&#10;System.out.println(&quot;\nCreazione del POD...&quot;);// + createdPod.toString());"/>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import io.fabric8.kubernetes.api.model.Pod;&#10;import io.fabric8.kubernetes.api.model.PodBuilder;&#10;import io.fabric8.kubernetes.client.DefaultKubernetesClient;&#10;import io.fabric8.kubernetes.client.KubernetesClient;&#10;&#10;import java.time.LocalDate;&#10;import java.time.format.DateTimeFormatter;"/>
+    <elementParameter field="TEXT" name="LABEL" value="Create_POD"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tJava_2">
+      <column comment="" key="false" length="-1" name="newColumn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="960" posY="512">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_4"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="KubernetesClient client = new DefaultKubernetesClient();&#10;        &#10;Boolean isDeleted = client.pods().inNamespace(context.namespace).withName(context.podName).delete();&#10;        &#10;System.out.println(&quot;\nPod '&quot; + context.podName + &quot;' has been deleted: &quot; + isDeleted + &quot;\n\n&quot;);&#10;&#10;&#10;row1.resultStatus = 1;"/>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import io.fabric8.kubernetes.client.DefaultKubernetesClient;&#10;import io.fabric8.kubernetes.client.KubernetesClient;"/>
+    <elementParameter field="TEXT" name="LABEL" value="Delete_POD"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tJava_4">
+      <column comment="" key="false" length="-1" name="resultStatus" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tBufferOutput" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1216" posY="512">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tBufferOutput_1"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tBufferOutput_1">
+      <column comment="" key="false" length="-1" name="resultStatus" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="128" posY="288">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_5"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="/*DateTimeFormatter dtf = DateTimeFormatter.ofPattern(&quot;yyyyMMdd&quot;);&#10;LocalDate localDate = LocalDate.now();&#10;&#10;context.flow_id = &quot;id12345&quot;;&#10;context.flow_data = dtf.format(localDate);&#10;context.flow_exec = Long.toString(System.currentTimeMillis());&#10;*/&#10;&#10;context.podName = context.flow_id + &quot;-&quot; + context.flow_exec;&#10;context.namespace = &quot;default&quot;;&#10;&#10;&#10;System.out.println(&quot;\n_______________ Job Variables _______________\n&quot;);&#10;System.out.println(&quot;\tflowID: &quot; + context.flow_id);&#10;System.out.println(&quot;\tflowData: &quot; + context.flow_data);&#10;System.out.println(&quot;\tflowExec: &quot; + context.flow_exec);&#10;System.out.println(&quot;\tpodName: &quot; + context.podName );&#10;System.out.println(&quot;\tnamespace: &quot; + context.namespace);&#10;System.out.println(&quot;\twatcherTimeoutInMinutes: &quot; + context.watcherTimeoutInMinutes);&#10;System.out.println(&quot;_____________________________________________\n\n&quot;);&#10;&#10;&#10;&#10;// Per far terminare con errore&#10;if(context.flow_data.equals(&quot;20200604&quot;)){&#10;&#9;row2.resultStatus = -1;&#10;} else {row2.resultStatus = 1;}"/>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
+    <elementParameter field="TEXT" name="LABEL" value="Variables_Setting"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tJava_5">
+      <column comment="" key="false" length="-1" name="resultStatus" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tBufferOutput" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="448" posY="288">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tBufferOutput_2"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tBufferOutput_2">
+      <column comment="" key="false" length="-1" name="resultStatus" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tLibraryLoad_1" offsetLabelX="0" offsetLabelY="0" source="tLibraryLoad_1" target="tJava_5">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk1"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tJava_3" offsetLabelX="0" offsetLabelY="0" source="tJava_3" target="tJava_4">
+    <elementParameter field="CHECK" name="ACTIVATE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk5"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tJava_1" offsetLabelX="0" offsetLabelY="0" source="tJava_1" target="tJava_3">
+    <elementParameter field="CHECK" name="ACTIVATE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk3"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tJava_2" offsetLabelX="0" offsetLabelY="0" source="tJava_2" target="tJava_1">
+    <elementParameter field="CHECK" name="ACTIVATE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk2"/>
+  </connection>
+  <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tJava_4" offsetLabelX="0" offsetLabelY="0" source="tJava_4" target="tBufferOutput_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="resultStatus"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="ACTIVATE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row1"/>
+  </connection>
+  <connection connectorName="FLOW" label="row2" lineStyle="0" metaname="tJava_5" offsetLabelX="0" offsetLabelY="0" source="tJava_5" target="tBufferOutput_2">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row2"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tJava_5" offsetLabelX="0" offsetLabelY="0" source="tJava_5" target="tJava_2">
+    <elementParameter field="CHECK" name="ACTIVATE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk6"/>
+  </connection>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tLibraryLoad_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_3"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_2"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_4"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_5"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_a401a8b5-2964-40bc-9a0f-6a0ddebedc70"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>AdXF0FKNE5wyyqZNBbhZ0sMzPTpbim7/FaGEVemQUR0p7MNLZmlo2pIKsErWIGqChQCTWBmp/KDj
+LkQqlvVaYg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_3a3ea4d7-ad60-415e-939c-11ab85231c44"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>mIfM4TIF4zFE1eRrveZ5cA5uS5FKccV6mcXpS51aM9iVcP3+TvAWintU3PXyFx35F+RX5EbcA7Dt
+4yYrdESOhA==</DigestValue></Reference></SignedInfo><SignatureValue>Hr2wOhnk1rH6/3qb1c37+Uj4J+oUgoaYqqIJM1VIcUg0mjsMtYvZSLfgGyUUofVXYx28axc5si1d
+QvMnGnr85cU+5Z+HxIrKmTVz5Lsy7qRsZJ+/UQ4UQUl8WnjLJKGD/Qy7IoqwWX3gnt+D2nqEpuYu
+1ukzrOl/1WYXDYMUspV3m9zjZwdi5nYP/EhAaaVnwDEaMbXsUt1TS0sKIEwnTLjR8ScpiKdaNbTs
+TT490OCSgsxlCP1Z8psoNd9YbOKF1D6WWJ3t1Q5/Q8ZoF82YWyq3B4MVAb/rDYvhqN/1EDz1bV5N
+cGJomi8G1lX8tt7w+D81tTAMO0b7LpoX/zo33Q==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
+DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD
+VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5
+QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U
+YWxlbmQgQ29kZSBTaWduaW5nIGNlcnRpZmljYXRlMQwwCgYDVQQLDANSJkQxFDASBgNVBAoTC1Rh
+bGVuZCBJbmMuMQ4wDAYDVQQHEwVQYXJpczEOMAwGA1UECBMFUGFyaXMxCzAJBgNVBAYTAkZSMIIB
+IjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAp5TMF8BmRt8dY51t9kIDdDkoOKVVytJN2gn2
+DhMGi8hzpUofNDykJDhe9SPqyJdGZ6o/h7laTA0/CivKyPT1OJQ9E2gMHKs8cTZM/cO2w0Atlqkl
+alIxepol0DNnUtmECVBqdnVsJesfmdoeptxgJAtxYbquFsTsrATNY2cscXpwmOca/Ewip48WQLFx
+e5s067jaIsAQGRIqpIup3bOtWBySrtImJ40lQCPeEcl96qzkv3utaVaNc3ukkhYkCDbMbK8NVd1B
+CVeeIBAe+n/SdpHH20o+6eIiZecsBGDLwlTYrFvuVqAa6xI7y8Vdz6irjPAVBEtG/iOc782aJ/lZ
+TwIDAQABo3UwczAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB/wQEAwIHgDATBgNVHSUEDDAKBggrBgEF
+BQcDAzAdBgNVHQ4EFgQUGdfzQEbjQnANq28sfhEMTx+rsOcwHwYDVR0jBBgwFoAU530Lcvy1gZnG
+gCvZLOyCczK1qPcwDQYJKoZIhvcNAQELBQADggIBAEr22wnaQwZm2dhbUCqD+qZpTq2AF/tzxqAM
+eL/CiTjPbTblS4SNNwCKvTgMe9ucpUbenXmK7xE+DU9dN4om+t3VHbkOLQVyuLcd2WGsy7ZGwRvA
+f+TFwLbwjyTukOGm6Sd1qyZgvCPzBsKnft6vscvGy2yEpmFCeHJyBP8pvchg607zguRdNbkGYZXw
+G6jNipAbTtzdPTFKKr1bEf0sUGqMrlZIMPjflh2Vewu8ImNdX5IZdvBD6DdFVOC5wqV6u+W9ukE/
+mXZxDBYNl2AF7FTh04ucEVN3mHv7m2L0uFvUlhxchcagJhJsdQG+A0LVCemHbp6CSNQJx02KxqUG
+hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/
+WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW
+gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+
+qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_3a3ea4d7-ad60-415e-939c-11ab85231c44" Target="#_a401a8b5-2964-40bc-9a0f-6a0ddebedc70"><Timestamp>2020-07-07 07:24:11</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
