@@ -50,7 +50,7 @@
     <elementParameter field="TEXT" name="PROPERTIES_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="SCHEMA_DB_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:wqycP52pSUMmQU3VjZbstkdeFzFb7TLnWfiss7Be"/>
+    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:JZCpT0lbp6ewN8Z3oYHkVQLSTXhlqAK1kV1Yu/+N"/>
     <elementParameter field="FILE" name="DBFILE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="DBTABLE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="QUERY_CONDITION_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
@@ -85,7 +85,7 @@
     <elementParameter field="TEXT" name="PROPERTIES" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="SCHEMA_DB" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER" show="false" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:t8i/sA0WtXWmuYLqeMNFhlFQq1qsyRe2Met6QtCg"/>
+    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:NVJyuDSZgUx2rPBQqpUxhheesGaIkg1S02/70fkf"/>
     <elementParameter field="FILE" name="DBFILE" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE_STATS" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE_LOGS" show="false" value="&quot;&quot;"/>
@@ -169,7 +169,7 @@
     <elementParameter field="TEXT" name="LABEL" value="Libraries_import"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
   </node>
-  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="896" posY="512">
+  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="960" posY="512">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_3"/>
     <elementParameter field="MEMO_JAVA" name="CODE" value="KubernetesClient client = new DefaultKubernetesClient();&#10;&#10;String log = client.pods().inNamespace(context.namespace).withName(context.podName).getLog();&#10;&#10;System.out.println(&quot;\n\nLog del pod 'hello':\n&quot; + log);&#10;&#10;// *** DA ELIMINARE DOPO I TEST ***&#10;//log = &quot;1&quot;;&#10;// *** ________________________ ***&#10;&#10;if(log.equals(&quot;1&quot;)) {&#10;&#9;context.resultStatus = 1;&#10;} else {&#10;&#9;context.resultStatus = -5;&#10;}"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import io.fabric8.kubernetes.client.DefaultKubernetesClient;&#10;import io.fabric8.kubernetes.client.KubernetesClient;"/>
@@ -189,18 +189,6 @@
       </column>
     </metadata>
   </node>
-  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="608" posY="512">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_8"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="// Se resultStatus non è stato settato a 1 (è ancora al valore di default 0) vuol dire che è stato raggiunto il timeout&#10;if(context.resultStatus == 0) context.resultStatus = -4; &#10;&#10;if(context.resultStatus &lt; 1) throw new Exception(&quot;POD Failed/POD timeout&quot;);"/>
-    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
-    <elementParameter field="TEXT" name="LABEL" value="Watcher_Result"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="tJava_8">
-      <column comment="" key="false" length="-1" name="newColumn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true">
-        <additionalField key="FUNCTION_INFO" value="{&quot;NAME&quot;:&quot;getAsciiRandomString&quot;,&quot;PARAMETERS&quot;:[{&quot;PARAMETER_NAME&quot;:&quot;length&quot;,&quot;PARAMETER_VALUE&quot;:&quot;6&quot;}],&quot;PARAMETER_CLASS_NAME&quot;:&quot;TalendString&quot;}"/>
-      </column>
-    </metadata>
-  </node>
   <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="128" posY="512">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_2"/>
     <elementParameter field="MEMO_JAVA" name="CODE" value="KubernetesClient client = new DefaultKubernetesClient();&#10;&#10;Pod aPod = &#10;                    new PodBuilder().&#10;                            withNewMetadata().&#10;                            withName(context.podName).&#10;                            endMetadata()&#10;                            .withNewSpec()&#10;                            .addNewContainer()&#10;                            .addToCommand(&quot;python&quot;, &quot;app.py&quot;, context.flow_id, context.flow_data, context.flow_exec)&#10;                            .withName(context.podName)&#10;                            .withImage(&quot;al3p3r/helloworld-python&quot;)&#10;                            .endContainer()&#10;                            .withRestartPolicy(&quot;Never&quot;)&#10;                            .endSpec()&#10;                            .build();&#10;&#10;&#10;try {&#10;&#9;System.out.println(&quot;\nCreazione del POD...&quot;); // + createdPod.toString());&#10;&#9;Pod createdPod = client.pods().inNamespace(context.namespace).create(aPod);&#10;} catch (Exception e) {&#10;&#9;context.resultStatus = -2;&#10;&#9;throw new Exception(&quot;Errore durante la creazione del POD&quot;);&#10;}"/>
@@ -211,7 +199,7 @@
       <column comment="" key="false" length="-1" name="newColumn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1120" posY="512">
+  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1184" posY="512">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_4"/>
     <elementParameter field="MEMO_JAVA" name="CODE" value="KubernetesClient client = new DefaultKubernetesClient();&#10;        &#10;Boolean isDeleted = client.pods().inNamespace(context.namespace).withName(context.podName+&quot;xxx&quot;).delete();&#10;        &#10;System.out.println(&quot;\nPod '&quot; + context.podName + &quot;' has been deleted: &quot; + isDeleted + &quot;\n\n&quot;);&#10;&#10;if(!isDeleted &amp;&amp; context.resultStatus == -5) {&#10;&#9;context.resultStatus = -6;&#10;} else if (!isDeleted) {&#10;&#9;context.resultStatus = -1;&#10;}&#10;&#10;row1.resultStatus = context.resultStatus;&#10;&#10;"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import io.fabric8.kubernetes.client.DefaultKubernetesClient;&#10;import io.fabric8.kubernetes.client.KubernetesClient;"/>
@@ -221,7 +209,7 @@
       <column comment="" key="false" length="-1" name="resultStatus" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tBufferOutput" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1344" posY="512">
+  <node componentName="tBufferOutput" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1408" posY="512">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tBufferOutput_1"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tBufferOutput_1">
@@ -255,7 +243,7 @@
       <column comment="" key="false" length="-1" name="resultStatus" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="608" posY="704">
+  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="672" posY="704">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_7"/>
     <elementParameter field="MEMO_JAVA" name="CODE" value="// *** DA ELIMINARE DOPO I TEST ***&#10;Thread.sleep(5000);&#10;// ********************************&#10;&#10;KubernetesClient client = new DefaultKubernetesClient();&#10;        &#10;Boolean isDeleted = client.pods().inNamespace(context.namespace).withName(context.podName).delete();&#10;        &#10;System.out.println(&quot;\nPod '&quot; + context.podName + &quot;' has been deleted: &quot; + isDeleted + &quot;\n\n&quot;);&#10;&#10;if(!isDeleted &amp;&amp; context.resultStatus == -4) context.resultStatus = -7;&#10;&#10;if(!isDeleted &amp;&amp; context.resultStatus == -3) context.resultStatus = -8;&#10;&#10;row4.resultStatus = context.resultStatus;"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
@@ -280,21 +268,26 @@
       <column comment="" key="false" length="-1" name="resultStatus" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
     </metadata>
   </node>
+  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="672" posY="512">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_8"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="// Se resultStatus non è stato settato a 1 (è ancora al valore di default 0) vuol dire che è stato raggiunto il timeout&#10;if(context.resultStatus == 0) context.resultStatus = -4; &#10;&#10;if(context.resultStatus &lt; 1) throw new Exception(&quot;POD Failed/POD timeout&quot;);"/>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
+    <elementParameter field="TEXT" name="LABEL" value="Watcher_Result"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tJava_8">
+      <column comment="" key="false" length="-1" name="newColumn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true">
+        <additionalField key="FUNCTION_INFO" value="{&quot;NAME&quot;:&quot;getAsciiRandomString&quot;,&quot;PARAMETERS&quot;:[{&quot;PARAMETER_NAME&quot;:&quot;length&quot;,&quot;PARAMETER_VALUE&quot;:&quot;6&quot;}],&quot;PARAMETER_CLASS_NAME&quot;:&quot;TalendString&quot;}"/>
+      </column>
+    </metadata>
+  </node>
   <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tLibraryLoad_1" offsetLabelX="0" offsetLabelY="0" source="tLibraryLoad_1" target="tJava_5">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk1"/>
   </connection>
   <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tJava_3" offsetLabelX="0" offsetLabelY="0" source="tJava_3" target="tJava_4">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk5"/>
   </connection>
-  <connection connectorName="FLOW" label="row5" lineStyle="0" metaname="tJava_1" offsetLabelX="0" offsetLabelY="0" source="tJava_1" target="tJava_8">
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row5"/>
-  </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tJava_8" offsetLabelX="15" offsetLabelY="0" source="tJava_8" target="tJava_3">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk3"/>
-  </connection>
-  <connection connectorName="COMPONENT_ERROR" label="OnComponentError" lineStyle="5" metaname="tJava_8" offsetLabelX="0" offsetLabelY="0" source="tJava_8" target="tJava_7">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentError2"/>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tJava_1" offsetLabelX="-18" offsetLabelY="-1" source="tJava_1" target="tJava_8">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk7"/>
   </connection>
   <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tJava_2" offsetLabelX="0" offsetLabelY="0" source="tJava_2" target="tJava_1">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk2"/>
@@ -326,6 +319,12 @@
   <connection connectorName="FLOW" label="row4" lineStyle="0" metaname="tJava_7" offsetLabelX="0" offsetLabelY="0" source="tJava_7" target="tBufferOutput_4">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row4"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tJava_8" offsetLabelX="15" offsetLabelY="0" source="tJava_8" target="tJava_3">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk3"/>
+  </connection>
+  <connection connectorName="COMPONENT_ERROR" label="OnComponentError" lineStyle="5" metaname="tJava_8" offsetLabelX="0" offsetLabelY="0" source="tJava_8" target="tJava_7">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentError2"/>
   </connection>
   <note opaque="true" posX="832" posY="96" sizeHeight="225" sizeWidth="417" text="Valore di ritorno: context.resultStatus&#13;&#10;&#13;&#10;1:&#9;nessun errore&#13;&#10;-1:&#9;POD succeeded ma non eliminato&#13;&#10;-2:&#9;errore di creazione POD&#13;&#10;-3:&#9;POD Failed&#13;&#10;-4:&#9;timeout watcher raggiunto&#13;&#10;-5:&#9;errore codice Python&#13;&#10;-6:&#9;errore codice Python e POD non eliminato&#13;&#10;-7:&#9;timeout watcher raggiunto e POD non eliminato&#13;&#10;-8:&#9;POD Failed e non eliminato">
     <elementParameter field="RADIO" name="NOTETXT_LEFT" value="true"/>
@@ -377,13 +376,18 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_67ba6ca0-39cf-4baf-8fe0-e99bacdce26a"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>wQW/XT7s8Os3oo07q8KC2kHVwjfSPAI0YHb6gFAMWKwQM+Qx5ctxzZvdPHPO0dSC6eXwy8M+3R01
-BvnLxCrh0A==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_9572565e-9166-4e52-9636-bd128e43d616"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>nAmkw55NTJil1Z5+Tev2x9cvceJw1YoFWp88rSz/PMcNmP7pgIPfk6SQ4JhIs/fwsdMXe4dKVgwB
-8yH39qdAlA==</DigestValue></Reference></SignedInfo><SignatureValue>U/CdJnus5HLvwxWEdTkkAh25IZhrGfMYcjPAawobJm7DC1bT5DJLU45A2CC4WiBwXHz9r9BdMXqz
-/bZ8/OeGJbc4pdjx+AJU+PwOojLpz4CeVwVYjG36ELsARrewBzJ8IG53VY31dXGXqJVspJRxelRZ
-NlZdh8HyAbwWwK900q9qwbzsDYZWz825Q6RlWh6hWpenNDUm91hsE6bgn/XkeC7/ZxHAs7iIGcOL
-7hdqAopdl6/iMMB+SObmj5Z9CTxVHfEmnpz2fokgmSaRg/J0VveyInEFlXaOTucEz/5C0iIK3h4P
-fPXl3hitu0zNfkS8KOXMpAWUoUuZcDWirx0pwg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_8"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_2338772c-b0dc-4d2a-9a99-8c24a0426dd9"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>AXP5yyTCzAoBMh+xeQ0czA3nhrENjgpyzM2PkAQRMQyHOZWQGWMH7SsJ23v3ICZKHU2fSP6zNhep
+Muv+6PmU/w==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_e2e1fa08-c8aa-43cd-a327-974389172003"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>vfgKdSs6yQhCFGqe9KsK2t0t+XBp3Y6Fqwt3jIXT6QP+L/z9zI8wjNxYAIKFy/jD+Z8+Pt3UFg7T
+2P0S8R4vow==</DigestValue></Reference></SignedInfo><SignatureValue>TzJyxHhLE/JjcPOZN1viq/DQ08OkkAhKMznZ9hSe3QDIAIs2lFwRhv1AtcRk8vZpb6OMTv33bSv/
+Ek8E9gdnggOKne8Hw8y0CBSl54wjVktbd6osm72ho/qB8JhEpmsD3pA2XPg7Ljp8Qiy55zSFSEBA
+Fsjo7mKl+zx+KR++Tl7A+3XGP2vWfhv0Ag3OwI4lVG0s46H3FydV3lPq89mfLJb6Hd+xl9YJZlk0
+XB7cqzF/QMVaXCtpfljeLqN2pQHfOqlZiQh1bp6qyGsBlajELTI/syhPe8HJi1l77v5wdNYNSC5a
+yRWLWWwB0frwgTapfOhktKWNiHzuAABfw+CwVQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U
@@ -405,4 +409,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_9572565e-9166-4e52-9636-bd128e43d616" Target="#_67ba6ca0-39cf-4baf-8fe0-e99bacdce26a"><Timestamp>2020-07-07 10:53:12</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_e2e1fa08-c8aa-43cd-a327-974389172003" Target="#_2338772c-b0dc-4d2a-9a99-8c24a0426dd9"><Timestamp>2020-07-07 11:01:08</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
