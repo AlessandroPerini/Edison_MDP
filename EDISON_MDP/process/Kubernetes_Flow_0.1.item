@@ -50,7 +50,7 @@
     <elementParameter field="TEXT" name="PROPERTIES_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="SCHEMA_DB_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:hIAYjDZQhdNb9ih9w39n/o0IZQl8kmOYZT8rRvaR"/>
+    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:6NxYy5K1Yqih3n+6GLW2OFS/flcX24g+DH7aXjSl"/>
     <elementParameter field="FILE" name="DBFILE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="DBTABLE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="QUERY_CONDITION_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
@@ -85,7 +85,7 @@
     <elementParameter field="TEXT" name="PROPERTIES" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="SCHEMA_DB" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER" show="false" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:fX2z7YLzF1+slV9K8b1POqlRkspVBTI/uoovhYcg"/>
+    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:lJqEnOvBOC04VduXpdWPpHbi4OPC1+mFuljHJ+ka"/>
     <elementParameter field="FILE" name="DBFILE" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE_STATS" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE_LOGS" show="false" value="&quot;&quot;"/>
@@ -155,7 +155,6 @@
       <elementValue elementRef="LIBPATH" value="&quot;kubernetes-model-scheduling-4.10.2.jar&quot;"/>
       <elementValue elementRef="LIBPATH" value="&quot;kubernetes-model-settings-4.10.2.jar&quot;"/>
       <elementValue elementRef="LIBPATH" value="&quot;kubernetes-model-storageclass-4.10.2.jar&quot;"/>
-      <elementValue elementRef="LIBPATH" value="&quot;logging-interceptor-3.12.12.jar°°°&quot;"/>
       <elementValue elementRef="LIBPATH" value="&quot;okhttp-3.12.12.jar&quot;"/>
       <elementValue elementRef="LIBPATH" value="&quot;okio-1.15.0.jar&quot;"/>
       <elementValue elementRef="LIBPATH" value="&quot;openshift-client-4.10.2.jar&quot;"/>
@@ -360,13 +359,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_396780d6-e8a5-49d3-8c34-8f2603ae4f54"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>iOLrBoC0eRncBmN++tjQp7XYh0qED+OkuqWETjlkw2fCQj/mP34kyoYzuiEhOVV/E89HN9B7tPQa
-yE8lIDaCZw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_bb6e0b0c-744b-4760-9ff5-93a0e75e18b3"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>UCQQa+PYfe5EGHLL10lkeirl+cm1Fgju7Uq9eB/eM/t44S+6HfOwy3C8vxtxpbb9iu+bUl0K2D2s
-bf4ajpUYjQ==</DigestValue></Reference></SignedInfo><SignatureValue>Dz96shaC/vO9iX4KXF+tIcmYqamBPV3Bb/35xtoAH0N/NXxgZEc+tLvxU8k0PIV2StGUD2OO4061
-H6gPpkFzlAVZh6keylC4RgTXrSiy0u8mxVRXLaF5lTR+VAr9SAajD4p9BDhzTljafMtRK3VCgxTj
-YEvYUZWrfQWqvsvOdxlYUnpWTYKJIczYtfnzIito45Dgt3itU5sCeKv/Z2nFf4Wn8garA2D+wFpG
-rCFmGkIcBhHI/OXedzxPlQac/N3jDNAyXh8y13ASWUCWSp60PRXg1Pwo5X6y38AnROK75eEkqWoy
-aDTIagRygkpUQjxIEHQ0Q+4vxOKZIHuib9LHzw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_e4c027ef-568f-4eaf-a746-d844eae9b127"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>G+UCjBCw0pHBU0bRtKI+zHtRWgWeFuR2VtsiEXm1q5IJk3htpiQU1VAHYALxD4uXRe6vIAJcEPh6
+H0B1bJTJEg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_c7ac7315-0269-4256-a524-8c3b62b51f77"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Xo8YKzB3Dc3ZO4rceq2ZA2D0PNgRDaMLJZ2gr9MEgGrBwUtKLTno5ix+U9DJB9BgPG7Uqfu+ms66
+bgxdzLEcOQ==</DigestValue></Reference></SignedInfo><SignatureValue>dYnEiOW2TCCF7rHQhFOhbcYph+TDj7mpGEJjIU5QTv9hQ4nskP9kVc7157L5DI1HfCZA72CCKz9Y
+LieByFwTaeHnFKtY8UAjIEoflSEKj5F7ycfzf2kfvAVIJxAuS4HiO03kmWbT8Kvq16iMwVCfTZOw
+yDdYVYisO7EuWKQaHWd5hrrZzNeu3aqvTZBD1bmPGX6IQ2q4k+X3PNF4suig3YWVG3WHNYYOXo5x
+DNyLpdMnrccvF6G1XZqVebsU4ePdPWTf+ZD5xJCIJ90U9s/GHdvzuCUoBB6yxC2rPi0cvtbXv/Xy
+T9Tk33Wl+rtmsxFyOnq0GtoViEZZKQ5S2lwkTQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U
@@ -388,4 +387,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_bb6e0b0c-744b-4760-9ff5-93a0e75e18b3" Target="#_396780d6-e8a5-49d3-8c34-8f2603ae4f54"><Timestamp>2020-07-07 09:48:48</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_c7ac7315-0269-4256-a524-8c3b62b51f77" Target="#_e4c027ef-568f-4eaf-a746-d844eae9b127"><Timestamp>2020-07-07 09:50:03</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
