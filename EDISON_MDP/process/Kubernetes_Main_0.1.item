@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><talendfile:ProcessType xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmlns:xmi="http://www.omg.org/XMI" defaultContext="Default" jobType="Standard" xmi:version="2.0">
   <context confirmationNeeded="false" name="Default">
-    <contextParameter comment="" name="flow_id" prompt="flow_id?" promptNeeded="false" type="id_String" value="&quot;id000&quot;"/>
+    <contextParameter comment="" name="flow_id" prompt="flow_id?" promptNeeded="true" type="id_String" value="&quot;id000&quot;"/>
     <contextParameter comment="" name="flow_date" prompt="flow_date?" promptNeeded="true" type="id_String" value="&quot;1&quot;"/>
-    <contextParameter comment="" name="flow_exec" prompt="flow_exec?" promptNeeded="false" type="id_String" value="&quot;&quot;"/>
+    <contextParameter comment="" name="flow_exec" prompt="flow_exec?" promptNeeded="true" type="id_String" value="&quot;&quot;"/>
     <contextParameter comment="" name="flow_date_ref" prompt="flow_date_ref?" promptNeeded="true" type="id_String" value="&quot;+3&quot;"/>
-    <contextParameter comment="" name="loop" prompt="loop?" promptNeeded="false" type="id_Integer" value="1"/>
-    <contextParameter comment="" name="error" prompt="error?" promptNeeded="false" type="id_Boolean" value="false"/>
+    <contextParameter comment="" name="loop" prompt="loop?" promptNeeded="true" type="id_Integer" value="1"/>
+    <contextParameter comment="" name="error" prompt="error?" promptNeeded="true" type="id_Boolean" value="false"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" show="false" value="0"/>
@@ -49,7 +49,7 @@
     <elementParameter field="TEXT" name="PROPERTIES_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="SCHEMA_DB_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:Inj10YULlPpghK8otdyIp7BqoLvX0hU3EaGBYQZz"/>
+    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:13HMnmuG1elVqv/wTd0UK7+gaZRVrZODtkh1Ufdr"/>
     <elementParameter field="FILE" name="DBFILE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="DBTABLE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="QUERY_CONDITION_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
@@ -84,7 +84,7 @@
     <elementParameter field="TEXT" name="PROPERTIES" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="SCHEMA_DB" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER" show="false" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:BDLX+ytHzSv7GE7MgK6DoOjDqkd77oHhYT+jLMmX"/>
+    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:R6pI/dG/mlttAECz/SheyNiNy42AVIxzp50t63FN"/>
     <elementParameter field="FILE" name="DBFILE" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE_STATS" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE_LOGS" show="false" value="&quot;&quot;"/>
@@ -134,7 +134,7 @@
   </node>
   <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="704" posY="96">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_2"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="System.out.println(&quot;Chiamata POD...&quot;);&#10;&#10;&#10;DateTimeFormatter dtf = DateTimeFormatter.ofPattern(&quot;yyyyMMdd&quot;);&#10;&#10;LocalDate localDate = LocalDate.parse(context.flow_date_ref, dtf);&#10;&#10;context.flow_date = dtf.format(localDate.plusDays(-1 * (context.loop - 1)));&#10;&#10;context.flow_exec = &quot;1594115690548&quot;;&#10;&#10;System.out.println(context.flow_id +&quot; &quot;+ context.flow_date +&quot; &quot;+ context.flow_exec +&quot;\n&quot;);"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="System.out.println(&quot;Chiamata POD...&quot;);&#10;&#10;&#10;DateTimeFormatter dtf = DateTimeFormatter.ofPattern(&quot;yyyyMMdd&quot;);&#10;&#10;LocalDate localDate = LocalDate.parse(context.flow_date_ref, dtf);&#10;&#10;context.flow_date = dtf.format(localDate.plusDays(-1 * (context.loop - 1)));&#10;&#10;System.out.println(context.flow_id +&quot; &quot;+ context.flow_date +&quot; &quot;+ context.flow_exec +&quot;\n&quot;);"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import java.time.LocalDate;&#10;import java.time.format.DateTimeFormatter;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tJava_2">
@@ -247,13 +247,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_7ed20c47-94ec-4c8f-b33e-3cdc8ad34a22"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>+/ufS09/V2cYE85lwhbG+Vfx/0Gvav5O8301haka6kLIY7g+kjQnuz1HNz/AU3KBxM0H6pPnPbyu
-4MwVivxVQw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_f5c53503-859f-4eb0-89c8-9de37126fe31"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>3BA8Og+1s/5jjdhA+Mcd/OQCVpYV504Pk5Fi1q2JaYoYl20HiKASwGeRA0bUhFlr8A0B8Sm+MOgR
-O18i1B52bw==</DigestValue></Reference></SignedInfo><SignatureValue>TpDemrbd7O0JHhPhiQ6zW3V2PO9pqxrnXaquyat8252dQLwq79pbaf6sQbvreOPvArY4DVkctegX
-8RSpBe+YOxYutpsLuNkJtGNNtsJldJXZYEBZjtzHkh/7z0RmdsQ+K7w1UctMoX1oX4Wf8sVC1b3f
-iTGliCumWAL+yoMC5KNAcpdbwIXoHxLbKZ24vG7Ap2qrLtrCqA36kToYyBSFRSU5iSKA2z5oROBH
-qPjzurF7PTi0mzZ+WCbMpDOxRihM1ZM0pVg/LcbjtVtYAe4YYR30NYCWvQ/EeCRwpKfRTugwhSBw
-kKdp3/tgme7NtUD3IqxbX4YCc/j11uUeAJsdEQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_16b1dd91-45c5-4354-8559-773ce11aee9f"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>YvzTVywcmZPfVqqx0PNCU/BqvYK43cP2uk8Bas1nrVJU1PwcoqpprwVSjaU8YDpyZoLdjhJYln+u
+Kg03ebSTVQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_959dd4bc-6e65-4171-a112-14983be76bd3"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>FnBA5Qpd6aBMH8112pyGHbJwt0yiX+aLZiccmhiwxgAZfqwdmSskgVewe3jyu928DS3bsFt5dqgd
+U7RUJoXNIQ==</DigestValue></Reference></SignedInfo><SignatureValue>AQ6ZT++C4ad0er9EenVbQDJby7+W7W35HUVr3QmlnJ8F4NCUjR1Y4K1RwVxrH2+bS+DP0Srj4YUM
+MAxe+3CW0uE/N5ne8nPRAfaGdhorRUD8MyCE/kApQEme3pYTDibxaivlCrjDpcYV5uDamrKMh5JJ
+0zSB4/J8O1qvykO/S7/WhqdLuZOPvqHIXB8VIDEZhjCjDLYjP/FKyCy2WTPqIemA3jq7FFxPo+jJ
+umU3evSp+bU8bTI9WOSLIc4qk2gS1igIJuUfDQ6+Grf2vSJPdMhckXtnF8PbCVL0rLOZokpPcImQ
+fcJKeBCvHhoBwIZr3Prz+0ZP7ylGQMoAGKVfTA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U
@@ -275,4 +275,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_f5c53503-859f-4eb0-89c8-9de37126fe31" Target="#_7ed20c47-94ec-4c8f-b33e-3cdc8ad34a22"><Timestamp>2020-07-07 09:57:18</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_959dd4bc-6e65-4171-a112-14983be76bd3" Target="#_16b1dd91-45c5-4354-8559-773ce11aee9f"><Timestamp>2020-07-07 10:02:12</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
