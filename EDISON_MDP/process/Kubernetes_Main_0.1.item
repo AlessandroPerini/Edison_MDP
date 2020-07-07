@@ -4,8 +4,6 @@
     <contextParameter comment="" name="flow_date" prompt="flow_date?" promptNeeded="true" type="id_String" value="&quot;1&quot;"/>
     <contextParameter comment="" name="flow_exec" prompt="flow_exec?" promptNeeded="true" type="id_String" value="&quot;&quot;"/>
     <contextParameter comment="" name="flow_date_ref" prompt="flow_date_ref?" promptNeeded="true" type="id_String" value="&quot;+3&quot;"/>
-    <contextParameter comment="" name="loop" prompt="loop?" promptNeeded="true" type="id_Integer" value="1"/>
-    <contextParameter comment="" name="error" prompt="error?" promptNeeded="true" type="id_Boolean" value="false"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" show="false" value="0"/>
@@ -49,7 +47,7 @@
     <elementParameter field="TEXT" name="PROPERTIES_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="SCHEMA_DB_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:jdOLIKp6liwvA4fCEzommUuY5Vjixcn2CGD9HddS"/>
+    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:iFdJVzn0rNEP2DsY3k/rvkL54DgziE87cXEsOpyY"/>
     <elementParameter field="FILE" name="DBFILE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="DBTABLE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="QUERY_CONDITION_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
@@ -84,7 +82,7 @@
     <elementParameter field="TEXT" name="PROPERTIES" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="SCHEMA_DB" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER" show="false" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:V8AFFqTr7Qz/IuXpjgqthfGqIkiuiNNnDzVgQqa+"/>
+    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:Kk69v9heYkhn9Q37IQg3UrqNy0nw8n+5ktDUhCX7"/>
     <elementParameter field="FILE" name="DBFILE" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE_STATS" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE_LOGS" show="false" value="&quot;&quot;"/>
@@ -128,13 +126,13 @@
     <elementParameter field="TEXT" name="STEP" show="false" value="1"/>
     <elementParameter field="CHECK" name="INCREASE" show="false" value="true"/>
     <elementParameter field="TEXT" name="DECLARATION" value="int i=0"/>
-    <elementParameter field="TEXT" name="CONDITION" value="i&lt;context.loop"/>
-    <elementParameter field="TEXT" name="ITERATION" value="context.loop--"/>
+    <elementParameter field="TEXT" name="CONDITION" value="i&lt;(Integer) globalMap.get(&quot;loop&quot;)"/>
+    <elementParameter field="TEXT" name="ITERATION" value="globalMap.put(&quot;loop&quot;, (Integer) globalMap.get(&quot;loop&quot;)--)"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
   </node>
   <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="704" posY="96">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_2"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="System.out.println(&quot;Chiamata POD...&quot;);&#10;&#10;&#10;DateTimeFormatter dtf = DateTimeFormatter.ofPattern(&quot;yyyyMMdd&quot;);&#10;&#10;LocalDate localDate = LocalDate.parse(context.flow_date_ref, dtf);&#10;&#10;context.flow_date = dtf.format(localDate.plusDays(-1 * (context.loop - 1)));&#10;&#10;System.out.println(context.flow_id +&quot; &quot;+ context.flow_date +&quot; &quot;+ context.flow_exec +&quot;\n&quot;);"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="System.out.println(&quot;Chiamata POD...&quot;);&#10;&#10;&#10;DateTimeFormatter dtf = DateTimeFormatter.ofPattern(&quot;yyyyMMdd&quot;);&#10;&#10;LocalDate localDate = LocalDate.parse(context.flow_date_ref, dtf);&#10;&#10;context.flow_date = dtf.format(localDate.plusDays(-1 * ((Integer) globalMap.get(&quot;loop&quot;) - 1)));&#10;&#10;System.out.println(context.flow_id +&quot; &quot;+ context.flow_date +&quot; &quot;+ context.flow_exec +&quot;\n&quot;);"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import java.time.LocalDate;&#10;import java.time.format.DateTimeFormatter;"/>
     <elementParameter field="TEXT" name="LABEL" value="Parameters_Setting"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -176,7 +174,7 @@
   </node>
   <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1152" posY="96">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJavaRow_1"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="int resultStatus = input_row.resultStatus;&#10;&#10;if(resultStatus &lt; 0) {&#10;&#9;context.error = true;&#10;} else {&#10;&#9;context.error = false;&#10;}&#10;&#10;System.out.println(&quot;Stampa del valore di ritorno: &quot; + resultStatus + &quot;\n\n&quot;);&#10;&#10;"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="int resultStatus = input_row.resultStatus;&#10;&#10;if(resultStatus &lt; 0) {&#10;&#9;globalMap.put(&quot;error&quot;, true);&#10;} else {&#10;&#9;globalMap.put(&quot;error&quot;, false);&#10;}&#10;&#10;System.out.println(&quot;Stampa del valore di ritorno: &quot; + resultStatus + &quot;\n\n&quot;);&#10;&#10;"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
     <elementParameter field="TEXT" name="LABEL" value="resultStatus_Reader"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -184,7 +182,7 @@
   </node>
   <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="128" posY="96">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_1"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="int n = parseInt(context.flow_date.replaceAll(&quot;\\s+&quot;,&quot;&quot;));&#10;&#10;if(n&lt;0) {&#10;&#9;context.loop = -1 * n;&#10;} else {&#10;&#9;context.loop = 1;&#10;}&#10;&#10;globalMap.put(&quot;error&quot;, true);&#10;System.out.println(&quot;error: &quot; + (Boolean) globalMap.get(&quot;error&quot;));&#10;&#10;&#10;context.flow_exec = Long.toString(System.currentTimeMillis());&#10;&#10;DateTimeFormatter dtf = DateTimeFormatter.ofPattern(&quot;yyyyMMdd&quot;);&#10;LocalDate localDate = LocalDate.now();&#10;&#10;String date_type = context.flow_date_ref.substring(0,1);&#10;int offset = 0;&#10;&#10;switch(date_type) {&#10;    case &quot;0&quot;:&#10;      context.flow_date_ref = dtf.format(localDate);&#10;      break;&#10;    case &quot;+&quot;:&#10;      offset = parseInt(context.flow_date_ref.replaceAll(&quot;\\s+&quot;,&quot;&quot;).substring(1));&#10;      context.flow_date_ref = dtf.format(localDate.plusDays(offset));&#10;      break;&#10;    case &quot;-&quot;:&#10;      offset = parseInt(context.flow_date_ref.replaceAll(&quot;\\s+&quot;,&quot;&quot;).substring(1));&#10;      context.flow_date_ref = dtf.format(localDate.plusDays(-1 * offset));&#10;      break;&#10;    default:&#10;      context.flow_date_ref =  context.flow_date_ref;&#10;}&#10;&#10;System.out.println(&quot;\nData di riferimento: &quot; + context.flow_date_ref + &quot;\n&quot;);"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="int n = parseInt(context.flow_date.replaceAll(&quot;\\s+&quot;,&quot;&quot;));&#10;&#10;if(n&lt;0) {&#10;&#9;globalMap.put(&quot;loop&quot;, -1 * n);&#10;} else {&#10;&#9;globalMap.put(&quot;loop&quot;, 1);&#10;}&#10;&#10;context.flow_exec = Long.toString(System.currentTimeMillis());&#10;&#10;DateTimeFormatter dtf = DateTimeFormatter.ofPattern(&quot;yyyyMMdd&quot;);&#10;LocalDate localDate = LocalDate.now();&#10;&#10;String date_type = context.flow_date_ref.substring(0,1);&#10;int offset = 0;&#10;&#10;switch(date_type) {&#10;    case &quot;0&quot;:&#10;      context.flow_date_ref = dtf.format(localDate);&#10;      break;&#10;    case &quot;+&quot;:&#10;      offset = parseInt(context.flow_date_ref.replaceAll(&quot;\\s+&quot;,&quot;&quot;).substring(1));&#10;      context.flow_date_ref = dtf.format(localDate.plusDays(offset));&#10;      break;&#10;    case &quot;-&quot;:&#10;      offset = parseInt(context.flow_date_ref.replaceAll(&quot;\\s+&quot;,&quot;&quot;).substring(1));&#10;      context.flow_date_ref = dtf.format(localDate.plusDays(-1 * offset));&#10;      break;&#10;    default:&#10;      context.flow_date_ref =  context.flow_date_ref;&#10;}&#10;&#10;System.out.println(&quot;\nData di riferimento: &quot; + context.flow_date_ref + &quot;\n&quot;);"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import java.time.LocalDate;&#10;import java.time.format.DateTimeFormatter;&#10;import static java.lang.Integer.parseInt;"/>
     <elementParameter field="TEXT" name="LABEL" value="Context_Setting"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -225,7 +223,7 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row1"/>
   </connection>
   <connection connectorName="RUN_IF" label="If" lineStyle="6" metaname="tJavaRow_1" offsetLabelX="0" offsetLabelY="0" source="tJavaRow_1" target="tDie_1">
-    <elementParameter field="MEMO_JAVA" name="CONDITION" value="context.error"/>
+    <elementParameter field="MEMO_JAVA" name="CONDITION" value="(Boolean) globalMap.get(&quot;error&quot;)"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="If1"/>
   </connection>
   <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tJava_1" offsetLabelX="0" offsetLabelY="0" source="tJava_1" target="tLoop_1">
@@ -251,13 +249,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_2fbaa2e2-891c-42a6-84ae-eef11111999e"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>KCpBFb3gLW+jZqDuVoNlxhR/Iea7fQ0ETrq6rqd34MXGYKnR/bdP8OypeWzPqfWw5p19QDFKxpSd
-aac38RzsPw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_213ff290-5b9d-4ae9-9386-304f5587ac35"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>lVJesuokPuppI7d8E/npu/of/W4GGZ0hUN1X98wPkbOYVXzQTzfp0PU6rB90BEDevZHvbVpwQ7U9
-YT/NeGGRqQ==</DigestValue></Reference></SignedInfo><SignatureValue>c/7+/m3YbqnLKmyt1uQwSjjKhpK80/P+zxDz3jXKKnSne/W/PMec5PY4K1b4o5nVX+/Nl9k2vtC7
-nCm7XxJnvu/54WziEKBghzsxtE3fd1gSA9XwPN5MRUBQPRZLwpQqlRZwD+xgKZC/2BOOT1h7n+ec
-/+q68VJoiI6dCND5MciEIYJrYx5o1ed+KaajtVs5LkbOHIMfTNP7epU3/yTPak7GBR6WRr9G1ZrW
-DXD5oXEAAmqU3FJF7oeRy0OCnWoJ5Esm2Z/l0P6NgEZ30zKWEVh5vOoKv95tAGAKH6XRqQ3PNQtb
-Wdt70HBDNis5d6f7/qXgk76dxJ0SynXJk5hO4w==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_991c8fbf-81ae-4e6c-9fe7-25f10a0265c9"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Lv73twiJg6v6FEa5v8GdNGpyu6cMdxsM+w+XT+C023TFAHYBBs97t8yNTdmG+Ofdo5v0njXECMwf
+b4DEghzusw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_f602b5ac-66bf-4988-9885-bbce9567dbe7"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>XxfT5hGH4XRU+1FOKRF17l/CpxYbQjQ90jZ0dzzxBWPqdu7oVVReQ3dpWlLdA0z+MJ3Wy4FNBhwV
+n5i6Ub34RQ==</DigestValue></Reference></SignedInfo><SignatureValue>ECy4nXzKvEIxzl+Ob20cJsEB5GPVbX71yRy1u76s2Dtk7lRYdKf0OE85pswtaRjRX9dsrajEEPmi
+YKzMvGPyG8le+m0X6zoPO+i+xzfZMSjnCaYkWSkH7vykObqmR+BvoIuceq6cgXNBKShTtJLlpok0
+X/ZRQtUX6wxcELb/1k1LHHYDYuv98COAF1tGdsamui6cpfWa+C9QWPDdgkdPCUdPyKTMlLY2woJP
+LH7xePAcVQ/9+6cdAXc18pdO66ZamUslcxPH3qQPI0k1wBbRq1b3xGEcwggoA0WQoWIi651/aFD7
+WlKgRJKBcprAyvkaUyHba2AEx/Uw2dlAn9Lrkg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U
@@ -279,4 +277,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_213ff290-5b9d-4ae9-9386-304f5587ac35" Target="#_2fbaa2e2-891c-42a6-84ae-eef11111999e"><Timestamp>2020-07-07 12:50:27</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_f602b5ac-66bf-4988-9885-bbce9567dbe7" Target="#_991c8fbf-81ae-4e6c-9fe7-25f10a0265c9"><Timestamp>2020-07-07 12:56:13</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
