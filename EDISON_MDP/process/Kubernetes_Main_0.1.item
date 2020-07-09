@@ -48,7 +48,7 @@
     <elementParameter field="TEXT" name="PROPERTIES_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="SCHEMA_DB_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:TRqSZfMQK5Wozm/z0kh5rDUp6ss8fnEXlpGeovTa"/>
+    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:Kc5VAkzdWXU+tRBY3E5h0Fq5IqLJZQQkH/5MsYx1"/>
     <elementParameter field="FILE" name="DBFILE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="DBTABLE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="QUERY_CONDITION_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
@@ -83,7 +83,7 @@
     <elementParameter field="TEXT" name="PROPERTIES" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="SCHEMA_DB" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER" show="false" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:OSPeF8Kqv9akBItUjOm/+qsz/Ge7/n5dRcWVlFqz"/>
+    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:HnQHxJfBW+nGSHnMtx/mM/vdQgvNH1zSe/pASGK3"/>
     <elementParameter field="FILE" name="DBFILE" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE_STATS" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE_LOGS" show="false" value="&quot;&quot;"/>
@@ -224,7 +224,7 @@
     <elementParameter field="CLOSED_LIST" name="IMPORTANCE" value="Normal"/>
     <elementParameter field="CHECK" name="NEED_AUTH" value="true"/>
     <elementParameter field="TEXT" name="AUTH_USERNAME" value="&quot;alessandroperini@outlook.it&quot;"/>
-    <elementParameter field="PASSWORD" name="AUTH_PASSWORD" value="enc:system.encryption.key.v1:QupM62GAjn3UBL32xeSrBjbXjZsYrjvQ3qBwXtVRU4CjcIirgAPKY9HQgP/kI6AT"/>
+    <elementParameter field="PASSWORD" name="AUTH_PASSWORD" value="enc:system.encryption.key.v1:jvVbGjATAizv2zoKsozYrBE46gTsBIewjBI3pBVztDdL54jFePSttSlmuC3mu00l"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
     <elementParameter field="CLOSED_LIST" name="TEXT_SUBTYPE" value="plain"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
@@ -247,7 +247,7 @@
   </node>
   <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="448" posY="352">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_3"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="DateTimeFormatter dtf = DateTimeFormatter.ofPattern(&quot;dd-MM-yyyy HH:mm:ss&quot;);&#10;LocalDateTime localDateTime = LocalDateTime.now();&#10;globalMap.put(&quot;end_time&quot;, dtf.format(localDateTime));&#10;&#10;System.out.println(&quot;\nEsito positivo: Tutti i subJobs hanno terminato correttamente\n&quot;);&#10;System.out.println(&quot;\nLog:\n&quot; + (String) globalMap.get(&quot;log&quot;) + &quot;\n&quot;);&#10;&#10;if(context.sendMail) System.out.println(&quot;Invio mail...&quot;);"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="System.out.println(&quot;\nEsito positivo: Tutti i subJobs hanno terminato correttamente\n&quot;);&#10;System.out.println(&quot;\nLog:\n&quot; + (String) globalMap.get(&quot;log&quot;) + &quot;\n&quot;);&#10;&#10;DateTimeFormatter dtf = DateTimeFormatter.ofPattern(&quot;dd-MM-yyyy HH:mm:ss&quot;);&#10;LocalDateTime localDateTime = LocalDateTime.now();&#10;globalMap.put(&quot;end_time&quot;, dtf.format(localDateTime));&#10;&#10;System.out.println(&quot;Job End Time:\t&quot; + dtf.format(localDateTime));&#10;&#10;if(context.sendMail) { System.out.println(&quot;\nInvio mail...&quot;);"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import java.time.LocalDate;&#10;import java.time.LocalDateTime;&#10;import java.time.format.DateTimeFormatter;&#10;import static java.lang.Integer.parseInt;&#10;&#10;import java.text.DateFormat;"/>
     <elementParameter field="TEXT" name="LABEL" value="Job_End_FLEX"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -255,7 +255,7 @@
   </node>
   <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="960" posY="352">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_4"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="if(context.sendMail) System.out.println(&quot;Email inviata correttamente.\n\n&quot;);&#10;&#10;System.out.println(&quot;Job End Time:\t&quot; + dtf.format(localDateTime));"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="if(context.sendMail) System.out.println(&quot;Email inviata correttamente.\n\n&quot;);"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
     <elementParameter field="TEXT" name="LABEL" value="Email_Confirmation"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -345,13 +345,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_63d3260f-c473-48e4-82d6-6bc2f6912ad1"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>3ouFsnL8WxFbHuuu3CBOV351Bk0KwfNo2i/nuMX6InyHI+G2zvFrLi5eAHrKygssyiGqx4fSfwRT
-N87ny9fXbw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_848aec21-191e-4822-9f7a-a0414f316c3b"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>rvBwOT54l4yB+wMiUhl+4z9cV3nUN5r5pac4APzZ/Y5F+IUofSCNPk14goTLlUh+V8pnRdXf7CNH
-X2fJIg6+zA==</DigestValue></Reference></SignedInfo><SignatureValue>dUMX7SzPbZptJm4WAuEFBYhwIScc2GWVc7iRmD9sSGgtesLVCh+94QBcukq95479gkZWKXnN75lr
-pXi2FnnXlyUwSoDLIHEWic3RgZXK5ufBKR4rdee6sNVcpxq+hQkhAgOwQL3RkFukDyRRzsRFLe9s
-p2B4TVeLEDsEIZh2QMVlww8mnCM5QIoBHtKz1rfn8+3p1jYnNOj8Iz34KV9AKDtkeehh2zf0xzna
-g0C3OAlUOHB4QRiVKePfGbV7VRHdhtI2GCDmZnqd0ehGDkIXzNf0RAX+iAWawLbSP2XIljdqlwlj
-JN0rAvP3KsU6MHSkUmVsrDBVTJDgevD7EVjcGA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_f4973324-8ca8-4410-8e13-9f66284f836c"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>a2AYsRQiMTc+m8sMkhXXvDF2PQXm4o+1WnhiGb/VUxaNkpFmxr/M61dlKhgjRoLJAr9JQ/H+tGJi
+Oh2WxSq+GA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_aeeab5a4-50f0-4a0e-8615-be6cd7a3ac7f"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>ZxpeVhbdbDZ2tkI/z5Ta23azZgJgaqN8DKMqGVFW5nei2tAZFkJIpDErJjuBjWlnzq+I179JR1pj
+PGjgZL/DdQ==</DigestValue></Reference></SignedInfo><SignatureValue>ljQ646/ykD7MxhAGn9THHmHAReh3WcQu6SJTx/wwELoyk7DsB/7YBskm7tFI2+U74okoPeOkDw04
+BaG70IlDOkP+CLcMMFRCreo2bSY8L3Smp0oEWvABrx8jhcQPfNEF/4ZNYQWR8B6foBPMUH1qQlvq
+KQz6IfEtw0H9EOHiN/wQovIRQmmKIcLLmYqdXpYMIZBR0fV7b6/qc0gaA3J6M3yOERbHzEf8IEaH
+tr6YxR/Jml0MwJMNdzHLB4pJPI2myK7sqjeGmitIV7SmaHVUmhd+ct9M5Cr5JzK4vpdCqDAioc49
+11arp+5LSlShiZ+xzgEYwEVL//Sxz+RPuovxFg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U
@@ -373,4 +373,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_848aec21-191e-4822-9f7a-a0414f316c3b" Target="#_63d3260f-c473-48e4-82d6-6bc2f6912ad1"><Timestamp>2020-07-09 12:48:50</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_aeeab5a4-50f0-4a0e-8615-be6cd7a3ac7f" Target="#_f4973324-8ca8-4410-8e13-9f66284f836c"><Timestamp>2020-07-09 12:51:58</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
