@@ -48,7 +48,7 @@
     <elementParameter field="TEXT" name="PROPERTIES_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="SCHEMA_DB_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:8gY+57Lg7+HE9ydZCVPgJ9C+fb5HF2IF9tO8tXP1"/>
+    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:h1Y2wXUPboACcrkFgqOr0uukmji0vZc6WYeAN4U7"/>
     <elementParameter field="FILE" name="DBFILE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="DBTABLE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="QUERY_CONDITION_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
@@ -83,7 +83,7 @@
     <elementParameter field="TEXT" name="PROPERTIES" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="SCHEMA_DB" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER" show="false" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:L0LXptij4VEQMzYK+cjpmCqxIdK5iu0V1EtF3fBp"/>
+    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:Xlt+Ib2ElE4VKQkBwepTKs3psI9i8VOAQz9qTwkP"/>
     <elementParameter field="FILE" name="DBFILE" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE_STATS" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE_LOGS" show="false" value="&quot;&quot;"/>
@@ -132,8 +132,125 @@
     <elementParameter field="TEXT" name="LABEL" value="Loop"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
   </node>
+  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="128" posY="128">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_1"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern(&quot;dd-MM-yyyy HH:mm:ss&quot;);&#10;LocalDateTime localDateTime = LocalDateTime.now();&#10;globalMap.put(&quot;start_time&quot;, dtf1.format(localDateTime));&#10;&#10;System.out.println(&quot;\nJob Start Time:\t&quot; + dtf1.format(localDateTime));&#10;&#10;//Inizializzazione log&#10;globalMap.put(&quot;log&quot;, &quot;&quot;);&#10;&#10;String validDate = &quot;&quot;;&#10;&#10;try{&#10;&#10;// Recupero n° giorni da caricare precedenti alla data di riferimento&#10;int n = parseInt(context.flow_date.replaceAll(&quot;\\s+&quot;,&quot;&quot;));&#10;&#10;if(n&lt;0) {&#10;&#9;globalMap.put(&quot;loop&quot;, -1 * n);&#10;} else {&#10;&#9;globalMap.put(&quot;loop&quot;, 1);&#10;}&#10;&#10;context.flow_exec = Long.toString(System.currentTimeMillis());&#10;&#10;DateTimeFormatter dtf = DateTimeFormatter.ofPattern(&quot;yyyyMMdd&quot;);&#10;LocalDate localDate = LocalDate.now();&#10;&#10;globalMap.put(&quot;ref&quot;, context.flow_date_ref);&#10;globalMap.put(&quot;flow_date&quot;, context.flow_date);&#10;String date_type = context.flow_date_ref.substring(0,1);&#10;int offset = 0;&#10;&#10;// Calcolo data di riferimento&#10;switch(date_type) {&#10;    case &quot;0&quot;:&#10;      context.flow_date_ref = dtf.format(localDate);&#10;      break;&#10;    case &quot;+&quot;:&#10;      offset = parseInt(context.flow_date_ref.replaceAll(&quot;\\s+&quot;,&quot;&quot;).substring(1));&#10;      context.flow_date_ref = dtf.format(localDate.plusDays(offset));&#10;      break;&#10;    case &quot;-&quot;:&#10;      offset = parseInt(context.flow_date_ref.replaceAll(&quot;\\s+&quot;,&quot;&quot;).substring(1));&#10;      context.flow_date_ref = dtf.format(localDate.plusDays(-1 * offset));&#10;      break;&#10;    default:&#10;      context.flow_date_ref = context.flow_date_ref;&#10;}&#10;&#10;// Validazione data calcolata&#10;validDate = &quot;0&quot;;&#10;String DATE_FORMAT = &quot;yyyyMMdd&quot;;&#10;DateFormat df = new SimpleDateFormat(DATE_FORMAT);&#10;df.setLenient(false);&#10;df.parse(context.flow_date_ref);&#10;validDate = &quot;&quot;;&#10;&#10;System.out.println(&quot;\n_______ Job Kubernetes_Main Variables _______\n&quot;);&#10;System.out.println(&quot;\tflowID:\t\t\t&quot; + context.flow_id);&#10;System.out.println(&quot;\tflowDate:\t\t&quot; + (String) globalMap.get(&quot;flow_date&quot;));&#10;System.out.println(&quot;\tflowDateRef:\t&quot; + (String) globalMap.get(&quot;ref&quot;));&#10;System.out.println(&quot;\tflowExec:\t\t&quot; + context.flow_exec);&#10;System.out.println(&quot;\tData di riferim. calcolata:\t&quot; + context.flow_date_ref);&#10;System.out.println(&quot;_____________________________________________\n\n&quot;);&#10;&#10;&#10;} catch (Exception ex) {&#10;&#9;if(validDate.equals(&quot;0&quot;)) validDate=&quot;*** Data di riferimento non valida ***&quot;; &#10;&#9;throw new Exception(&quot;\tParametri di input non validi! &quot; + validDate);&#10;}"/>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import java.time.LocalDate;&#10;import java.time.LocalDateTime;&#10;import java.time.format.DateTimeFormatter;&#10;import static java.lang.Integer.parseInt;&#10;&#10;import java.text.DateFormat;"/>
+    <elementParameter field="TEXT" name="LABEL" value="Context_Setting"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tJava_1"/>
+  </node>
+  <node componentName="tDie" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1440" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDie_1"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
+    <elementParameter field="TEXT" name="MESSAGE" value="&quot;Uno dei subJobs ha terminato con errore&quot;"/>
+    <elementParameter field="TEXT" name="CODE" value="1"/>
+    <elementParameter field="CLOSED_LIST" name="PRIORITY" value="5"/>
+    <elementParameter field="CHECK" name="EXIT_JVM" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="Subjob_Error"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tDie_1"/>
+  </node>
+  <node componentName="tSendMail" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="672" posY="352">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tSendMail_1"/>
+    <elementParameter field="TEXT" name="TO" value="&quot;a.perini@reply.it&quot;"/>
+    <elementParameter field="TEXT" name="FROM" value="&quot;alessandroperini@outlook.it&quot;"/>
+    <elementParameter field="CHECK" name="NEED_PERSONAL_NAME" value="true"/>
+    <elementParameter field="TEXT" name="PERSONAL_NAME" value="&quot;JobTalend&quot;"/>
+    <elementParameter field="TEXT" name="CC" value=""/>
+    <elementParameter field="TEXT" name="BCC" value=""/>
+    <elementParameter field="TEXT" name="SUBJECT" value="&quot;Talend Open Studio notification&quot;"/>
+    <elementParameter field="MEMO_MESSAGE" name="MESSAGE" value="&quot;Job Talend terminato con successo.&quot; +&quot;\n\n&quot; + &#13;&#10;&quot;\n_________ Job Kubernetes_Main Variables _________\n\n&quot; +&#13;&#10;&quot;\tflowID:\t\t&quot; + context.flow_id + &quot;\n&quot; +&#13;&#10;&quot;\tflowDate:\t&quot; + (String) globalMap.get(&quot;flow_date&quot;) + &quot;\n&quot; +&#13;&#10;&quot;\tflowDateRef:\t&quot; + (String) globalMap.get(&quot;ref&quot;) + &quot;\n&quot; +&#13;&#10;&quot;\tflowExec:\t&quot; + context.flow_exec + &quot;\n&quot; + &#13;&#10;&quot;\tData di riferim. calcolata:\t&quot; + context.flow_date_ref +&#13;&#10;&quot;\n_____________________________________________\n\n&quot; +&#13;&#10;&quot;Job start time:\t&quot; + (String) globalMap.get(&quot;start_time&quot;) + &quot;\n&quot; +&#13;&#10;&quot;Job end time:\t&quot; + (String) globalMap.get(&quot;end_time&quot;) + &quot;\n&quot; +&#13;&#10;&#13;&#10;&quot;\n&quot; + (String) globalMap.get(&quot;log&quot;) + &quot;\n&quot; "/>
+    <elementParameter field="CHECK" name="CHECK_ATTACHMENT" value="true"/>
+    <elementParameter field="TABLE" name="ATTACHMENTS"/>
+    <elementParameter field="TABLE" name="HEADERS"/>
+    <elementParameter field="TEXT" name="SMTP_HOST" value="&quot;smtp.office365.com&quot;"/>
+    <elementParameter field="TEXT" name="SMTP_PORT" value="587"/>
+    <elementParameter field="CHECK" name="SSL" value="false"/>
+    <elementParameter field="CHECK" name="STARTTLS" value="true"/>
+    <elementParameter field="CLOSED_LIST" name="IMPORTANCE" value="Normal"/>
+    <elementParameter field="CHECK" name="NEED_AUTH" value="true"/>
+    <elementParameter field="TEXT" name="AUTH_USERNAME" value="&quot;alessandroperini@outlook.it&quot;"/>
+    <elementParameter field="PASSWORD" name="AUTH_PASSWORD" value="enc:system.encryption.key.v1:g0Cxl4XlzOU8I5dPjzuzFtWI8X7hBpK1JewixoySY7oyWHghEcO7a7xRXopsStjT"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
+    <elementParameter field="CLOSED_LIST" name="TEXT_SUBTYPE" value="plain"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="SET_LOCALHOST" value="false"/>
+    <elementParameter field="TEXT" name="LOCALHOST" show="false" value="&quot;localhost&quot;"/>
+    <elementParameter field="TEXT" name="LABEL" value="Email_Sender"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tSendMail_1"/>
+  </node>
+  <node componentName="tDie" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1440" posY="192">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDie_2"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
+    <elementParameter field="TEXT" name="MESSAGE" value="&quot;Downloader e/o formatter e/o loader hanno dato esito negativo.&quot;"/>
+    <elementParameter field="TEXT" name="CODE" value="2"/>
+    <elementParameter field="CLOSED_LIST" name="PRIORITY" value="5"/>
+    <elementParameter field="CHECK" name="EXIT_JVM" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="Python_Error"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tDie_2"/>
+  </node>
+  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="448" posY="352">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_3"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="System.out.println(&quot;\nEsito positivo: Tutti i subJobs hanno terminato correttamente\n&quot;);&#10;System.out.println(&quot;\nLog:\n&quot; + (String) globalMap.get(&quot;log&quot;) + &quot;\n&quot;);&#10;&#10;DateTimeFormatter dtf = DateTimeFormatter.ofPattern(&quot;dd-MM-yyyy HH:mm:ss&quot;);&#10;LocalDateTime localDateTime = LocalDateTime.now();&#10;globalMap.put(&quot;end_time&quot;, dtf.format(localDateTime));&#10;&#10;&#10;String s3_path = &quot;LOG/&quot; + context.flow_id + &quot;/&quot; + context.flow_date_ref.substring(0, 4) + &quot;/&quot; + context.flow_date_ref.substring(4, 6) + &quot;/&quot; + context.flow_date_ref.substring(6, 8) + &quot;/&quot;;&#10;String s3_filename = context.flow_id + &quot;_&quot; + context.flow_exec + &quot;.log&quot;;&#10;&#10;System.out.println(&quot;Path Bucket S3:\t&quot; + s3_path + &quot;\n&quot;);&#10;System.out.println(&quot;File Bucket S3:\t&quot; + s3_filename + &quot;\n&quot;);&#10;&#10;// MANCA SCRITTURA SU BUCKET S3&#10;&#10;System.out.println(&quot;Job End Time:\t&quot; + dtf.format(localDateTime) +&quot;\n&quot;);&#10;&#10;if(context.sendMail) System.out.println(&quot;Invio mail...&quot;);"/>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import java.time.LocalDate;&#10;import java.time.LocalDateTime;&#10;import java.time.format.DateTimeFormatter;&#10;import static java.lang.Integer.parseInt;&#10;&#10;import java.text.DateFormat;"/>
+    <elementParameter field="TEXT" name="LABEL" value="Job_End_FLEX"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tJava_3"/>
+  </node>
+  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="960" posY="352">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_4"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="if(context.sendMail) System.out.println(&quot;Email inviata correttamente.\n\n&quot;);"/>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
+    <elementParameter field="TEXT" name="LABEL" value="Email_Confirmation"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tJava_4"/>
+  </node>
+  <node componentName="tS3Put" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="448" posY="544">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tS3Put_1"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
+    <elementParameter field="TEXT" name="ACCESS_KEY" value="&quot;AKIA5GOQBZLRW4N7RF63&quot;"/>
+    <elementParameter field="PASSWORD" name="SECRET_KEY" value="enc:system.encryption.key.v1:5rIurtMM0141n3Wv15LdFF3Im50+Mvij66gflR8gCu5B/eVRUBaOsjGS8EX+Nwl7z9HU/eUm2b+u7b/cCUaxBTibxHtxQw=="/>
+    <elementParameter field="CHECK" name="INHERIT_CREDENTIALS" value="false"/>
+    <elementParameter field="CHECK" name="ASSUME_ROLE" value="false"/>
+    <elementParameter field="TEXT" name="ARN" show="false" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="ROLE_SESSION_NAME" show="false" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="SESSION_DURATION" show="false" value="15"/>
+    <elementParameter field="OPENED_LIST" name="REGION" value="&quot;eu-central-1&quot;"/>
+    <elementParameter field="CHECK" name="ENCRYPT" value="false"/>
+    <elementParameter field="CLOSED_LIST" name="KEY_TYPE" show="false" value="KMS_CMK"/>
+    <elementParameter field="CLOSED_LIST" name="ALGORITHM_SYMMETRIC_MASTER_KEY" show="false" value="AES"/>
+    <elementParameter field="CLOSED_LIST" name="ALGORITHM_ASYMMETRIC_MASTER_KEY" show="false" value="RSA"/>
+    <elementParameter field="CLOSED_LIST" name="ENCODING" show="false" value="BASE64"/>
+    <elementParameter field="PASSWORD" name="ENCRYPTED_KEY_CMK" show="false" value="enc:system.encryption.key.v1:P/+hjrqeP5nA9mBGh5hgvnpdSMg/6AUeVbiM0j5B"/>
+    <elementParameter field="PASSWORD" name="ENCRYPTED_KEY_BASE64" show="false" value="enc:system.encryption.key.v1:MmJ7VAczwHKfpkxOqKkYaSBxqMmGUS6Y4l/hIqJD"/>
+    <elementParameter field="FILE" name="ENCRYPTED_KEY_X509" show="false" value="&quot;&quot;"/>
+    <elementParameter field="FILE" name="PUBLIC_KEY" show="false" value="&quot;&quot;"/>
+    <elementParameter field="FILE" name="PRIVATE_KEY" show="false" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="BUCKET" value="&quot;mdp-qa-s3/LOGS/&quot;"/>
+    <elementParameter field="TEXT" name="KEY" value="&quot;&quot;"/>
+    <elementParameter field="FILE" name="FILE" value="&quot;C:/Users/a.perini/Desktop/s3_write_test.txt&quot;"/>
+    <elementParameter field="CHECK" name="ENABLE_SERVER_SIDE_ENCRYPTION" value="false"/>
+    <elementParameter field="CHECK" name="ENABLE_KMS" show="false" value="false"/>
+    <elementParameter field="TEXT" name="KMSID" show="false" value="&quot;&quot;"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
+    <elementParameter field="CHECK" name="CONFIG_CLIENT" value="false"/>
+    <elementParameter field="TABLE" name="CLIENT_CONFIGURATION" show="false"/>
+    <elementParameter field="CHECK" name="SET_STS_ENDPOINT" show="false" value="false"/>
+    <elementParameter field="TEXT" name="STS_ENDPOINT" show="false" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PART_SIZE" value="5"/>
+    <elementParameter field="CHECK" name="ENABLE_ACCELERATE" value="false"/>
+    <elementParameter field="CHECK" name="ACCESS_CONTROL_LIST" value="false"/>
+    <elementParameter field="TABLE" name="ACL" show="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+  </node>
   <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="704" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_2"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="MEMO_JAVA" name="CODE" value="System.out.println(&quot;Chiamata POD...&quot;);&#10;&#10;DateTimeFormatter dtf = DateTimeFormatter.ofPattern(&quot;yyyyMMdd&quot;);&#10;LocalDate localDate = LocalDate.parse(context.flow_date_ref, dtf);&#10;&#10;context.flow_date = dtf.format(localDate.plusDays(-1 * ((Integer) globalMap.get(&quot;loop&quot;) - 1)));"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import java.time.LocalDate;&#10;import java.time.format.DateTimeFormatter;"/>
     <elementParameter field="TEXT" name="LABEL" value="Parameters_Setting"/>
@@ -144,6 +261,7 @@
   </node>
   <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="928" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tRunJob_1"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
     <elementParameter field="TEXT" name="CONTEXT_JOB" show="false" value=""/>
     <elementParameter field="PROCESS_TYPE" name="PROCESS" value="Kubernetes_Flow"/>
@@ -180,125 +298,12 @@
   </node>
   <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1152" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJavaRow_1"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="MEMO_JAVA" name="CODE" value="int resultStatus = input_row.resultStatus;&#10;&#10;if(resultStatus &lt; 0) {&#10;&#9;globalMap.put(&quot;error&quot;, true);&#10;} else {&#10;&#9;globalMap.put(&quot;error&quot;, false);&#10;&#9;globalMap.put(&quot;log&quot;, (String) globalMap.get(&quot;log&quot;) + input_row.log + &quot;\n&quot;);&#10;&#9;//Ogni esecuzione del subjob sovrascrive i dati&#10;&#9;//globalMap.put(&quot;stato_d&quot;, input_row.stato_d);&#10;&#9;//globalMap.put(&quot;stato_l&quot;, input_row.stato_l);&#10;&#9;//globalMap.put(&quot;stato_f&quot;, input_row.stato_f);&#10;&#9;System.out.println(&quot;\nStati (stampa del job padre): downloader=&quot; + input_row.stato_d + &quot; formatter=&quot; + input_row.stato_f + &quot; loader=&quot; + &#9;&#9;&#9;&#9;&#9;&#9;input_row.stato_l);&#10;&#9;globalMap.put(&quot;python_state_error&quot;, false);&#10;&#9;if(input_row.stato_d + input_row.stato_l + input_row.stato_f != 3) globalMap.put(&quot;python_state_error&quot;, true);&#10;}&#10;&#10;System.out.println(&quot;\nStampa del valore di ritorno: &quot; + resultStatus + &quot;\n\n&quot;);&#10;&#10;"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
     <elementParameter field="TEXT" name="LABEL" value="ResultStatus_Reader"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tJavaRow_1"/>
-  </node>
-  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="128" posY="128">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_1"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern(&quot;dd-MM-yyyy HH:mm:ss&quot;);&#10;LocalDateTime localDateTime = LocalDateTime.now();&#10;globalMap.put(&quot;start_time&quot;, dtf1.format(localDateTime));&#10;&#10;System.out.println(&quot;\nJob Start Time:\t&quot; + dtf1.format(localDateTime));&#10;&#10;//Inizializzazione log&#10;globalMap.put(&quot;log&quot;, &quot;&quot;);&#10;&#10;String validDate = &quot;&quot;;&#10;&#10;try{&#10;&#10;// Recupero n° giorni da caricare precedenti alla data di riferimento&#10;int n = parseInt(context.flow_date.replaceAll(&quot;\\s+&quot;,&quot;&quot;));&#10;&#10;if(n&lt;0) {&#10;&#9;globalMap.put(&quot;loop&quot;, -1 * n);&#10;} else {&#10;&#9;globalMap.put(&quot;loop&quot;, 1);&#10;}&#10;&#10;context.flow_exec = Long.toString(System.currentTimeMillis());&#10;&#10;DateTimeFormatter dtf = DateTimeFormatter.ofPattern(&quot;yyyyMMdd&quot;);&#10;LocalDate localDate = LocalDate.now();&#10;&#10;globalMap.put(&quot;ref&quot;, context.flow_date_ref);&#10;globalMap.put(&quot;flow_date&quot;, context.flow_date);&#10;String date_type = context.flow_date_ref.substring(0,1);&#10;int offset = 0;&#10;&#10;// Calcolo data di riferimento&#10;switch(date_type) {&#10;    case &quot;0&quot;:&#10;      context.flow_date_ref = dtf.format(localDate);&#10;      break;&#10;    case &quot;+&quot;:&#10;      offset = parseInt(context.flow_date_ref.replaceAll(&quot;\\s+&quot;,&quot;&quot;).substring(1));&#10;      context.flow_date_ref = dtf.format(localDate.plusDays(offset));&#10;      break;&#10;    case &quot;-&quot;:&#10;      offset = parseInt(context.flow_date_ref.replaceAll(&quot;\\s+&quot;,&quot;&quot;).substring(1));&#10;      context.flow_date_ref = dtf.format(localDate.plusDays(-1 * offset));&#10;      break;&#10;    default:&#10;      context.flow_date_ref = context.flow_date_ref;&#10;}&#10;&#10;// Validazione data calcolata&#10;validDate = &quot;0&quot;;&#10;String DATE_FORMAT = &quot;yyyyMMdd&quot;;&#10;DateFormat df = new SimpleDateFormat(DATE_FORMAT);&#10;df.setLenient(false);&#10;df.parse(context.flow_date_ref);&#10;validDate = &quot;&quot;;&#10;&#10;System.out.println(&quot;\n_______ Job Kubernetes_Main Variables _______\n&quot;);&#10;System.out.println(&quot;\tflowID:\t\t\t&quot; + context.flow_id);&#10;System.out.println(&quot;\tflowDate:\t\t&quot; + (String) globalMap.get(&quot;flow_date&quot;));&#10;System.out.println(&quot;\tflowDateRef:\t&quot; + (String) globalMap.get(&quot;ref&quot;));&#10;System.out.println(&quot;\tflowExec:\t\t&quot; + context.flow_exec);&#10;System.out.println(&quot;\tData di riferim. calcolata:\t&quot; + context.flow_date_ref);&#10;System.out.println(&quot;_____________________________________________\n\n&quot;);&#10;&#10;&#10;} catch (Exception ex) {&#10;&#9;if(validDate.equals(&quot;0&quot;)) validDate=&quot;*** Data di riferimento non valida ***&quot;; &#10;&#9;throw new Exception(&quot;\tParametri di input non validi! &quot; + validDate);&#10;}"/>
-    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import java.time.LocalDate;&#10;import java.time.LocalDateTime;&#10;import java.time.format.DateTimeFormatter;&#10;import static java.lang.Integer.parseInt;&#10;&#10;import java.text.DateFormat;"/>
-    <elementParameter field="TEXT" name="LABEL" value="Context_Setting"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="tJava_1"/>
-  </node>
-  <node componentName="tDie" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1440" posY="64">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDie_1"/>
-    <elementParameter field="TEXT" name="MESSAGE" value="&quot;Uno dei subJobs ha terminato con errore&quot;"/>
-    <elementParameter field="TEXT" name="CODE" value="1"/>
-    <elementParameter field="CLOSED_LIST" name="PRIORITY" value="5"/>
-    <elementParameter field="CHECK" name="EXIT_JVM" value="true"/>
-    <elementParameter field="TEXT" name="LABEL" value="Subjob_Error"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="tDie_1"/>
-  </node>
-  <node componentName="tSendMail" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="672" posY="352">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tSendMail_1"/>
-    <elementParameter field="TEXT" name="TO" value="&quot;a.perini@reply.it&quot;"/>
-    <elementParameter field="TEXT" name="FROM" value="&quot;alessandroperini@outlook.it&quot;"/>
-    <elementParameter field="CHECK" name="NEED_PERSONAL_NAME" value="true"/>
-    <elementParameter field="TEXT" name="PERSONAL_NAME" value="&quot;JobTalend&quot;"/>
-    <elementParameter field="TEXT" name="CC" value=""/>
-    <elementParameter field="TEXT" name="BCC" value=""/>
-    <elementParameter field="TEXT" name="SUBJECT" value="&quot;Talend Open Studio notification&quot;"/>
-    <elementParameter field="MEMO_MESSAGE" name="MESSAGE" value="&quot;Job Talend terminato con successo.&quot; +&quot;\n\n&quot; + &#13;&#10;&quot;\n_________ Job Kubernetes_Main Variables _________\n\n&quot; +&#13;&#10;&quot;\tflowID:\t\t&quot; + context.flow_id + &quot;\n&quot; +&#13;&#10;&quot;\tflowDate:\t&quot; + (String) globalMap.get(&quot;flow_date&quot;) + &quot;\n&quot; +&#13;&#10;&quot;\tflowDateRef:\t&quot; + (String) globalMap.get(&quot;ref&quot;) + &quot;\n&quot; +&#13;&#10;&quot;\tflowExec:\t&quot; + context.flow_exec + &quot;\n&quot; + &#13;&#10;&quot;\tData di riferim. calcolata:\t&quot; + context.flow_date_ref +&#13;&#10;&quot;\n_____________________________________________\n\n&quot; +&#13;&#10;&quot;Job start time:\t&quot; + (String) globalMap.get(&quot;start_time&quot;) + &quot;\n&quot; +&#13;&#10;&quot;Job end time:\t&quot; + (String) globalMap.get(&quot;end_time&quot;) + &quot;\n&quot; +&#13;&#10;&#13;&#10;&quot;\n&quot; + (String) globalMap.get(&quot;log&quot;) + &quot;\n&quot; "/>
-    <elementParameter field="CHECK" name="CHECK_ATTACHMENT" value="true"/>
-    <elementParameter field="TABLE" name="ATTACHMENTS"/>
-    <elementParameter field="TABLE" name="HEADERS"/>
-    <elementParameter field="TEXT" name="SMTP_HOST" value="&quot;smtp.office365.com&quot;"/>
-    <elementParameter field="TEXT" name="SMTP_PORT" value="587"/>
-    <elementParameter field="CHECK" name="SSL" value="false"/>
-    <elementParameter field="CHECK" name="STARTTLS" value="true"/>
-    <elementParameter field="CLOSED_LIST" name="IMPORTANCE" value="Normal"/>
-    <elementParameter field="CHECK" name="NEED_AUTH" value="true"/>
-    <elementParameter field="TEXT" name="AUTH_USERNAME" value="&quot;alessandroperini@outlook.it&quot;"/>
-    <elementParameter field="PASSWORD" name="AUTH_PASSWORD" value="enc:system.encryption.key.v1:mvKHv+iGvsrOusGpoqncRnjimRSaz0lh2iqHlaN/y3oxKnvW4vKyQ4HvrY82llT5"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
-    <elementParameter field="CLOSED_LIST" name="TEXT_SUBTYPE" value="plain"/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="CHECK" name="SET_LOCALHOST" value="false"/>
-    <elementParameter field="TEXT" name="LOCALHOST" show="false" value="&quot;localhost&quot;"/>
-    <elementParameter field="TEXT" name="LABEL" value="Email_Sender"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="tSendMail_1"/>
-  </node>
-  <node componentName="tDie" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1440" posY="192">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDie_2"/>
-    <elementParameter field="TEXT" name="MESSAGE" value="&quot;Downloader e/o formatter e/o loader hanno dato esito negativo.&quot;"/>
-    <elementParameter field="TEXT" name="CODE" value="2"/>
-    <elementParameter field="CLOSED_LIST" name="PRIORITY" value="5"/>
-    <elementParameter field="CHECK" name="EXIT_JVM" value="true"/>
-    <elementParameter field="TEXT" name="LABEL" value="Python_Error"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="tDie_2"/>
-  </node>
-  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="448" posY="352">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_3"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="System.out.println(&quot;\nEsito positivo: Tutti i subJobs hanno terminato correttamente\n&quot;);&#10;System.out.println(&quot;\nLog:\n&quot; + (String) globalMap.get(&quot;log&quot;) + &quot;\n&quot;);&#10;&#10;DateTimeFormatter dtf = DateTimeFormatter.ofPattern(&quot;dd-MM-yyyy HH:mm:ss&quot;);&#10;LocalDateTime localDateTime = LocalDateTime.now();&#10;globalMap.put(&quot;end_time&quot;, dtf.format(localDateTime));&#10;&#10;&#10;String s3_path = &quot;LOG/&quot; + context.flow_id + &quot;/&quot; + context.flow_date_ref.substring(0, 4) + &quot;/&quot; + context.flow_date_ref.substring(4, 6) + &quot;/&quot; + context.flow_date_ref.substring(6, 8) + &quot;/&quot;;&#10;String s3_filename = context.flow_id + &quot;_&quot; + context.flow_exec + &quot;.log&quot;;&#10;&#10;System.out.println(&quot;Path Bucket S3:\t&quot; + s3_path + &quot;\n&quot;);&#10;System.out.println(&quot;File Bucket S3:\t&quot; + s3_filename + &quot;\n&quot;);&#10;&#10;// MANCA SCRITTURA SU BUCKET S3&#10;&#10;System.out.println(&quot;Job End Time:\t&quot; + dtf.format(localDateTime) +&quot;\n&quot;);&#10;&#10;if(context.sendMail) System.out.println(&quot;Invio mail...&quot;);"/>
-    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import java.time.LocalDate;&#10;import java.time.LocalDateTime;&#10;import java.time.format.DateTimeFormatter;&#10;import static java.lang.Integer.parseInt;&#10;&#10;import java.text.DateFormat;"/>
-    <elementParameter field="TEXT" name="LABEL" value="Job_End_FLEX"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="tJava_3"/>
-  </node>
-  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="960" posY="352">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_4"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="if(context.sendMail) System.out.println(&quot;Email inviata correttamente.\n\n&quot;);"/>
-    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
-    <elementParameter field="TEXT" name="LABEL" value="Email_Confirmation"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="tJava_4"/>
-  </node>
-  <node componentName="tS3Put" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="448" posY="544">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tS3Put_1"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
-    <elementParameter field="TEXT" name="ACCESS_KEY" value="&quot;AKIA5GOQBZLRW4N7RF63&quot;"/>
-    <elementParameter field="PASSWORD" name="SECRET_KEY" value="enc:system.encryption.key.v1:81Yb+7W4ui0T+2WU0iU4spFSL+WYQ4WK6mL61wvfW79IT+rZg3AKdA2xcbgLrO/HsDy3t2yf0bn7qgEvEA+Khs+nOQkoYQ=="/>
-    <elementParameter field="CHECK" name="INHERIT_CREDENTIALS" value="false"/>
-    <elementParameter field="CHECK" name="ASSUME_ROLE" value="false"/>
-    <elementParameter field="TEXT" name="ARN" show="false" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="ROLE_SESSION_NAME" show="false" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="SESSION_DURATION" show="false" value="15"/>
-    <elementParameter field="OPENED_LIST" name="REGION" value="&quot;eu-central-1&quot;"/>
-    <elementParameter field="CHECK" name="ENCRYPT" value="false"/>
-    <elementParameter field="CLOSED_LIST" name="KEY_TYPE" show="false" value="KMS_CMK"/>
-    <elementParameter field="CLOSED_LIST" name="ALGORITHM_SYMMETRIC_MASTER_KEY" show="false" value="AES"/>
-    <elementParameter field="CLOSED_LIST" name="ALGORITHM_ASYMMETRIC_MASTER_KEY" show="false" value="RSA"/>
-    <elementParameter field="CLOSED_LIST" name="ENCODING" show="false" value="BASE64"/>
-    <elementParameter field="PASSWORD" name="ENCRYPTED_KEY_CMK" show="false" value="enc:system.encryption.key.v1:ZGU/tBdHBJL8pLSwqiMyexUr+iF3Lgwv50UeAFmf"/>
-    <elementParameter field="PASSWORD" name="ENCRYPTED_KEY_BASE64" show="false" value="enc:system.encryption.key.v1:Zov4MGEL/bipQuuZidI7crOVF80vE2TO/Vx+l5dx"/>
-    <elementParameter field="FILE" name="ENCRYPTED_KEY_X509" show="false" value="&quot;&quot;"/>
-    <elementParameter field="FILE" name="PUBLIC_KEY" show="false" value="&quot;&quot;"/>
-    <elementParameter field="FILE" name="PRIVATE_KEY" show="false" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="BUCKET" value="&quot;mdp-qa-s3/LOGS/&quot;"/>
-    <elementParameter field="TEXT" name="KEY" value="&quot;&quot;"/>
-    <elementParameter field="FILE" name="FILE" value="&quot;C:/Users/a.perini/Desktop/s3_write_test.txt&quot;"/>
-    <elementParameter field="CHECK" name="ENABLE_SERVER_SIDE_ENCRYPTION" value="false"/>
-    <elementParameter field="CHECK" name="ENABLE_KMS" show="false" value="false"/>
-    <elementParameter field="TEXT" name="KMSID" show="false" value="&quot;&quot;"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
-    <elementParameter field="CHECK" name="CONFIG_CLIENT" value="false"/>
-    <elementParameter field="TABLE" name="CLIENT_CONFIGURATION" show="false"/>
-    <elementParameter field="CHECK" name="SET_STS_ENDPOINT" show="false" value="false"/>
-    <elementParameter field="TEXT" name="STS_ENDPOINT" show="false" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="PART_SIZE" value="5"/>
-    <elementParameter field="CHECK" name="ENABLE_ACCELERATE" value="false"/>
-    <elementParameter field="CHECK" name="ACCESS_CONTROL_LIST" value="false"/>
-    <elementParameter field="TABLE" name="ACL" show="false"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
   </node>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tLoop_1" offsetLabelX="0" offsetLabelY="0" source="tLoop_1" target="tJava_3">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnSubjobOk3"/>
@@ -306,11 +311,27 @@
   <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="tLoop_1" offsetLabelX="0" offsetLabelY="0" source="tLoop_1" target="tJava_2">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" show="false" value="2"/>
+    <elementParameter field="CHECK" name="ACTIVATE" show="false" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="iterate6"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tJava_1" offsetLabelX="0" offsetLabelY="0" source="tJava_1" target="tLoop_1">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk3"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tSendMail_1" offsetLabelX="-13" offsetLabelY="0" source="tSendMail_1" target="tJava_4">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk2"/>
+  </connection>
+  <connection connectorName="RUN_IF" label="If" lineStyle="6" metaname="tJava_3" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tJava_3" target="tSendMail_1">
+    <elementParameter field="MEMO_JAVA" name="CONDITION" value="context.sendMail"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="If5"/>
+  </connection>
+  <connection connectorName="RUN_IF" label="If" lineStyle="6" metaname="tJava_3" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tJava_3" target="tS3Put_1">
+    <elementParameter field="MEMO_JAVA" name="CONDITION" value="context.sendMail == false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="If4"/>
   </connection>
   <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="tJava_2" offsetLabelX="0" offsetLabelY="0" source="tJava_2" target="tRunJob_1">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" show="false" value="2"/>
+    <elementParameter field="CHECK" name="ACTIVATE" show="false" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="iterate7"/>
   </connection>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tRunJob_1" offsetLabelX="0" offsetLabelY="0" source="tRunJob_1" target="tJavaRow_1">
@@ -329,29 +350,18 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="ACTIVATE" show="false" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row1"/>
   </connection>
   <connection connectorName="RUN_IF" label="If" lineStyle="6" metaname="tJavaRow_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tJavaRow_1" target="tDie_1">
     <elementParameter field="MEMO_JAVA" name="CONDITION" value="(Boolean) globalMap.get(&quot;error&quot;)"/>
+    <elementParameter field="CHECK" name="ACTIVATE" show="false" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="If6"/>
   </connection>
   <connection connectorName="RUN_IF" label="If" lineStyle="6" metaname="tJavaRow_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tJavaRow_1" target="tDie_2">
     <elementParameter field="MEMO_JAVA" name="CONDITION" value="(Boolean) globalMap.get(&quot;python_state_error&quot;)"/>
+    <elementParameter field="CHECK" name="ACTIVATE" show="false" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="If3"/>
-  </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tJava_1" offsetLabelX="0" offsetLabelY="0" source="tJava_1" target="tLoop_1">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk3"/>
-  </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tSendMail_1" offsetLabelX="-13" offsetLabelY="0" source="tSendMail_1" target="tJava_4">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk2"/>
-  </connection>
-  <connection connectorName="RUN_IF" label="If" lineStyle="6" metaname="tJava_3" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tJava_3" target="tSendMail_1">
-    <elementParameter field="MEMO_JAVA" name="CONDITION" value="context.sendMail"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="If5"/>
-  </connection>
-  <connection connectorName="RUN_IF" label="If" lineStyle="6" metaname="tJava_3" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tJava_3" target="tS3Put_1">
-    <elementParameter field="MEMO_JAVA" name="CONDITION" value="context.sendMail == false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="If4"/>
   </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tLoop_1"/>
@@ -393,13 +403,18 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_c0212612-58cf-4b8e-977b-9b8c4f2e7864"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>KCndt2R+1ewLXwX7FLNY2OUX3B0g/pStUpjJOCAc+LM7KH5W7TeqzGnbc1eosh/QUy6JQVbilIGU
-06biLaMbKw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_70a861b6-b961-4907-8c9b-5ba7d8120dce"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>JY29hwI5Mrvm0PqZmBsyhFkbStYaEO+QcWFclBho8a+6TbLDXlQKjsk6nQ+XxUIxKochCZU2dsR/
-lDcEvfcRwQ==</DigestValue></Reference></SignedInfo><SignatureValue>SLWhgiv4Fn6WcKAdhuHd35wZ/0M5YepXGadWUIwqFrS3aE0pThXVIygNDhZS+oUNM7wL86JAX4c9
-+VEq93ulbD0Mo+NDaGhbqg76CBGQXnCqy3/QyZ92tstG4bfSi1Krn+EYQd04SfPrDGPQnZU/8Y6V
-Raio1Dv3mQWD2HdAKUMptrFG8G/0hqi+YPtfjzoPxy7bG9P0bYUo9dgnuwumiMPjyNSs7pWVytrW
-eSYhpZ0onYM7dKTvsU2zljbXXaEOS9Lts87yGsF/wzrVCbjm7YsWrpjIA6wi5mTdcc9sujJytDOI
-20dsxfRCQf2YuhS+FYn437DN/rEu6mac6A2afQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_2"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_2d4d81e0-21d7-40e0-96a1-3da55e5d868f"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>cR4KLBLwT8pDDUgRYWbRWemgUIGvDj9Ciy2CZycw46A+UWQDJBlg/iXJ/RpsCi0rd6gm/vknJt4C
+5238uWVbHw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_29b709ab-d89c-4a4f-8dd6-13bc095592b0"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>grdl4X32q5+DZiUalkv5141575WLszmk/6IYOc+csrlT6pxtTWumwaVwd8W7p5rS6Grd1qKNM0lW
+dUE5AcYNXg==</DigestValue></Reference></SignedInfo><SignatureValue>FigJggzuLEaZkMxVPH8Wka0la+jBk3bJHNLNq4ho4z9b8TBHBIC+Gc7AabFpj+G9IOLgohT+jhoD
+wciT9TkpaAJKy6iMtw9BA/EhTCScTf8W8KmGMIALKHc9Q6BdKCkFJlxbydQqa9/jU3zYotrCrOJW
+R6pVmvQ3f14MolAd/GJIQsMTZqm+LpzdiYkBrsloLzUFcnu3EpFixbDj3LiIq+/RjtnhAfS7I7y1
+ztvx70HV09Pj7e8dbUQYmsPdkU/UfLXKfbtn3NWVcj1P//www5/dL1Tv5CkzvKkXyH6ol90BXXYB
+sWs+Bf6LcnUms+KFvatbxWLqE3Xb50sMdTbt5A==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U
@@ -421,4 +436,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_70a861b6-b961-4907-8c9b-5ba7d8120dce" Target="#_c0212612-58cf-4b8e-977b-9b8c4f2e7864"><Timestamp>2020-07-09 13:45:35</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_29b709ab-d89c-4a4f-8dd6-13bc095592b0" Target="#_2d4d81e0-21d7-40e0-96a1-3da55e5d868f"><Timestamp>2020-07-09 13:49:34</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
