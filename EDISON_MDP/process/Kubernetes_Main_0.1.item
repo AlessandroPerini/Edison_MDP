@@ -48,7 +48,7 @@
     <elementParameter field="TEXT" name="PROPERTIES_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="SCHEMA_DB_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:SNVevVTJrf5bUhjMWNHWKV+syrqkFzwNh26rVUIq"/>
+    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:hJdHR0sNdMkRhzpaMfrTqrA5G0uJX0L303RqZEYn"/>
     <elementParameter field="FILE" name="DBFILE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="DBTABLE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="QUERY_CONDITION_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
@@ -83,7 +83,7 @@
     <elementParameter field="TEXT" name="PROPERTIES" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="SCHEMA_DB" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER" show="false" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:fpudIUYTwS9Ak6cweCMBwJ9FWy/NNP+7XNTLzVr1"/>
+    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:N0wuzAXJTfbG/mwkxh22ImKinqoPlwfmvU1s329P"/>
     <elementParameter field="FILE" name="DBFILE" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE_STATS" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE_LOGS" show="false" value="&quot;&quot;"/>
@@ -188,7 +188,7 @@
   </node>
   <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="128" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_1"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern(&quot;dd-MM-yyyy HH:mm:ss&quot;);&#10;LocalDateTime localDateTime = LocalDateTime.now();&#10;globalMap.put(&quot;start_time&quot;, dtf1.format(localDateTime));&#10;&#10;System.out.println(&quot;\nJob Start Time:\t&quot; + dtf1.format(localDateTime));&#10;&#10;//Inizializzazione log&#10;globalMap.put(&quot;log&quot;, &quot;&quot;);&#10;&#10;String validDate = &quot;&quot;;&#10;&#10;try{&#10;&#10;// Recupero n° giorni da caricare precedenti alla data di riferimento&#10;int n = parseInt(context.flow_date.replaceAll(&quot;\\s+&quot;,&quot;&quot;));&#10;&#10;if(n&lt;0) {&#10;&#9;globalMap.put(&quot;loop&quot;, -1 * n);&#10;} else {&#10;&#9;globalMap.put(&quot;loop&quot;, 1);&#10;}&#10;&#10;context.flow_exec = Long.toString(System.currentTimeMillis());&#10;&#10;DateTimeFormatter dtf = DateTimeFormatter.ofPattern(&quot;yyyyMMdd&quot;);&#10;LocalDate localDate = LocalDate.now();&#10;&#10;globalMap.put(&quot;ref&quot;, context.flow_date_ref);&#10;globalMap.put(&quot;flow_date&quot;, context.flow_date);&#10;String date_type = context.flow_date_ref.substring(0,1);&#10;int offset = 0;&#10;&#10;// Calcolo data di riferimento&#10;switch(date_type) {&#10;    case &quot;0&quot;:&#10;      context.flow_date_ref = dtf.format(localDate);&#10;      break;&#10;    case &quot;+&quot;:&#10;      offset = parseInt(context.flow_date_ref.replaceAll(&quot;\\s+&quot;,&quot;&quot;).substring(1));&#10;      context.flow_date_ref = dtf.format(localDate.plusDays(offset));&#10;      break;&#10;    case &quot;-&quot;:&#10;      offset = parseInt(context.flow_date_ref.replaceAll(&quot;\\s+&quot;,&quot;&quot;).substring(1));&#10;      context.flow_date_ref = dtf.format(localDate.plusDays(-1 * offset));&#10;      break;&#10;    default:&#10;      context.flow_date_ref = context.flow_date_ref;&#10;}&#10;&#10;// Validazione data calcolata&#10;validDate = &quot;0&quot;;&#10;String DATE_FORMAT = &quot;yyyyMMdd&quot;;&#10;DateFormat df = new SimpleDateFormat(DATE_FORMAT);&#10;df.setLenient(false);&#10;df.parse(context.flow_date_ref);&#10;validDate = &quot;&quot;;&#10;&#10;System.out.println(&quot;\n_______ Job Kubernetes_Main Variables _______\n&quot;);&#10;System.out.println(&quot;\tflowID:\t\t\t&quot; + context.flow_id);&#10;System.out.println(&quot;\tflowDate:\t\t&quot; + (String) globalMap.get(&quot;flow_date&quot;));&#10;System.out.println(&quot;\tflowDateRef:\t&quot; + (String) globalMap.get(&quot;ref&quot;));&#10;System.out.println(&quot;\tflowExec:\t\t&quot; + context.flow_exec);&#10;System.out.println(&quot;\tData di riferim. calcolata:\t&quot; + context.flow_date_ref);&#10;System.out.println(&quot;_____________________________________________\n\n&quot;);&#10;&#10;&#10;} catch (Exception ex) {&#10;&#9;if(validDate.equals(&quot;0&quot;)) validDate=&quot;*** Data di riferimento non valida ***&quot;; &#10;&#9;throw new Exception(&quot;\tParametri di input non validi! &quot; + validDate);&#10;}"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern(&quot;dd-MM-yyyy HH:mm:ss&quot;);&#10;LocalDateTime localDateTime = LocalDateTime.now();&#10;globalMap.put(&quot;start_time&quot;, dtf1.format(localDateTime));&#10;&#10;System.out.println(&quot;\nJob Start Time:\t&quot; + dtf1.format(localDateTime));&#10;&#10;//Inizializzazione logs&#10;globalMap.put(&quot;logAll&quot;, &quot;&quot;);&#10;globalMap.put(&quot;logInfo&quot;, &quot;&quot;);&#10;&#10;String validDate = &quot;&quot;;&#10;&#10;try{&#10;&#10;// Recupero n° giorni da caricare precedenti alla data di riferimento&#10;int n = parseInt(context.flow_date.replaceAll(&quot;\\s+&quot;,&quot;&quot;));&#10;&#10;if(n&lt;0) {&#10;&#9;globalMap.put(&quot;loop&quot;, -1 * n);&#10;} else {&#10;&#9;globalMap.put(&quot;loop&quot;, 1);&#10;}&#10;&#10;context.flow_exec = Long.toString(System.currentTimeMillis());&#10;&#10;DateTimeFormatter dtf = DateTimeFormatter.ofPattern(&quot;yyyyMMdd&quot;);&#10;LocalDate localDate = LocalDate.now();&#10;&#10;globalMap.put(&quot;ref&quot;, context.flow_date_ref);&#10;globalMap.put(&quot;flow_date&quot;, context.flow_date);&#10;String date_type = context.flow_date_ref.substring(0,1);&#10;int offset = 0;&#10;&#10;// Calcolo data di riferimento&#10;switch(date_type) {&#10;    case &quot;0&quot;:&#10;      context.flow_date_ref = dtf.format(localDate);&#10;      break;&#10;    case &quot;+&quot;:&#10;      offset = parseInt(context.flow_date_ref.replaceAll(&quot;\\s+&quot;,&quot;&quot;).substring(1));&#10;      context.flow_date_ref = dtf.format(localDate.plusDays(offset));&#10;      break;&#10;    case &quot;-&quot;:&#10;      offset = parseInt(context.flow_date_ref.replaceAll(&quot;\\s+&quot;,&quot;&quot;).substring(1));&#10;      context.flow_date_ref = dtf.format(localDate.plusDays(-1 * offset));&#10;      break;&#10;    default:&#10;      context.flow_date_ref = context.flow_date_ref;&#10;}&#10;&#10;// Validazione data calcolata&#10;validDate = &quot;0&quot;;&#10;String DATE_FORMAT = &quot;yyyyMMdd&quot;;&#10;DateFormat df = new SimpleDateFormat(DATE_FORMAT);&#10;df.setLenient(false);&#10;df.parse(context.flow_date_ref);&#10;validDate = &quot;&quot;;&#10;&#10;System.out.println(&quot;\n_______ Job Kubernetes_Main Variables _______\n&quot;);&#10;System.out.println(&quot;\tflowID:\t\t\t&quot; + context.flow_id);&#10;System.out.println(&quot;\tflowDate:\t\t&quot; + (String) globalMap.get(&quot;flow_date&quot;));&#10;System.out.println(&quot;\tflowDateRef:\t&quot; + (String) globalMap.get(&quot;ref&quot;));&#10;System.out.println(&quot;\tflowExec:\t\t&quot; + context.flow_exec);&#10;System.out.println(&quot;\tData di riferim. calcolata:\t&quot; + context.flow_date_ref);&#10;System.out.println(&quot;_____________________________________________\n\n&quot;);&#10;&#10;&#10;} catch (Exception ex) {&#10;&#9;if(validDate.equals(&quot;0&quot;)) validDate=&quot;*** Data di riferimento non valida ***&quot;; &#10;&#9;throw new Exception(&quot;\tParametri di input non validi! &quot; + validDate);&#10;}"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import java.time.LocalDate;&#10;import java.time.LocalDateTime;&#10;import java.time.format.DateTimeFormatter;&#10;import static java.lang.Integer.parseInt;&#10;&#10;import java.text.DateFormat;"/>
     <elementParameter field="TEXT" name="LABEL" value="Context_Setting"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -224,7 +224,7 @@
     <elementParameter field="CLOSED_LIST" name="IMPORTANCE" value="Normal"/>
     <elementParameter field="CHECK" name="NEED_AUTH" value="true"/>
     <elementParameter field="TEXT" name="AUTH_USERNAME" value="&quot;alessandroperini@outlook.it&quot;"/>
-    <elementParameter field="PASSWORD" name="AUTH_PASSWORD" value="enc:system.encryption.key.v1:Ejv2UViPejSZnPfAFgOjSbeFg5Zj2334sU2FN7waGHT1Ez37nm4jhiD9NtBmDoRQ"/>
+    <elementParameter field="PASSWORD" name="AUTH_PASSWORD" value="enc:system.encryption.key.v1:aiO5Gk8GyUG2YyrYtSIw4eSkOlJOqQvyForQGhSCJB456gITnq93qnP+6wjlqBZ8"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
     <elementParameter field="CLOSED_LIST" name="TEXT_SUBTYPE" value="plain"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
@@ -267,7 +267,7 @@
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
     <elementParameter field="TEXT" name="ACCESS_KEY" value="&quot;AKIA5GOQBZLRW4N7RF63&quot;"/>
-    <elementParameter field="PASSWORD" name="SECRET_KEY" value="enc:system.encryption.key.v1:Rt7lkyrFQyyrB88tugYv0iRD4dmtS0A2Lbo+7ztOIPGa7lj+vmdUxGyFuUubbq5VtNot6O9CfNe9FwELfgpryhgwcmScpA=="/>
+    <elementParameter field="PASSWORD" name="SECRET_KEY" value="enc:system.encryption.key.v1:q1ed+JoVEqAhABpn39wyWKzJNaZTmFu2X9OKKJzFl48jN3d4a7+tflhj6u2bsLFIPVE5QH3Dmn6K5OGocwdfchPnvayhmw=="/>
     <elementParameter field="CHECK" name="INHERIT_CREDENTIALS" value="false"/>
     <elementParameter field="CHECK" name="ASSUME_ROLE" value="false"/>
     <elementParameter field="TEXT" name="ARN" show="false" value="&quot;&quot;"/>
@@ -279,8 +279,8 @@
     <elementParameter field="CLOSED_LIST" name="ALGORITHM_SYMMETRIC_MASTER_KEY" show="false" value="AES"/>
     <elementParameter field="CLOSED_LIST" name="ALGORITHM_ASYMMETRIC_MASTER_KEY" show="false" value="RSA"/>
     <elementParameter field="CLOSED_LIST" name="ENCODING" show="false" value="BASE64"/>
-    <elementParameter field="PASSWORD" name="ENCRYPTED_KEY_CMK" show="false" value="enc:system.encryption.key.v1:HsKvREYU3QcmQM+v7nZAuxdwJULQcRd4IVDWxjo7"/>
-    <elementParameter field="PASSWORD" name="ENCRYPTED_KEY_BASE64" show="false" value="enc:system.encryption.key.v1:gRyX2f5RP5oVcWX8POk/l3JRlV7yafTf4jtD/FXq"/>
+    <elementParameter field="PASSWORD" name="ENCRYPTED_KEY_CMK" show="false" value="enc:system.encryption.key.v1:Gqhf6smugzR8PQtNAQ3VS8U03CHK1PENQC/PMaU7"/>
+    <elementParameter field="PASSWORD" name="ENCRYPTED_KEY_BASE64" show="false" value="enc:system.encryption.key.v1:8oI/tvCrBDi2HqhnlkEyDGaKHZZhS3+8gcIW5QyX"/>
     <elementParameter field="FILE" name="ENCRYPTED_KEY_X509" show="false" value="&quot;&quot;"/>
     <elementParameter field="FILE" name="PUBLIC_KEY" show="false" value="&quot;&quot;"/>
     <elementParameter field="FILE" name="PRIVATE_KEY" show="false" value="&quot;&quot;"/>
@@ -395,13 +395,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_3b432188-3855-4066-9357-d0c832818305"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>u00yPgAeuFZeQRsv9N+/DkfKpHL9nh1KIYICiHhzCqPpyvGoxRYsLX97wFdKnhumDBi4TIYGHq8L
-5PEHOml2rA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_44842e5d-dfd5-47d9-930e-47ac1c1d8042"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>FUvkmi4YT8eSWcNOdP3Fjak8tokRs9iwkZSR+vLFUkV18MfmDT/WHjIu8mPS9KT3j7W+gJeCCnE6
-2t6ClI03MA==</DigestValue></Reference></SignedInfo><SignatureValue>jVZuhhCMyC9m3MGkuThwwiZI3c4hE8t/AIn5i1MiJm35slEQweiVxLIe29ReF8pXubioMCC+q+X4
-aIq6+NHBe5uWjAzGl1r1VOdFLYLAz4UB7OHSbIx9SbpBlc/8JchSOaAX4trDr+N0ymf+tHhQqYnW
-m6EBPqRzcBsKrjy0DVvlvlQg7zAiVgEXAzcKGsf425wN+AABemJHP8FebUQGNa1pCNZTcrujyYiX
-//J3+G4tho0sYla/18OKwkuF+EFGfDkipgKKsv1s0hZHVEY1Wx4saJ1zveBej64peT4Li7293iTY
-hyqUvQFdIL/cbXPRSBHJihdxuUJsOYQv6aqLYg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_22e1c344-964f-4a36-92c4-a7dd8df776e9"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>KbPtJgQfsM72vaEfAFWvtIagUNcE177sk2lFMDEZ9a8A1vPkN1vmJ/rcrq2rGujDVYTsP9OT4KJ6
+bSyoiz6vUg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_6052263a-395c-4002-8643-a316d1d7eb9f"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>15XCLFfIo2IK+mm5Z98kvJnz0LSFTdExtBGU2CrjnfvXNdnvaRsMtBI3GwPWAwbuKSaVspTOZU57
+FPK/iR7FZA==</DigestValue></Reference></SignedInfo><SignatureValue>KITW+Ve3zWJrqVZfuzvDSly/SnA24jUKB5D9Clt98Hped5z4eSOGL7V03MswVEeJvvuvj1E6gyIV
+NY39zG+mPZQljzKku0hJPQBYOfUXbGPw5ZKi6VQhHEJ0vpG0ISDJR1GjyZaxnhYgaJX6i07PbjPZ
+15hgwJJWi/RkOQFW3qXVuh9UCiq1stoeF3A9ZUBxi7mevFNkLADHICmQu8r4pKMZgkNfsXHKt1Ym
+0435y0zC9VRn4WNM/SmQSjJ7OAsrcpKrdxUN+2IGv6b8BKaCkJJxGYdjQuxjTKFoal8eM1W2wSUD
+0MN7/UgPkhQrflgkgJlmadHrPB8vu816A3rmlQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U
@@ -423,4 +423,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_44842e5d-dfd5-47d9-930e-47ac1c1d8042" Target="#_3b432188-3855-4066-9357-d0c832818305"><Timestamp>2020-07-10 09:45:25</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_6052263a-395c-4002-8643-a316d1d7eb9f" Target="#_22e1c344-964f-4a36-92c4-a7dd8df776e9"><Timestamp>2020-07-10 09:49:33</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
