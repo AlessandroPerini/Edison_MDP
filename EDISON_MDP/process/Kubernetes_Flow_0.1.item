@@ -3,7 +3,7 @@
     <contextParameter comment="" name="podName" prompt="podName?" promptNeeded="false" type="id_String" value="&quot;&quot;"/>
     <contextParameter comment="" name="namespace" prompt="namespace?" promptNeeded="false" type="id_String" value="&quot;&quot;"/>
     <contextParameter comment="" name="flowId" prompt="flowId?" promptNeeded="false" type="id_String" value="&quot;1&quot;"/>
-    <contextParameter comment="" name="flowData" prompt="flowData?" promptNeeded="false" type="id_String" value="&quot;1&quot;"/>
+    <contextParameter comment="" name="flowDate" prompt="flowDate?" promptNeeded="false" type="id_String" value="&quot;1&quot;"/>
     <contextParameter comment="" name="flowExec" prompt="flowExec?" promptNeeded="false" type="id_String" value="&quot;1&quot;"/>
     <contextParameter comment="" name="watcherTimeoutInMinutes" prompt="watcherTimeoutInMinutes?" promptNeeded="false" type="id_Integer" value="30"/>
     <contextParameter comment="" name="resultStatus" prompt="resultStatus?" promptNeeded="false" type="id_Integer" value="0"/>
@@ -55,7 +55,7 @@
     <elementParameter field="TEXT" name="PROPERTIES_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="SCHEMA_DB_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:WdptwGMCph+l4ZPQ+BUg1p9f8vKLu+l0385eCVLv"/>
+    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:iSn10hZ5/TSgZF9/R5WKamSRrq/3H+P9Az8G0GSk"/>
     <elementParameter field="FILE" name="DBFILE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="DBTABLE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="QUERY_CONDITION_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
@@ -90,7 +90,7 @@
     <elementParameter field="TEXT" name="PROPERTIES" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="SCHEMA_DB" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER" show="false" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:ftIGb51HJ87j2XhgGHSb8UTyOyan5jOp2qoiB7xT"/>
+    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:siw+LC78qHjIHRKdkJGigGdmmfmz+GlMHJGFDRHH"/>
     <elementParameter field="FILE" name="DBFILE" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE_STATS" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE_LOGS" show="false" value="&quot;&quot;"/>
@@ -196,7 +196,7 @@
   </node>
   <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="128" posY="512">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_2"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="KubernetesClient client = new DefaultKubernetesClient();&#10;&#10;Pod aPod = new PodBuilder().&#10;                            withNewMetadata().&#10;                            withName(context.podName).&#10;                            endMetadata()&#10;                            .withNewSpec()&#10;                            .addNewContainer()&#10;                            .addToCommand(&quot;python&quot;, &quot;app.py&quot;, context.flowId, context.flowData, context.flowExec)&#10;                            .withName(context.podName)&#10;                            .withImage(&quot;al3p3r/helloworld-python&quot;)&#10;                            .endContainer()&#10;                            .withRestartPolicy(&quot;Never&quot;)&#10;                            .endSpec()&#10;                            .build();&#10;&#10;&#10;try {&#10;&#9;System.out.println(&quot;\nCreazione del POD...&quot;); // + createdPod.toString());&#10;&#9;Pod createdPod = client.pods().inNamespace(context.namespace).create(aPod);&#10;} catch (Exception e) {&#10;&#9;context.resultStatus = -2;&#10;&#9;throw new Exception(&quot;Errore durante la creazione del POD&quot;);&#10;}"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="KubernetesClient client = new DefaultKubernetesClient();&#10;&#10;Pod aPod = new PodBuilder().&#10;                            withNewMetadata().&#10;                            withName(context.podName).&#10;                            endMetadata()&#10;                            .withNewSpec()&#10;                            .addNewContainer()&#10;                            .addToCommand(&quot;python&quot;, &quot;app.py&quot;, context.flowId, context.flowDate, context.flowExec)&#10;                            .withName(context.podName)&#10;                            .withImage(&quot;al3p3r/helloworld-python&quot;)&#10;                            .endContainer()&#10;                            .withRestartPolicy(&quot;Never&quot;)&#10;                            .endSpec()&#10;                            .build();&#10;&#10;&#10;try {&#10;&#9;System.out.println(&quot;\nCreazione del POD...&quot;); // + createdPod.toString());&#10;&#9;Pod createdPod = client.pods().inNamespace(context.namespace).create(aPod);&#10;} catch (Exception e) {&#10;&#9;context.resultStatus = -2;&#10;&#9;throw new Exception(&quot;Errore durante la creazione del POD&quot;);&#10;}"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import io.fabric8.kubernetes.api.model.Pod;&#10;import io.fabric8.kubernetes.api.model.PodBuilder;&#10;import io.fabric8.kubernetes.client.DefaultKubernetesClient;&#10;import io.fabric8.kubernetes.client.KubernetesClient;&#10;&#10;import java.time.LocalDate;&#10;import java.time.format.DateTimeFormatter;"/>
     <elementParameter field="TEXT" name="LABEL" value="Create_POD"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -234,7 +234,7 @@
   </node>
   <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="128" posY="288">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_5"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="context.podName = context.flowId + &quot;-&quot; + context.flowExec;&#10;context.namespace = &quot;default&quot;;&#10;&#10;System.out.println(&quot;\n______ Job Kubernetes_Flow Variables ______\n&quot;);&#10;System.out.println(&quot;\tflowID:\t\t&quot; + context.flowId);&#10;System.out.println(&quot;\tflowData:\t&quot; + context.flowData);&#10;System.out.println(&quot;\tflowExec:\t&quot; + context.flowExec);&#10;System.out.println(&quot;\tpodName:\t&quot; + context.podName );&#10;System.out.println(&quot;\tnamespace:\t&quot; + context.namespace);&#10;System.out.println(&quot;\twatcherTimeoutInMinutes: &quot; + context.watcherTimeoutInMinutes);&#10;System.out.println(&quot;_____________________________________________\n\n&quot;);&#10;"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="context.podName = context.flowId + &quot;-&quot; + context.flowExec;&#10;context.namespace = &quot;default&quot;;&#10;&#10;System.out.println(&quot;\n______ Job Kubernetes_Flow Variables ______\n&quot;);&#10;System.out.println(&quot;\tflowID:\t\t&quot; + context.flowId);&#10;System.out.println(&quot;\tflowData:\t&quot; + context.flowDate);&#10;System.out.println(&quot;\tflowExec:\t&quot; + context.flowExec);&#10;System.out.println(&quot;\tpodName:\t&quot; + context.podName );&#10;System.out.println(&quot;\tnamespace:\t&quot; + context.namespace);&#10;System.out.println(&quot;\twatcherTimeoutInMinutes: &quot; + context.watcherTimeoutInMinutes);&#10;System.out.println(&quot;_____________________________________________\n\n&quot;);&#10;"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
     <elementParameter field="TEXT" name="LABEL" value="Variables_Setting"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -418,13 +418,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_0385cba2-283a-4339-9a38-5d6d2e6de1dd"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>R/e7VNObUVZ3iVfjr0zNEp3UPA3m4xFSd57qgXFjC6tNvR8pkfRI1qNfsiZBM3wxr6kcSefO2GWM
-GT9QO3psWQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_08b96a2c-54b8-4496-a304-8d62f385ceaa"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>MB8WvJAF+kLrEnneC+sCJx9POkyBr4UFmTHcngvfUGV0GSQNitd2UHTwGri9kwI1l/oH8Ic+tQWh
-cO4QIZgkvg==</DigestValue></Reference></SignedInfo><SignatureValue>VcAwaJbysgMyxxg6/zbkKlI03toHulCu0e0zUQ/RCFLoJBdiTB8bozdG5EcM4aT6v9L1VtTFcMMS
-kwK0ikgGyMi4XdD6VO8p8NFuEDHC57WlyhtAzDffkNBadFTT4T3ciFByv40HiEmsd0TqmqqwgPun
-iTyFmU94UbD037TDNiiOIm50TPVjY2LCPlBdpAhgGDgG0m0CUiGcow2/i13dbzGnLNydvYzWejcq
-zAyw+ao5bdFrlrtxcX6FJo60mEr5fZIaZyuBbTFPadOqmjA+4TJIjeXNbExzzqgr0B09DPgbZ1G4
-JzCcLhrY54pd+25H+Htz5EOSgwt/tz257TuTDA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_05edc699-c481-4a06-96f0-2a3521f41549"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>JKhIxL4A/nRD7xMKl6sb5Vp1tESzaSQChSN/B8L5F0SJhKyz4moV0J235m/OK/o4eHUMyHry17HY
+43Ji2EF9IA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_73f7ac93-1d31-4801-a6c2-5cd0cc34c707"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>kQk78eFaCTXBIpUVpPL1OA9vXltZw9EtsHb1YVqibrtOQF5N833vChrWKBwZ/npawMbQVVorqsvV
+8CK6Q0M1UQ==</DigestValue></Reference></SignedInfo><SignatureValue>RF7UsXpaEYTPKjYg7GVeHHdLa5F7mlULluL/sXXT3jqybzRFyg0mc13yf1TLV5+WJp7mhEuQB82c
+we+ElZro5oAbJNq9g6t56huuOpqMRsXpMyzkYewPQA9Sgw5oyk5Zk0ISXYTg98ZR2m9lwvBqdoOC
+zPDU8ctbZXsMmA/QrpZp5npqHtVyORT8cC0uHoIhRnOFZV2f239vUQSmyXQIugcEM/U6P09RJrAK
+UWNdkKIAf1rfRznW0wPGzqB/H7eUNTTTfaakMT6UJl8SGbsLN4RG2soTqDZO37yc9uo/X6NyaVZa
+kgo2P+mqjZGDtRUzdM00ovfEIObfVJKLuTchgw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U
@@ -446,4 +446,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_08b96a2c-54b8-4496-a304-8d62f385ceaa" Target="#_0385cba2-283a-4339-9a38-5d6d2e6de1dd"><Timestamp>2020-07-10 10:19:51</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_73f7ac93-1d31-4801-a6c2-5cd0cc34c707" Target="#_05edc699-c481-4a06-96f0-2a3521f41549"><Timestamp>2020-07-10 10:21:55</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
