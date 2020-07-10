@@ -48,7 +48,7 @@
     <elementParameter field="TEXT" name="PROPERTIES_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="SCHEMA_DB_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:pK7J31oF2RLprP+8ofJi49U9/iyl6FT8StvOzrru"/>
+    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" show="false" value="enc:system.encryption.key.v1:0LIiZCLWRHMyEG99Yoqttk16+rWByP8v0X19R2j6"/>
     <elementParameter field="FILE" name="DBFILE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="DBTABLE_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="QUERY_CONDITION_IMPLICIT_CONTEXT" show="false" value="&quot;&quot;"/>
@@ -83,7 +83,7 @@
     <elementParameter field="TEXT" name="PROPERTIES" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="SCHEMA_DB" show="false" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER" show="false" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:AYVSmHxHfXP1JqDdFYtKot2maY/SpHv+He1Zfd6W"/>
+    <elementParameter field="PASSWORD" name="PASS" show="false" value="enc:system.encryption.key.v1:pJe9EaRBMSCJ6aAxZlPazPz0Dbc8z7CW/FQ4iZiC"/>
     <elementParameter field="FILE" name="DBFILE" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE_STATS" show="false" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE_LOGS" show="false" value="&quot;&quot;"/>
@@ -155,11 +155,11 @@
     <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
     <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="false"/>
     <elementParameter field="TABLE" name="CONTEXTPARAMS">
-      <elementValue elementRef="PARAM_NAME_COLUMN" value="flow_id"/>
+      <elementValue elementRef="PARAM_NAME_COLUMN" value="flowId"/>
       <elementValue elementRef="PARAM_VALUE_COLUMN" value="context.flowId"/>
-      <elementValue elementRef="PARAM_NAME_COLUMN" value="flow_data"/>
+      <elementValue elementRef="PARAM_NAME_COLUMN" value="flowDate"/>
       <elementValue elementRef="PARAM_VALUE_COLUMN" value="context.flowDate"/>
-      <elementValue elementRef="PARAM_NAME_COLUMN" value="flow_exec"/>
+      <elementValue elementRef="PARAM_NAME_COLUMN" value="flowExec"/>
       <elementValue elementRef="PARAM_VALUE_COLUMN" value="context.flowExec"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PROPAGATE_CHILD_RESULT" value="true"/>
@@ -181,7 +181,7 @@
   </node>
   <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1152" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJavaRow_1"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="int resultStatus = input_row.resultStatus;&#10;&#10;if(resultStatus &lt; 0) {&#10;&#9;globalMap.put(&quot;error&quot;, true);&#10;} else {&#10;&#9;globalMap.put(&quot;error&quot;, false);&#10;&#9;globalMap.put(&quot;logAll&quot;, (String) globalMap.get(&quot;logAll&quot;) + input_row.logAll + &quot;\n&quot;);&#10;&#9;globalMap.put(&quot;logInfo&quot;, (String) globalMap.get(&quot;logInfo&quot;) + input_row.logInfo + &quot;\n&quot;);&#10;&#9;//Ogni esecuzione del subjob sovrascrive i dati&#10;&#9;//globalMap.put(&quot;stato_d&quot;, input_row.stato_d);&#10;&#9;//globalMap.put(&quot;stato_l&quot;, input_row.stato_l);&#10;&#9;//globalMap.put(&quot;stato_f&quot;, input_row.stato_f);&#10;&#9;System.out.println(&quot;\nStati (stampa del job padre): downloader=&quot; + input_row.stato_d + &quot; formatter=&quot; + input_row.stato_f + &quot; loader=&quot; + &#9;&#9;&#9;&#9;&#9;&#9;input_row.stato_l);&#10;&#9;globalMap.put(&quot;python_state_error&quot;, false);&#10;&#9;if(input_row.stato_d + input_row.stato_l + input_row.stato_f != 3) globalMap.put(&quot;python_state_error&quot;, true);&#10;}&#10;&#10;System.out.println(&quot;\nStampa del valore di ritorno: &quot; + resultStatus + &quot;\n\n&quot;);&#10;&#10;"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="int resultStatus = input_row.resultStatus;&#10;&#10;if(resultStatus &lt; 0) {&#10;&#9;globalMap.put(&quot;error&quot;, true);&#10;} else {&#10;&#9;globalMap.put(&quot;error&quot;, false);&#10;&#9;globalMap.put(&quot;logAll&quot;, (String) globalMap.get(&quot;logAll&quot;) + input_row.logAll + &quot;\n&quot;);&#10;&#9;globalMap.put(&quot;logInfo&quot;, (String) globalMap.get(&quot;logInfo&quot;) + input_row.logInfo + &quot;\n&quot;);&#10;&#9;//Ogni esecuzione del subjob sovrascrive i dati&#10;&#9;//globalMap.put(&quot;stato_d&quot;, input_row.stato_d);&#10;&#9;//globalMap.put(&quot;stato_l&quot;, input_row.stato_l);&#10;&#9;//globalMap.put(&quot;stato_f&quot;, input_row.stato_f);&#10;&#9;System.out.println(&quot;\nStati (stampa del job padre): downloader=&quot; + input_row.statoD + &quot; formatter=&quot; + input_row.statoF + &quot; loader=&quot; + input_row.statoL);&#10;&#9;globalMap.put(&quot;pythonStateError&quot;, false);&#10;&#9;if(input_row.statoD + input_row.statoL + input_row.statoF != 3) globalMap.put(&quot;pythonStateError&quot;, true);&#10;}&#10;&#10;System.out.println(&quot;\nStampa del valore di ritorno: &quot; + resultStatus + &quot;\n\n&quot;);&#10;&#10;"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
     <elementParameter field="TEXT" name="LABEL" value="ResultStatus_Reader"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -189,7 +189,7 @@
   </node>
   <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="128" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_1"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern(&quot;dd-MM-yyyy HH:mm:ss&quot;);&#10;LocalDateTime localDateTime = LocalDateTime.now();&#10;globalMap.put(&quot;start_time&quot;, dtf1.format(localDateTime));&#10;&#10;System.out.println(&quot;\nJob Start Time:\t&quot; + dtf1.format(localDateTime));&#10;&#10;//Inizializzazione logs&#10;globalMap.put(&quot;logAll&quot;, &quot;&quot;);&#10;globalMap.put(&quot;logInfo&quot;, &quot;&quot;);&#10;&#10;String validDate = &quot;&quot;;&#10;&#10;try{&#10;&#10;// Recupero n° giorni da caricare precedenti alla data di riferimento&#10;int n = parseInt(context.flowDate.replaceAll(&quot;\\s+&quot;,&quot;&quot;));&#10;&#10;if(n&lt;0) {&#10;&#9;globalMap.put(&quot;loop&quot;, -1 * n);&#10;} else {&#10;&#9;globalMap.put(&quot;loop&quot;, 1);&#10;}&#10;&#10;context.flowExec = Long.toString(System.currentTimeMillis());&#10;&#10;DateTimeFormatter dtf = DateTimeFormatter.ofPattern(&quot;yyyyMMdd&quot;);&#10;LocalDate localDate = LocalDate.now();&#10;&#10;globalMap.put(&quot;ref&quot;, context.flowDateRef);&#10;globalMap.put(&quot;flow_date&quot;, context.flowDate);&#10;String date_type = context.flowDateRef.substring(0,1);&#10;int offset = 0;&#10;&#10;// Calcolo data di riferimento&#10;switch(date_type) {&#10;    case &quot;0&quot;:&#10;      context.flowDateRef = dtf.format(localDate);&#10;      break;&#10;    case &quot;+&quot;:&#10;      offset = parseInt(context.flowDateRef.replaceAll(&quot;\\s+&quot;,&quot;&quot;).substring(1));&#10;      context.flowDateRef = dtf.format(localDate.plusDays(offset));&#10;      break;&#10;    case &quot;-&quot;:&#10;      offset = parseInt(context.flowDateRef.replaceAll(&quot;\\s+&quot;,&quot;&quot;).substring(1));&#10;      context.flowDateRef = dtf.format(localDate.plusDays(-1 * offset));&#10;      break;&#10;    default:&#10;      context.flowDateRef = context.flowDateRef;&#10;}&#10;&#10;// Validazione data calcolata&#10;validDate = &quot;0&quot;;&#10;String DATE_FORMAT = &quot;yyyyMMdd&quot;;&#10;DateFormat df = new SimpleDateFormat(DATE_FORMAT);&#10;df.setLenient(false);&#10;df.parse(context.flowDateRef);&#10;validDate = &quot;&quot;;&#10;&#10;System.out.println(&quot;\n_______ Job Kubernetes_Main Variables _______\n&quot;);&#10;System.out.println(&quot;\tflowID:\t\t\t&quot; + context.flowId);&#10;System.out.println(&quot;\tflowDate:\t\t&quot; + (String) globalMap.get(&quot;flow_date&quot;));&#10;System.out.println(&quot;\tflowDateRef:\t&quot; + (String) globalMap.get(&quot;ref&quot;));&#10;System.out.println(&quot;\tflowExec:\t\t&quot; + context.flowExec);&#10;System.out.println(&quot;\tData di riferim. calcolata:\t&quot; + context.flowDateRef);&#10;System.out.println(&quot;_____________________________________________\n\n&quot;);&#10;&#10;&#10;} catch (Exception ex) {&#10;&#9;if(validDate.equals(&quot;0&quot;)) validDate=&quot;*** Data di riferimento non valida ***&quot;; &#10;&#9;throw new Exception(&quot;\tParametri di input non validi! &quot; + validDate);&#10;}"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern(&quot;dd-MM-yyyy HH:mm:ss&quot;);&#10;LocalDateTime localDateTime = LocalDateTime.now();&#10;globalMap.put(&quot;startTime&quot;, dtf1.format(localDateTime));&#10;&#10;System.out.println(&quot;\nJob Start Time:\t&quot; + dtf1.format(localDateTime));&#10;&#10;//Inizializzazione logs&#10;globalMap.put(&quot;logAll&quot;, &quot;&quot;);&#10;globalMap.put(&quot;logInfo&quot;, &quot;&quot;);&#10;&#10;String validDate = &quot;&quot;;&#10;&#10;try{&#10;&#10;// Recupero n° giorni da caricare precedenti alla data di riferimento&#10;int n = parseInt(context.flowDate.replaceAll(&quot;\\s+&quot;,&quot;&quot;));&#10;&#10;if(n&lt;0) {&#10;&#9;globalMap.put(&quot;loop&quot;, -1 * n);&#10;} else {&#10;&#9;globalMap.put(&quot;loop&quot;, 1);&#10;}&#10;&#10;context.flowExec = Long.toString(System.currentTimeMillis());&#10;&#10;DateTimeFormatter dtf = DateTimeFormatter.ofPattern(&quot;yyyyMMdd&quot;);&#10;LocalDate localDate = LocalDate.now();&#10;&#10;globalMap.put(&quot;ref&quot;, context.flowDateRef);&#10;globalMap.put(&quot;flowDate&quot;, context.flowDate);&#10;String date_type = context.flowDateRef.substring(0,1);&#10;int offset = 0;&#10;&#10;// Calcolo data di riferimento&#10;switch(date_type) {&#10;    case &quot;0&quot;:&#10;      context.flowDateRef = dtf.format(localDate);&#10;      break;&#10;    case &quot;+&quot;:&#10;      offset = parseInt(context.flowDateRef.replaceAll(&quot;\\s+&quot;,&quot;&quot;).substring(1));&#10;      context.flowDateRef = dtf.format(localDate.plusDays(offset));&#10;      break;&#10;    case &quot;-&quot;:&#10;      offset = parseInt(context.flowDateRef.replaceAll(&quot;\\s+&quot;,&quot;&quot;).substring(1));&#10;      context.flowDateRef = dtf.format(localDate.plusDays(-1 * offset));&#10;      break;&#10;    default:&#10;      context.flowDateRef = context.flowDateRef;&#10;}&#10;&#10;// Validazione data calcolata&#10;validDate = &quot;0&quot;;&#10;String DATE_FORMAT = &quot;yyyyMMdd&quot;;&#10;DateFormat df = new SimpleDateFormat(DATE_FORMAT);&#10;df.setLenient(false);&#10;df.parse(context.flowDateRef);&#10;validDate = &quot;&quot;;&#10;&#10;System.out.println(&quot;\n_______ Job Kubernetes_Main Variables _______\n&quot;);&#10;System.out.println(&quot;\tflowID:\t\t\t&quot; + context.flowId);&#10;System.out.println(&quot;\tflowDate:\t\t&quot; + (String) globalMap.get(&quot;flowDate&quot;));&#10;System.out.println(&quot;\tflowDateRef:\t&quot; + (String) globalMap.get(&quot;ref&quot;));&#10;System.out.println(&quot;\tflowExec:\t\t&quot; + context.flowExec);&#10;System.out.println(&quot;\tData di riferim. calcolata:\t&quot; + context.flowDateRef);&#10;System.out.println(&quot;_____________________________________________\n\n&quot;);&#10;&#10;&#10;} catch (Exception ex) {&#10;&#9;if(validDate.equals(&quot;0&quot;)) validDate=&quot;*** Data di riferimento non valida ***&quot;; &#10;&#9;throw new Exception(&quot;\tParametri di input non validi! &quot; + validDate);&#10;}"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import java.time.LocalDate;&#10;import java.time.LocalDateTime;&#10;import java.time.format.DateTimeFormatter;&#10;import static java.lang.Integer.parseInt;&#10;&#10;import java.text.DateFormat;"/>
     <elementParameter field="TEXT" name="LABEL" value="Context_Setting"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -214,7 +214,7 @@
     <elementParameter field="TEXT" name="CC" value=""/>
     <elementParameter field="TEXT" name="BCC" value=""/>
     <elementParameter field="TEXT" name="SUBJECT" value="&quot;Talend Open Studio notification&quot;"/>
-    <elementParameter field="MEMO_MESSAGE" name="MESSAGE" value="&quot;Job Talend terminato con successo.&quot; +&quot;\n\n&quot; + &#13;&#10;&quot;\n_________ Job Kubernetes_Main Variables _________\n\n&quot; +&#13;&#10;&quot;\tflowID:\t\t&quot; + context.flowId + &quot;\n&quot; +&#13;&#10;&quot;\tflowDate:\t&quot; + (String) globalMap.get(&quot;flow_date&quot;) + &quot;\n&quot; +&#13;&#10;&quot;\tflowDateRef:\t&quot; + (String) globalMap.get(&quot;ref&quot;) + &quot;\n&quot; +&#13;&#10;&quot;\tflowExec:\t&quot; + context.flowExec + &quot;\n&quot; + &#13;&#10;&quot;\tData di riferim. calcolata:\t&quot; + context.flowDateRef +&#13;&#10;&quot;\n_____________________________________________\n\n&quot; +&#13;&#10;&quot;Job start time:\t&quot; + (String) globalMap.get(&quot;start_time&quot;) + &quot;\n&quot; +&#13;&#10;&quot;Job end time:\t&quot; + (String) globalMap.get(&quot;end_time&quot;) + &quot;\n&quot; +&#13;&#10;&#13;&#10;&quot;\n&quot; + (String) globalMap.get(&quot;logInfo&quot;) + &quot;\n&quot; "/>
+    <elementParameter field="MEMO_MESSAGE" name="MESSAGE" value="&quot;Job Talend terminato con successo.&quot; +&quot;\n\n&quot; + &#13;&#10;&quot;\n_________ Job Kubernetes_Main Variables _________\n\n&quot; +&#13;&#10;&quot;\tflowID:\t\t&quot; + context.flowId + &quot;\n&quot; +&#13;&#10;&quot;\tflowDate:\t&quot; + (String) globalMap.get(&quot;flowDate&quot;) + &quot;\n&quot; +&#13;&#10;&quot;\tflowDateRef:\t&quot; + (String) globalMap.get(&quot;ref&quot;) + &quot;\n&quot; +&#13;&#10;&quot;\tflowExec:\t&quot; + context.flowExec + &quot;\n&quot; + &#13;&#10;&quot;\tData di riferim. calcolata:\t&quot; + context.flowDateRef +&#13;&#10;&quot;\n_____________________________________________\n\n&quot; +&#13;&#10;&quot;Job start time:\t&quot; + (String) globalMap.get(&quot;startTime&quot;) + &quot;\n&quot; +&#13;&#10;&quot;Job end time:\t&quot; + (String) globalMap.get(&quot;endTime&quot;) + &quot;\n&quot; +&#13;&#10;&#13;&#10;&quot;\n&quot; + (String) globalMap.get(&quot;logInfo&quot;) + &quot;\n&quot; "/>
     <elementParameter field="CHECK" name="CHECK_ATTACHMENT" value="true"/>
     <elementParameter field="TABLE" name="ATTACHMENTS"/>
     <elementParameter field="TABLE" name="HEADERS"/>
@@ -225,7 +225,7 @@
     <elementParameter field="CLOSED_LIST" name="IMPORTANCE" value="Normal"/>
     <elementParameter field="CHECK" name="NEED_AUTH" value="true"/>
     <elementParameter field="TEXT" name="AUTH_USERNAME" value="&quot;alessandroperini@outlook.it&quot;"/>
-    <elementParameter field="PASSWORD" name="AUTH_PASSWORD" value="enc:system.encryption.key.v1:MPrTmtc2jhi/iX5PzfNVM9mTmTNQVLb5iBjTJdrmKVlfZJpbXLwecqMtd/CLn7dv"/>
+    <elementParameter field="PASSWORD" name="AUTH_PASSWORD" value="enc:system.encryption.key.v1:ZNZtTrVGMNCO8psPxwovD6FXAxjsyDan6ZLPbLZJdD3aH7zg9jSzega/oNY2Vt8a"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
     <elementParameter field="CLOSED_LIST" name="TEXT_SUBTYPE" value="plain"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
@@ -248,7 +248,7 @@
   </node>
   <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="448" posY="352">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tJava_3"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="System.out.println(&quot;\nEsito positivo: Tutti i subJobs hanno terminato correttamente\n&quot;);&#10;System.out.println(&quot;\nLog:\n&quot; + (String) globalMap.get(&quot;log&quot;) + &quot;\n&quot;);&#10;&#10;DateTimeFormatter dtf = DateTimeFormatter.ofPattern(&quot;dd-MM-yyyy HH:mm:ss&quot;);&#10;LocalDateTime localDateTime = LocalDateTime.now();&#10;globalMap.put(&quot;end_time&quot;, dtf.format(localDateTime));&#10;&#10;&#10;String s3_path = &quot;LOG/&quot; + context.flowId + &quot;/&quot; + context.flowDateRef.substring(0, 4) + &quot;/&quot; + context.flowDateRef.substring(4, 6) + &quot;/&quot; + context.flowDateRef.substring(6, 8) + &quot;/&quot;;&#10;String s3_filename = context.flowId + &quot;_&quot; + context.flowExec + &quot;.log&quot;;&#10;&#10;System.out.println(&quot;Path Bucket S3:\t&quot; + s3_path + &quot;\n&quot;);&#10;System.out.println(&quot;File Bucket S3:\t&quot; + s3_filename + &quot;\n&quot;);&#10;&#10;// MANCA SCRITTURA SU BUCKET S3&#10;&#10;System.out.println(&quot;Job End Time:\t&quot; + dtf.format(localDateTime) +&quot;\n&quot;);&#10;&#10;if(context.sendMail) System.out.println(&quot;Invio mail...&quot;);"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="System.out.println(&quot;\nEsito positivo: Tutti i subJobs hanno terminato correttamente\n&quot;);&#10;System.out.println(&quot;\nLog:\n&quot; + (String) globalMap.get(&quot;log&quot;) + &quot;\n&quot;);&#10;&#10;DateTimeFormatter dtf = DateTimeFormatter.ofPattern(&quot;dd-MM-yyyy HH:mm:ss&quot;);&#10;LocalDateTime localDateTime = LocalDateTime.now();&#10;globalMap.put(&quot;endTime&quot;, dtf.format(localDateTime));&#10;&#10;&#10;String s3_path = &quot;LOG/&quot; + context.flowId + &quot;/&quot; + context.flowDateRef.substring(0, 4) + &quot;/&quot; + context.flowDateRef.substring(4, 6) + &quot;/&quot; + context.flowDateRef.substring(6, 8) + &quot;/&quot;;&#10;String s3_filename = context.flowId + &quot;_&quot; + context.flowExec + &quot;.log&quot;;&#10;&#10;System.out.println(&quot;Path Bucket S3:\t&quot; + s3_path + &quot;\n&quot;);&#10;System.out.println(&quot;File Bucket S3:\t&quot; + s3_filename + &quot;\n&quot;);&#10;&#10;// MANCA SCRITTURA SU BUCKET S3&#10;&#10;System.out.println(&quot;Job End Time:\t&quot; + dtf.format(localDateTime) +&quot;\n&quot;);&#10;&#10;if(context.sendMail) System.out.println(&quot;Invio mail...&quot;);"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import java.time.LocalDate;&#10;import java.time.LocalDateTime;&#10;import java.time.format.DateTimeFormatter;&#10;import static java.lang.Integer.parseInt;&#10;&#10;import java.text.DateFormat;"/>
     <elementParameter field="TEXT" name="LABEL" value="Job_End_FLEX"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -268,7 +268,7 @@
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
     <elementParameter field="TEXT" name="ACCESS_KEY" value="&quot;AKIA5GOQBZLRW4N7RF63&quot;"/>
-    <elementParameter field="PASSWORD" name="SECRET_KEY" value="enc:system.encryption.key.v1:fS+ngFN9IAcAjDZAcgTSoqcqZk7Ex7LK2pXT+w/43eiUGnRYZkrkW4Dz1lSzxI/SDvHa55dZMiUAzKv6hippCUrxPjDQWQ=="/>
+    <elementParameter field="PASSWORD" name="SECRET_KEY" value="enc:system.encryption.key.v1:Z2X7kdew1vhG8U+QhbMAv+g8lEPQeJRmqoAvUxTJ1izWkTFjMR/VTWee9o2+WpBFuQm//eZ9Gt9wYWHgkETrF40qce1MRA=="/>
     <elementParameter field="CHECK" name="INHERIT_CREDENTIALS" value="false"/>
     <elementParameter field="CHECK" name="ASSUME_ROLE" value="false"/>
     <elementParameter field="TEXT" name="ARN" show="false" value="&quot;&quot;"/>
@@ -280,8 +280,8 @@
     <elementParameter field="CLOSED_LIST" name="ALGORITHM_SYMMETRIC_MASTER_KEY" show="false" value="AES"/>
     <elementParameter field="CLOSED_LIST" name="ALGORITHM_ASYMMETRIC_MASTER_KEY" show="false" value="RSA"/>
     <elementParameter field="CLOSED_LIST" name="ENCODING" show="false" value="BASE64"/>
-    <elementParameter field="PASSWORD" name="ENCRYPTED_KEY_CMK" show="false" value="enc:system.encryption.key.v1:AKOJwq7xKWIB2adg6EdqpgTS82sYE9BaKdZSBPbv"/>
-    <elementParameter field="PASSWORD" name="ENCRYPTED_KEY_BASE64" show="false" value="enc:system.encryption.key.v1:IEt5IbsU/1cGH2JsD8Ens7YRTSm/Z8U7hIgEygOH"/>
+    <elementParameter field="PASSWORD" name="ENCRYPTED_KEY_CMK" show="false" value="enc:system.encryption.key.v1:3bqvrXwieMfzrJy+G5CYr4qEmsbsoDGnD6mxBKBC"/>
+    <elementParameter field="PASSWORD" name="ENCRYPTED_KEY_BASE64" show="false" value="enc:system.encryption.key.v1:CZNOnUFckPVVIdYPl5bTccrIkJwhIAjlkowDY4M0"/>
     <elementParameter field="FILE" name="ENCRYPTED_KEY_X509" show="false" value="&quot;&quot;"/>
     <elementParameter field="FILE" name="PUBLIC_KEY" show="false" value="&quot;&quot;"/>
     <elementParameter field="FILE" name="PRIVATE_KEY" show="false" value="&quot;&quot;"/>
@@ -338,7 +338,7 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="If6"/>
   </connection>
   <connection connectorName="RUN_IF" label="If" lineStyle="6" metaname="tJavaRow_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tJavaRow_1" target="tDie_2">
-    <elementParameter field="MEMO_JAVA" name="CONDITION" value="(Boolean) globalMap.get(&quot;python_state_error&quot;)"/>
+    <elementParameter field="MEMO_JAVA" name="CONDITION" value="(Boolean) globalMap.get(&quot;pythonStateError&quot;)"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="If3"/>
   </connection>
   <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tJava_1" offsetLabelX="0" offsetLabelY="0" source="tJava_1" target="tLoop_1">
@@ -396,13 +396,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_6cbd8c76-6ee7-41e4-af51-5cb7ec6c460a"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>StuAY8HFSj6zWtiWIcEVLWipOAS/Z40b9Saz3P5+Yre1+tRb92MyMl4cj1F7VjJqSfPpeMNtiONn
-n+vcZo30wQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_cd321198-9c94-4fe1-be7e-2f9d7a044031"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>ek8uItfvLgVl6OesmqGyfaK9p5gTQt9Xr8mYZU4PiKxXxQ6smGJhAIX+gtwXNXWmFMfYcuCFlXim
-H7OkmGnWaA==</DigestValue></Reference></SignedInfo><SignatureValue>KBV5O80JFL9W8pmgf+am4WRibEgbJIl+JQ1Fo1agc56LAXyEZuexeNLSqT2q0jPvjfmoKvc+utZX
-jwQv7bHrmN1VA9CS1MP8I5kWR3+snroODcwYaP1fSNQL0Kw6bNTJ5MmFEY5eQuUVVbftksVrmsy0
-+wHcJfHHqGpkvG+GW6kzd1RpMdAX5LdjYLYOldnwFni4RN2vzNPlYghXcU3LZUacc48rwp5H2XDh
-WO+AMLjeCVFiZCbJxcgsMYhH8YC7lqa4rRkocS+q/yQ2WogOHOYP1h5EBgVsi8oPKE7+/QDb+VMQ
-W0ctAX+E7C/BzrTR26/TDWN2YS/x3EemGMMaVA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_c470fd84-a3c7-4419-b646-5910ccb70d1a"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>+NfBfgOUk6k9+jaGBLYRiYBDJ9z+KYmBJEm3s5lBDMuU+P4zkdVtQx6dXsRm1BQ7LUA6V0mYqiVf
+mn/LON8FqQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_b89bfc96-c081-4ea3-9e83-db776b622861"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>MzwL9j6dKtK8DKoy3RFm7h/DYlYG/jeTS5prTvCjx8NjLe5y5KXZhoJaN1yyKPnOEI5tDKiwjsm5
+oxTnJb9+Hg==</DigestValue></Reference></SignedInfo><SignatureValue>oRiAbcrIdsLnRXwSokpQHXkGgAZCjA8L+vyLL2JZVJ5ADvDiq0e8eB44zQIZrobZC+O6w0wnC3YD
+twVdkju5I7k4fqCmVztM5Opw+s+0VTItzBiRBqKdOcSGHyBLJgjd1bXmNir6kXfdFpfkxa14f87O
+wx2yBgCha7A/1Zhe28IilWvG7I8pZS55gEaobzswxakQg8cjBbI5wx7Go/r2aXwjhT82etPCGCGM
+I9AvtSz4VVNwoq4myufjLo3xFlLPC0C8n5B3QnJtAqcdk83kdNbWBXf4A569lGL8kMeRyt9pzlef
+u99rTnZVjpszWwRzO1qoy/PgHSwAcY3KUdcmlw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U
@@ -424,4 +424,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_cd321198-9c94-4fe1-be7e-2f9d7a044031" Target="#_6cbd8c76-6ee7-41e4-af51-5cb7ec6c460a"><Timestamp>2020-07-10 10:10:21</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_b89bfc96-c081-4ea3-9e83-db776b622861" Target="#_c470fd84-a3c7-4419-b646-5910ccb70d1a"><Timestamp>2020-07-10 10:24:27</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
