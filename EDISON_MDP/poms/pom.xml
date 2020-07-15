@@ -17,6 +17,7 @@
     <module>jobs/process/kubernetes_flow_copy_0.1</module>
     <module>jobs/process/kubernetes_main_copy_0.1</module>
     <module>jobs/process/test_bucket_s3_0.1</module>
+    <module>jobs/process/test_x_andrea_0.1</module>
   </modules>
   <properties>
     <signer.version>7.3.1</signer.version>
