@@ -10,7 +10,6 @@
   <url>http://www.talend.org/</url>
   <modules>
     <module>code/routines</module>
-    <module>jobs/process/kubernetes_flow_0.1</module>
     <module>jobs/process/job_di_prova_0.1</module>
     <module>jobs/process/sleep_0.1</module>
     <module>jobs/process/kubernetes_main_0.1</module>
@@ -18,6 +17,7 @@
     <module>jobs/process/kubernetes_main_copy_0.1</module>
     <module>jobs/process/test_bucket_s3_0.1</module>
     <module>jobs/process/test_x_andrea_0.1</module>
+    <module>jobs/process/kubernetes_pod_caller_0.1</module>
   </modules>
   <properties>
     <signer.version>7.3.1</signer.version>
